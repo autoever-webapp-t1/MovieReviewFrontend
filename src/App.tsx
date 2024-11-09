@@ -1,7 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
+import axios from "axios";
 
 function App() {
+  const [text, setText] = useState("");
+
   useEffect(() => {
     // SSE 연결 설정
     const eventSource = new EventSource("http://localhost:8080/api/events");
@@ -9,8 +12,9 @@ function App() {
     // 메시지 수신 처리
     eventSource.onmessage = (event) => {
       try {
-        const data = JSON.parse(event.data);
-        console.log(data);
+        console.log(event.data);
+        // const data = JSON.parse(event.data);
+        // console.log(data);
       } catch (error) {
         console.error("Error parsing SSE message:", error);
       }
@@ -28,7 +32,28 @@ function App() {
     };
   }, []);
 
-  return <div>asdf</div>;
+  const onClick = async () => {
+    console.log(text);
+    await axios.post("http://localhost:8080/api/notify", text);
+  };
+
+  return (
+    <div>
+      <div>
+        <input
+          type="text"
+          placeholder="서버로 받고 싶은 메시지"
+          value={text}
+          onChange={(e) => {
+            setText(e.target.value);
+          }}
+        />
+      </div>
+      <div>
+        <button onClick={onClick}>메시지를 보내줘 !!</button>
+      </div>
+    </div>
+  );
 }
 
 export default App;
