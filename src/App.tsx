@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   useEffect(() => {
     // SSE 연결 설정
     const eventSource = new EventSource("http://localhost:8080/api/events");
