@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import "./App.css";
 import axios from "axios";
+import { Outlet } from "react-router-dom";
 
 function App() {
   const [text, setText] = useState("");
@@ -51,6 +51,9 @@ function App() {
       </div>
       <div>
         <button onClick={onClick}>메시지를 보내줘 !!</button>
+      </div>
+      <div>
+        <Outlet />
       </div>
     </div>
   );
