@@ -1,4 +1,4 @@
-root {
+:root {
   --color-gray-50: #fff9d6;
   --color-gray-100: #f4eccc;
   --color-gray-200: #dad2b7;
@@ -28,4 +28,9 @@ root {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-gray-900);
+  color: var(--color-gray-100);
 }
