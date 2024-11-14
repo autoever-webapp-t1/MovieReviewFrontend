@@ -1,0 +1,73 @@
+.background {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  box-shadow: inset 0 0 32px 32px var(--color-gray-900);
+}
+
+.background > img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.1;
+}
+
+.login-box {
+  position: absolute;
+  width: 800px;
+  height: 600px;
+  left: calc(50% - 400px);
+  top: calc(50% - 300px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+.logo-wrapper {
+  width: 480px;
+  height: 260px;
+  overflow: hidden;
+  animation: fade-in-from-up 1s;
+}
+
+.logo-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  color: var(--color-primary);
+}
+
+.login-button {
+  display: block;
+  width: 366px;
+  height: 90px;
+  cursor: pointer;
+  opacity: 0;
+  animation: fade-in-from-up 1s 0.75s forwards;
+}
+
+.login-button img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@keyframes fade-in-from-up {
+  0% {
+    opacity: 0;
+    transform: translateY(-5%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

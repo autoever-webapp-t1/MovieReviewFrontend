@@ -1,14 +1,23 @@
 import Header from "@/widgets/header";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import "./App.css";
+import { useMemo } from "react";
 
 export default function App() {
-  return (
-    <>
-      <Header />
-      <div className="content-container">
-        <Outlet />
-      </div>
-    </>
-  );
+  const { pathname } = useLocation();
+
+  const hasHeader = useMemo(() => {
+    return !["/"].includes(pathname);
+  }, [pathname]);
+
+  if (hasHeader)
+    return (
+      <>
+        <Header />
+        <div className="content-container">
+          <Outlet />
+        </div>
+      </>
+    );
+  else return <Outlet />;
 }
