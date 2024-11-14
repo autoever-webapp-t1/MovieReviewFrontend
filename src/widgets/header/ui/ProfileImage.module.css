@@ -1,0 +1,8 @@
+.circularImage {
+  border-radius: 50%;
+  object-fit: cover;
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--color-gray-800);
+  display: block;
+}

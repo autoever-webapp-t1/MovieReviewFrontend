@@ -1,0 +1,90 @@
+.header {
+  display: flex;
+  border-bottom: 1px solid var(--color-gray-800);
+  position: fixed;
+  background: var(--color-gray-900);
+  height: 60px;
+  width: 100%;
+  top: 0;
+}
+
+.headerMenu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+}
+
+.nav ul {
+  display: flex;
+  align-items: center;
+  font-size: var(--font-md);
+  line-height: var(--line-height-md);
+  font-weight: var(--font-weight-bold);
+}
+
+.nav ul li {
+  padding: 0 8px;
+}
+
+.logoContainer {
+  width: 100px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.headerUtilities {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  width: 240px;
+  height: 32px;
+  background-color: var(--color-gray-800);
+  border-radius: 8px;
+  padding: 0 8px;
+  gap: 8px;
+}
+
+.searchBar input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  box-shadow: none;
+  color: inherit;
+  font-size: var(--font-sm);
+  line-height: var(--line-height-sm);
+  font-weight: var(--font-weight-regular);
+}
+
+.searchBar input::placeholder {
+  color: var(--color-gray-500);
+}
+
+.searchBar button {
+  padding: 0 2px;
+  background: none;
+  border: none;
+}
+
+.searchBar button img {
+  display: block;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+}
