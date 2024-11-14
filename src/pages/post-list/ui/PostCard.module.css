@@ -1,0 +1,69 @@
+.postCard {
+  display: flex;
+  justify-content: space-between;
+  width: 1005px;
+  border-bottom: 2px solid var(--color-sub-dark);
+  padding: 20px 0 20px 0;
+  gap: 48px;
+}
+
+.postContent {
+  flex: 1;
+}
+
+.postTitle {
+  font-size: var(--font-header-h3);
+  line-height: var(--line-height-header-h3);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--color-gray-50);
+  margin-bottom: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 837px;
+}
+
+.postPreview {
+  font-size: var(--font-md);
+  line-height: var(--line-height-md);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-gray-100);
+  margin-bottom: 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* 줄 수 제한 */
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.postMeta {
+  display: flex;
+  align-items: center;
+}
+
+.author,
+.createdDate {
+  font-size: var(--font-sm);
+  line-height: var(--line-height-sm);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-gray-200);
+}
+
+.author {
+  padding-left: 8px;
+}
+
+.likeCount {
+  font-size: var(--font-sm);
+  line-height: var(--line-height-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-sub-light);
+}
+
+.postThumnailContainer {
+}
+
+.postThumbnail {
+  object-fit: cover;
+}

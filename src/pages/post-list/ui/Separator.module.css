@@ -1,0 +1,7 @@
+.separator {
+  font-size: var(--font-md);
+  line-height: var(--line-height-md);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-gray-400);
+  padding: 0 8px;
+}

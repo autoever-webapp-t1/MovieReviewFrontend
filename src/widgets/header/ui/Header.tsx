@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
+import ProfileImage from "./ProfileImage";
 
 export default function Header() {
   return (
@@ -29,22 +30,20 @@ export default function Header() {
           </nav>
           <div className={styles.headerUtilities}>
             <div className={styles.searchBar}>
-              <button type="submit">
-                <img
-                  src="../../../src/assets/headerSearch.svg"
-                  width="24"
-                  height="24"
-                ></img>
-              </button>
+              <img
+                src="../../../src/assets/headerSearch.svg"
+                width="24"
+                height="24"
+              ></img>
               <input className="" type="text" placeholder="영화 제목 검색" />
             </div>
             <div className={styles.profile}>
-              <img
+              <ProfileImage
                 src="../../../src/assets/song.jpg"
                 alt=""
-                width="32"
-                height="32"
+                size={32}
               />
+              <img />
             </div>
           </div>
         </div>
