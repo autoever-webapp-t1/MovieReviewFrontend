@@ -73,16 +73,6 @@
   color: var(--color-gray-500);
 }
 
-.searchBar button {
-  padding: 0 2px;
-  background: none;
-  border: none;
-}
-
-.searchBar button img {
-  display: block;
-}
-
 .profile {
   display: flex;
   align-items: center;
