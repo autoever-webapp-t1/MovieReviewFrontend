@@ -11,3 +11,8 @@
 .sub {
   color: var(--color-sub);
 }
+
+.button:disabled {
+  color: var(--color-gray-500);
+  cursor: default;
+}

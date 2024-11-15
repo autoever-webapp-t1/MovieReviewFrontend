@@ -4,7 +4,7 @@ import styles from "./SignupPage.module.css";
 import TextButton from "@/widgets/text-button/ui/TextButton";
 import MovieCard from "@/entities/movie";
 import { MovieCardDto } from "@/entities/movie/model/types";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 const movieCard: MovieCardDto = {
   movieId: 1,
@@ -27,7 +27,16 @@ const movieCard: MovieCardDto = {
 
 export default function SignupPage() {
   const [topRated, setTopRated] = useState(
-    Array.from({ length: 100 }, () => movieCard)
+    Array.from({ length: 100 }, (v, i) => ({ ...movieCard, movieId: i }))
+  );
+
+  const [selectedMovieCards, setSelectedMovieCards] = useState<number[]>([]);
+
+  const handleMovieCardClick = useCallback(
+    (movieId: number) => {
+      setSelectedMovieCards([...selectedMovieCards, movieId]);
+    },
+    [selectedMovieCards]
   );
 
   return (
@@ -39,14 +48,25 @@ export default function SignupPage() {
         <div className={`${styles.title} header-h2`}>
           좋아하는 영화를 골라주세요
           <div className={styles["button-wrapper"]}>
-            <TextButton color="primary" onClick={() => {}}>
-              asdf
+            <TextButton
+              color="primary"
+              onClick={() => {}}
+              disabled={selectedMovieCards.length < 3}
+            >
+              {selectedMovieCards.length < 3
+                ? `${3 - selectedMovieCards.length} 남음`
+                : "다음"}
             </TextButton>
           </div>
         </div>
         <div className={styles["movie-list"]}>
           {topRated.map((movie, i) => (
-            <MovieCard key={i} movieCard={movie} />
+            <MovieCard
+              key={i}
+              movieCard={movie}
+              selected={selectedMovieCards.includes(movie.movieId)}
+              onClick={() => handleMovieCardClick(movie.movieId)}
+            />
           ))}
         </div>
       </div>
