@@ -52,7 +52,11 @@ export default function MovieCard({
       ) : (
         <div className={styles["info-box-selected"]}>
           <div className={styles["icon-wrapper"]}>
-            <img src={CheckedLibraryImg} alt="CheckedLibraryImg" />
+            <img
+              src={CheckedLibraryImg}
+              alt="CheckedLibraryImg"
+              style={{ opacity: 1 }}
+            />
           </div>
         </div>
       )}

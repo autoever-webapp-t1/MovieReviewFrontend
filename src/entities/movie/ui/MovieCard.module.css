@@ -30,6 +30,7 @@
   opacity: 0;
   background-color: var(--color-gray-900-75);
   padding: 8px;
+  padding-right: 88px;
   cursor: pointer;
   transition: opacity 0.15s ease;
 
@@ -62,6 +63,7 @@
     width: 100%;
     height: 100%;
     color: var(--color-gray-100);
+    opacity: 0.5;
   }
 }
 
