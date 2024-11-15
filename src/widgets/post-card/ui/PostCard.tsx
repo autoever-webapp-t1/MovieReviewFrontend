@@ -1,7 +1,7 @@
 import { formatDate } from "@/utils/dateUtils";
 import styles from "./PostCard.module.css";
-import ProfileImage from "@/widgets/header/ui/ProfileImage";
-import Separator from "./Separator";
+import ProfileImage from "@/widgets/profile-image";
+import Separator from "@/widgets/separator";
 
 interface PostCardProps {
   title: string;
@@ -25,8 +25,10 @@ export default function PostCard({
   return (
     <li className={styles.postCard}>
       <div className={styles.postContent}>
-        <div className={styles.postTitle}>{title}</div>
-        <div className={styles.postPreview}>{preview}</div>
+        <div className={`${styles.postTitle} header-h4`}>{title}</div>
+        <div className={`${styles.postPreview} text-sm text-regular`}>
+          {preview}
+        </div>
         <div className={styles.postMeta}>
           <ProfileImage src={authorProfileImage} size={32} />
           <span className={styles.author}>{author}</span>
@@ -36,7 +38,7 @@ export default function PostCard({
           <span className={styles.likeCount}>♥️ {likeCount}</span>
         </div>
       </div>
-      <div className={styles.postThumbnailContainer}>
+      <div className={styles["post-thumbnail-container"]}>
         <img
           src={thumbnail}
           width={120}
