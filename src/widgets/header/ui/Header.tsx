@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
-import Logo from "@assets/gasannes_logo_f3bb4b_notext.svg";
+import Logo from "@assets/logo.svg";
 import UserImage from "@assets/song.jpg";
 import ProfileImage from "@/widgets/profile-image";
-import SearchIcon from "@/widgets/search-icon";
+import SearchIcon from "@mui/icons-material/Search";
 
 export default function Header() {
   return (
@@ -32,7 +32,7 @@ export default function Header() {
           </nav>
           <div className={styles.headerUtilities}>
             <div className={styles.searchBar}>
-              <SearchIcon />
+              <SearchIcon sx={{ color: "var(--color-gray-500)" }} />
               <input className="" type="text" placeholder="영화 제목 검색" />
             </div>
             <div className={styles.profile}>

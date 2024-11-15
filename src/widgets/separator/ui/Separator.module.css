@@ -4,4 +4,5 @@
   font-weight: var(--font-weight-regular);
   color: var(--color-gray-400);
   padding: 0 8px;
+  transform: translateY(-2px);
 }
