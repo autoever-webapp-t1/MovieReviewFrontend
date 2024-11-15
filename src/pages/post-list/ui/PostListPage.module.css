@@ -1,4 +1,31 @@
+.container {
+  margin: 0 auto;
+  width: 800px;
+}
+
 .postList {
+}
+
+.searchBar {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--color-gray-400);
+  padding: 12px 8px 4px 8px;
+  margin-top: 8px;
+}
+
+.searchBar input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  box-shadow: none;
+  color: inherit;
+  font-size: var(--font-md);
+  line-height: var(--line-height-md);
+  font-weight: var(--font-weight-regular);
+}
+
+.searchBar input::placeholder {
+  color: var(--color-gray-600);
 }
