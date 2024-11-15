@@ -89,3 +89,18 @@ img {
   pointer-events: none;
   user-select: none;
 }
+
+.header-h2 {
+  font-size: var(--font-header-h2);
+  line-height: var(--line-height-header-h2);
+  font-weight: var(--font-weight-extrabold);
+}
+
+.text-md {
+  font-size: var(--font-md);
+  line-height: var(--line-height-md);
+}
+
+.text-bold {
+  font-weight: var(--font-weight-bold);
+}
