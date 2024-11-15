@@ -1,0 +1,29 @@
+.button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.25s;
+}
+
+.primary {
+  background-color: var(--color-primary);
+  color: var(--color-gray-900);
+
+  &:hover {
+    background-color: var(--color-primary-light);
+  }
+}
+
+.sub {
+  background-color: var(--color-sub);
+  color: var(--color-gray-100);
+
+  &:hover {
+    background-color: var(--color-sub-light);
+  }
+}
+
+.button:disabled {
+  color: var(--color-gray-500);
+  cursor: default;
+}
