@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
-import ProfileImage from "./ProfileImage";
+import Logo from "@assets/logo.svg";
+import UserImage from "@assets/song.jpg";
+import ProfileImage from "@/widgets/profile-image";
+import SearchIcon from "@mui/icons-material/Search";
 
 export default function Header() {
   return (
@@ -9,11 +12,7 @@ export default function Header() {
         <div className={styles.logo}>
           <Link to="/">
             <div className={styles.logoContainer}>
-              <img
-                src="../../../src/assets/gasannes_logo_f3bb4b_notext.svg"
-                alt="로고"
-                width="90"
-              />
+              <img src={Logo} alt="로고" width="90" />
             </div>
           </Link>
         </div>
@@ -26,23 +25,18 @@ export default function Header() {
               <li>
                 <Link to="/awards">어워드</Link>
               </li>
+              <li>
+                <Link to="/post-list">포스트</Link>
+              </li>
             </ul>
           </nav>
           <div className={styles.headerUtilities}>
             <div className={styles.searchBar}>
-              <img
-                src="../../../src/assets/headerSearch.svg"
-                width="24"
-                height="24"
-              ></img>
+              <SearchIcon sx={{ color: "var(--color-gray-500)" }} />
               <input className="" type="text" placeholder="영화 제목 검색" />
             </div>
             <div className={styles.profile}>
-              <ProfileImage
-                src="../../../src/assets/song.jpg"
-                alt=""
-                size={32}
-              />
+              <ProfileImage src={UserImage} alt="" size={32} />
               <img />
             </div>
           </div>

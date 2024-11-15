@@ -1,12 +1,11 @@
-import SplashImg from "@assets/splash.png";
-import TextLogoImg from "@assets/gasannes_logo_f3bb4b.svg";
+import TextLogoImg from "@assets/logo_text.svg";
 import KakaoLoginButtonImg from "@assets/kakao_login_button.png";
 import styles from "./LoginPage.module.css";
+import SplashBackground from "@/widgets/splash-background";
 
 export default function LoginPage() {
   return (
-    <div className={styles.background}>
-      <img src={SplashImg} alt="SplashImg" />
+    <SplashBackground>
       <div className={styles["login-box"]}>
         <div className={styles["logo-wrapper"]}>
           <img src={TextLogoImg} alt="LogoImg" />
@@ -15,6 +14,6 @@ export default function LoginPage() {
           <img src={KakaoLoginButtonImg} alt="KakaoLoginButtonImg" />
         </button>
       </div>
-    </div>
+    </SplashBackground>
   );
 }

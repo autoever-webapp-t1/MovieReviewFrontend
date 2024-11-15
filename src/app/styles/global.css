@@ -10,6 +10,9 @@
   --color-gray-800: #3e3639;
   --color-gray-900: #241c24;
 
+  --color-gray-900-50: #241c2480;
+  --color-gray-900-75: #241c24c0;
+
   --color-error: #fe5d26;
   --color-success: #358600;
   --color-info: #0075f2;
@@ -88,4 +91,65 @@ button {
 img {
   pointer-events: none;
   user-select: none;
+}
+
+.text-light {
+  font-weight: var(--font-weight-extralight);
+}
+
+.text-regular {
+  font-weight: var(--font-weight-regular);
+}
+
+.text-bold {
+  font-weight: var(--font-weight-bold);
+}
+
+.text-xs {
+  font-size: var(--line-height-xs);
+  line-height: var(--line-height-xs);
+}
+
+.text-sm {
+  font-size: var(--font-sm);
+  line-height: var(--line-height-sm);
+}
+
+.text-md {
+  font-size: var(--font-md);
+  line-height: var(--line-height-md);
+}
+
+.text-lg {
+  font-size: var(--font-lg);
+  line-height: var(--line-height-lg);
+}
+
+.text-xl {
+  font-size: var(--font-xl);
+  line-height: var(--line-height-xl);
+}
+
+.header-h4 {
+  font-size: var(--font-header-h4);
+  line-height: var(--line-height-header-h4);
+  font-weight: var(--font-weight-extrabold);
+}
+
+.header-h3 {
+  font-size: var(--font-header-h3);
+  line-height: var(--line-height-header-h3);
+  font-weight: var(--font-weight-extrabold);
+}
+
+.header-h2 {
+  font-size: var(--font-header-h2);
+  line-height: var(--line-height-header-h2);
+  font-weight: var(--font-weight-extrabold);
+}
+
+.header-h1 {
+  font-size: var(--font-header-h1);
+  line-height: var(--line-height-header-h1);
+  font-weight: var(--font-weight-extrabold);
 }
