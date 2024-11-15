@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
-import Logo from "@assets/gasannes_logo_f3bb4b_notext.svg";
+import Logo from "@assets/logo.svg";
 import UserImage from "@assets/song.jpg";
 import ProfileImage from "@/widgets/profile-image";
 import SearchIcon from "@/widgets/search-icon";

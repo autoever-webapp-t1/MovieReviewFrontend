@@ -1,3 +1,4 @@
+import ScoreChart from "@/widgets/score-chart";
 import { MovieCardDto } from "../model/types";
 import styles from "./MovieCard.module.css";
 import AddLibraryImg from "@assets/add_library.svg";
@@ -28,6 +29,22 @@ export default function MovieCard({
             총점 {score.totalAverageSkill}/10
           </p>
           <p className="text-xs text-regular">{release_date}</p>
+          <div className={styles["chart-wrapper"]}>
+            <ScoreChart
+              size="small"
+              data={[
+                {
+                  movieTitle: movieCard.title,
+                  sceneSkill: movieCard.score.avgSceneSkill,
+                  actorSkill: movieCard.score.avgActorSkill,
+                  directorSkill: movieCard.score.avgDirectorSkill,
+                  lineSkill: movieCard.score.avgLineSkill,
+                  musicSkill: movieCard.score.avgMusicSkill,
+                  storySkill: movieCard.score.avgStorySkill,
+                },
+              ]}
+            />
+          </div>
           <div className={styles["icon-wrapper"]}>
             <img src={AddLibraryImg} alt="AddLibraryImg" />
           </div>
