@@ -1,0 +1,13 @@
+.button {
+  padding: 8px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.primary {
+  color: var(--color-primary);
+}
+
+.sub {
+  color: var(--color-sub);
+}
