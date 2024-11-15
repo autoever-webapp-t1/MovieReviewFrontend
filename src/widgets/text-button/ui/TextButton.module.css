@@ -1,0 +1,18 @@
+.button {
+  padding: 8px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.primary {
+  color: var(--color-primary);
+}
+
+.sub {
+  color: var(--color-sub);
+}
+
+.button:disabled {
+  color: var(--color-gray-500);
+  cursor: default;
+}
