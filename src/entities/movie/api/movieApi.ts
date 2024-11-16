@@ -18,6 +18,14 @@ export const fetchNowPlaying = async (userId: number) => {
   return response.data;
 };
 
+export const fetchUpComing = async (userId: number) => {
+  const response = await authAxios.get<MovieCardDto[]>(
+    `api/movie/upComing/${userId}`
+  );
+
+  return response.data;
+};
+
 export const rateMovie = async (
   userId: number,
   movieId: number,
