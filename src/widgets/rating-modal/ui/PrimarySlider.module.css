@@ -1,0 +1,9 @@
+.container {
+  width: 260px;
+  padding: 0 16px;
+}
+
+.label {
+  user-select: none;
+  line-height: var(--line-height-xs);
+}

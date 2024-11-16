@@ -1,0 +1,21 @@
+.content {
+  display: flex;
+  padding: 8px;
+}
+
+.slider-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chart-box {
+  flex: 320px 0 0;
+  height: 320px;
+}
+
+.footer {
+  padding: 8px;
+  display: flex;
+  justify-content: flex-end;
+}
