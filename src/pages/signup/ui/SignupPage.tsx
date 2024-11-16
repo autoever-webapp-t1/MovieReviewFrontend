@@ -2,39 +2,26 @@ import SplashBackground from "@/widgets/splash-background";
 import LogoImg from "@assets/logo.svg";
 import styles from "./SignupPage.module.css";
 import TextButton from "@/widgets/text-button/ui/TextButton";
-import MovieCard from "@/entities/movie";
-import { MovieCardDto } from "@/entities/movie/model/types";
-import { useCallback, useState } from "react";
-
-const movieCard: MovieCardDto = {
-  movieId: 1,
-  title: "헤이트풀 8",
-  overview: "가나다라마바사아 가나다라마바사아",
-  poster_path:
-    "https://m.media-amazon.com/images/M/MV5BMjA1MTc1NTg5NV5BMl5BanBnXkFtZTgwOTM2MDEzNzE@._V1_.jpg",
-  score: {
-    avgSceneSkill: 8.9,
-    totalAverageSkill: 7.7,
-    avgLineSkill: 7.1,
-    avgStorySkill: 7.0,
-    avgDirectorSkill: 6.6,
-    avgMusicSkill: 9.0,
-    avgActorSkill: 9.0,
-  },
-  release_date: "2024-11-15",
-  genre_ids: [1, 2, 3],
-};
+import MovieCard, { useTopRated } from "@/entities/movie";
+import { useCallback, useMemo } from "react";
+import { useModalStore } from "@/widgets/app-modal/model/store";
 
 export default function SignupPage() {
-  const [topRated, setTopRated] = useState(
-    Array.from({ length: 100 }, (v, i) => ({ ...movieCard, movieId: i }))
-  );
+  const { setOpenModal } = useModalStore();
 
-  const [selectedMovieCards, setSelectedMovieCards] = useState<number[]>([]);
+  const { data: topRated } = useTopRated();
+
+  const selectedMovieCards = useMemo(() => {
+    if (topRated) {
+      return topRated
+        .filter((movie) => movie.myScore !== null)
+        .map((movie) => movie.id);
+    } else return [];
+  }, [topRated]);
 
   const handleMovieCardClick = useCallback(
     (movieId: number) => {
-      setSelectedMovieCards([...selectedMovieCards, movieId]);
+      setOpenModal("ratingModal", { movieId: movieId });
     },
     [selectedMovieCards]
   );
@@ -60,12 +47,12 @@ export default function SignupPage() {
           </div>
         </div>
         <div className={styles["movie-list"]}>
-          {topRated.map((movie, i) => (
+          {topRated?.map((movie, i) => (
             <MovieCard
               key={i}
               movieCard={movie}
-              selected={selectedMovieCards.includes(movie.movieId)}
-              onClick={() => handleMovieCardClick(movie.movieId)}
+              selected={selectedMovieCards.includes(movie.id)}
+              onClick={() => handleMovieCardClick(movie.id)}
             />
           ))}
         </div>

@@ -4,14 +4,21 @@ import styles from "./RatingModal.module.css";
 import BaseModal from "@/widgets/base-modal";
 import ScoreChart from "@/widgets/score-chart";
 import MainButton from "@/widgets/main-button/ui/MainButton";
+import { RatingModalProps } from "@/widgets/app-modal/model/types";
+import { useRateMovieForSignup } from "@/entities/movie";
+import { useUserStore } from "@/entities/user";
 
-export default function RatingModal() {
+export default function RatingModal({ movieId }: RatingModalProps) {
+  const { user } = useUserStore();
+
   const [sceneScore, setSceneScore] = useState(0);
   const [actorScore, setActorScore] = useState(0);
   const [lineScore, setLineScore] = useState(0);
   const [directorScore, setDirectorScore] = useState(0);
   const [musicScore, setMusicScore] = useState(0);
   const [storyScore, setStoryScore] = useState(0);
+
+  const rateMovie = useRateMovieForSignup();
 
   const handleSceneScoreChange = useCallback(
     (_: Event, value: number | number[]) => {
@@ -55,7 +62,32 @@ export default function RatingModal() {
     []
   );
 
-  const handleSaveButtonClick = useCallback(() => {}, []);
+  const handleSaveButtonClick = useCallback(() => {
+    if (user && movieId) {
+      rateMovie.mutate({
+        userId: user.memberId,
+        movieId,
+        newReview: {
+          content: null,
+          sceneSkill: sceneScore,
+          actorSkill: actorScore,
+          lineSkill: lineScore,
+          directorSkill: directorScore,
+          musicSkill: musicScore,
+          storySkill: storyScore,
+        },
+      });
+    }
+  }, [
+    user,
+    movieId,
+    sceneScore,
+    actorScore,
+    lineScore,
+    directorScore,
+    musicScore,
+    storyScore,
+  ]);
 
   return (
     <BaseModal title="영화 평가">
