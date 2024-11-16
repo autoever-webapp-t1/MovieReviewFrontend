@@ -8,13 +8,23 @@ export interface Score {
   avgActorSkill: number;
 }
 
+export interface MyScore {
+  sceneSkill: number;
+  avgSkill: number;
+  lineSkill: number;
+  musicSkill: number;
+  storySkill: number;
+  directorSkill: number;
+  actorSkill: number;
+}
+
 export interface MovieCardDto {
   id: number;
   title: string;
   overview: string;
   poster_path: string;
   score: Score | null;
-  myScore: Score | null;
+  myScore: MyScore | null;
   release_date: string;
   genre_ids: number[];
 }
