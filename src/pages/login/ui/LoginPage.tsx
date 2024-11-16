@@ -12,7 +12,7 @@ export default function LoginPage() {
           <img src={TextLogoImg} alt="LogoImg" />
         </div>
         <Link
-          to="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=7afd832d40c601c8d991c2096ac2b039&redirect_uri=http://api.gasanne.site:8080/login/oauth/kakao"
+          to="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=7afd832d40c601c8d991c2096ac2b039&redirect_uri=http://localhost:5173/login/oauth/kakao"
           className={styles["login-button"]}
         >
           <img src={KakaoLoginButtonImg} alt="KakaoLoginButtonImg" />
