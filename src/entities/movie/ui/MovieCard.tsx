@@ -20,7 +20,7 @@ export default function MovieCard({
     <div className={styles.container} onClick={onClick}>
       <div className={styles["background-img-wrapper"]}>
         <img
-          src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+          src={`https://image.tmdb.org/t/p/w200${poster_path}`}
           alt="PosterImg"
         />
       </div>
