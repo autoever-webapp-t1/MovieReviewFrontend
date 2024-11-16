@@ -12,7 +12,6 @@ export default function PostDetailPage() {
   const likeCount = 26;
   const isAuthor = false;
   const commentCount = 4;
-  const commentCount = 4;
 
   const [isLiked, setIsLiked] = useState(false);
 
