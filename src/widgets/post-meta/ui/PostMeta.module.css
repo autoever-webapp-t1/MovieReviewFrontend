@@ -1,0 +1,23 @@
+.postMeta {
+  display: flex;
+  align-items: center;
+}
+
+.author,
+.createdDate {
+  font-size: var(--font-sm);
+  line-height: var(--line-height-sm);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-gray-200);
+}
+
+.author {
+  padding-left: 8px;
+}
+
+.likeCount {
+  font-size: var(--font-sm);
+  line-height: var(--line-height-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-sub-light);
+}
