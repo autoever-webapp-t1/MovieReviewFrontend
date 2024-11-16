@@ -1,4 +1,4 @@
-import { axios } from "@/shared/api/base";
+import { authAxios } from "@/shared/api/base";
 import { MovieCardDto, NewReviewDto } from "../model/types";
 import { AxiosResponse } from "axios";
 
@@ -6,11 +6,8 @@ export const fetchTopRated = async (userId: number) => {
   const at = localStorage.getItem("at");
   if (!at) throw new Error();
 
-  const response = await axios.get<MovieCardDto[]>(
-    `api/movie/topRated/${userId}`,
-    {
-      headers: { Authorization: `Bearer ${at}` },
-    }
+  const response = await authAxios.get<MovieCardDto[]>(
+    `api/movie/topRated/${userId}`
   );
 
   return response.data;
@@ -24,12 +21,9 @@ export const rateMovie = async (
   const at = localStorage.getItem("at");
   if (!at) throw new Error();
 
-  const response = await axios.post<string, AxiosResponse, NewReviewDto>(
+  const response = await authAxios.post<string, AxiosResponse, NewReviewDto>(
     `api/movie/${movieId}/review?memberId=${userId}`,
-    newReview,
-    {
-      headers: { Authorization: `Bearer ${at}` },
-    }
+    newReview
   );
 
   console.log(response);
