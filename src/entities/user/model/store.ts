@@ -1,12 +1,12 @@
 import { create } from "zustand";
-import { User } from "./types";
+import { MemberDto } from "./types";
 
 interface UserStore {
-  user: User;
-  setUser: (newUser: User) => void;
+  user: MemberDto | null;
+  setUser: (newUser: MemberDto) => void;
 }
 
 export const useUserStore = create<UserStore>((set) => ({
-  user: { userId: 1, email: "" },
-  setUser: (newUser: User) => set({ user: newUser }),
+  user: null,
+  setUser: (newUser: MemberDto) => set({ user: newUser }),
 }));

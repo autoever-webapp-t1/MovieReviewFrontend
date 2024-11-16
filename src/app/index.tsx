@@ -11,7 +11,7 @@ createRoot(document.getElementById("root")!).render(
   <QueryProvider>
     <MuiThemeProvider>
       <AppModal>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<div></div>}>
           <RouterProvider router={router} />
         </Suspense>
       </AppModal>

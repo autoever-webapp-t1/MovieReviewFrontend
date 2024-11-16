@@ -7,12 +7,16 @@ interface AppModalProps {
 }
 
 export default function AppModal({ children }: AppModalProps) {
-  const openModal = useModalStore((state) => state.openModal);
+  const { openModal, modalProps } = useModalStore();
 
   return (
     <>
       {children}
-      {openModal === "ratingModal" ? <RatingModal /> : <></>}
+      {openModal === "ratingModal" ? (
+        <RatingModal movieId={modalProps!.movieId} />
+      ) : (
+        <></>
+      )}
     </>
   );
 }

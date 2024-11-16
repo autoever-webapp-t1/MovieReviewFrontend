@@ -1,10 +1,3 @@
-import { Favorite, FavoriteBorder } from "@mui/icons-material";
-import styles from "./PostDetailPage.module.css";
-import PostMeta from "@/widgets/post-meta/ui/PostMeta";
-import MainButton from "@/widgets/main-button/ui/MainButton";
-import { useState } from "react";
-import Comment from "./Comment";
-
 export default function PostDetailPage() {
   const authorProfileImage = "../../../src/assets/jackeylove.jpg";
   const author = "재키러브";
