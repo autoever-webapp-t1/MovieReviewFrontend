@@ -13,6 +13,7 @@ const PostEditPage = lazy(() => import("@/pages/post-edit"));
 const UserPage = lazy(() => import("@/pages/user"));
 const AwardsPage = lazy(() => import("@/pages/awards"));
 const AwardsHistoryPage = lazy(() => import("@/pages/awards-history"));
+const AuthCodePage = lazy(() => import("@/pages/auth-code"));
 
 const router = createBrowserRouter([
   {
@@ -66,6 +67,10 @@ const router = createBrowserRouter([
       {
         path: "/awards/history",
         element: <AwardsHistoryPage />,
+      },
+      {
+        path: "/login/oauth/kakao",
+        element: <AuthCodePage />,
       },
     ],
   },

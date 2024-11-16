@@ -66,11 +66,13 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: inherit;
 }
 
 body {
   background-color: var(--color-gray-900);
   color: var(--color-gray-100);
+  font-family: "Pretendard Variable", sans-serif;
 }
 
 ol,
@@ -152,4 +154,13 @@ img {
   font-size: var(--font-header-h1);
   line-height: var(--line-height-header-h1);
   font-weight: var(--font-weight-extrabold);
+}
+
+@font-face {
+  font-family: "Pretendard Variable";
+  font-weight: 45 920;
+  font-style: normal;
+  font-display: swap;
+  src: url("../../assets/fonts/PretendardVariable.woff2")
+    format("woff2-variations");
 }

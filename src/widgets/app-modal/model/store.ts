@@ -1,13 +1,20 @@
 import { create } from "zustand";
+import { ModalPropsType } from "./types";
 
 type ModalType = null | "ratingModal";
 
 interface ModalStore {
   openModal: ModalType;
-  setOpenModal: (newOpenModal: ModalType) => void;
+  modalProps: ModalPropsType;
+  setOpenModal: (
+    newOpenModal: ModalType,
+    newModalProps: ModalPropsType
+  ) => void;
 }
 
 export const useModalStore = create<ModalStore>((set) => ({
   openModal: null,
-  setOpenModal: (newOpenModal: ModalType) => set({ openModal: newOpenModal }),
+  modalProps: null,
+  setOpenModal: (newOpenModal: ModalType, newModalProps: ModalPropsType) =>
+    set({ openModal: newOpenModal, modalProps: newModalProps }),
 }));

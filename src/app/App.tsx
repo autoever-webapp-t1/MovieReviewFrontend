@@ -7,7 +7,7 @@ export default function App() {
   const { pathname } = useLocation();
 
   const hasHeader = useMemo(() => {
-    return !["/", "/signup"].includes(pathname);
+    return !["/", "/signup", "/login/oauth/kakao"].includes(pathname);
   }, [pathname]);
 
   if (hasHeader)
