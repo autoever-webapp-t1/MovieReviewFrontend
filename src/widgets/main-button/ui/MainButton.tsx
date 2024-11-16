@@ -1,24 +1,24 @@
-import styles from "./TextButton.module.css";
+import styles from "./MainButton.module.css";
 
-interface TextButtonProps {
+interface MainButtonProps {
   color: "primary" | "sub";
   onClick: () => void;
   children: string;
   disabled?: boolean;
 }
 
-export default function TextButton({
+export default function MainButton({
   color,
   onClick,
-  children,
   disabled,
-}: TextButtonProps) {
+  children,
+}: MainButtonProps) {
   return (
     <button
+      disabled={disabled}
       className={`${styles.button} ${
         color === "primary" ? styles.primary : styles.sub
       } text-md text-bold`}
-      disabled={disabled}
       onClick={onClick}
     >
       {children}

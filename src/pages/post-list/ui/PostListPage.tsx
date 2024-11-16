@@ -1,13 +1,13 @@
 import PostCard from "@/widgets/post-card";
 import styles from "./PostListPage.module.css";
-import SearchIcon from "@/widgets/search-icon";
+import SearchIcon from "@mui/icons-material/Search";
 
 export default function PostListPage() {
   return (
     <div className={styles.container}>
       <div className={styles.searchBar}>
         <input type="text" placeholder="제목으로 검색" />
-        <SearchIcon />
+        <SearchIcon sx={{ color: "var(--color-gray-400)", fontSize: "32px" }} />
       </div>
       <div className={styles.postList}>
         <ul>

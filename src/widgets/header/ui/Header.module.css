@@ -6,6 +6,7 @@
   height: 60px;
   width: 100%;
   top: 0;
+  z-index: 10;
 }
 
 .headerMenu {
@@ -71,16 +72,6 @@
 
 .searchBar input::placeholder {
   color: var(--color-gray-500);
-}
-
-.searchBar button {
-  padding: 0 2px;
-  background: none;
-  border: none;
-}
-
-.searchBar button img {
-  display: block;
 }
 
 .profile {
