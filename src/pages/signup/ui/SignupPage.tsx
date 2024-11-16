@@ -5,11 +5,13 @@ import TextButton from "@/widgets/text-button/ui/TextButton";
 import MovieCard, { useTopRated } from "@/entities/movie";
 import { useCallback, useMemo } from "react";
 import { useModalStore } from "@/widgets/app-modal/model/store";
+import { useUserStore } from "@/entities/user";
 
 export default function SignupPage() {
   const { setOpenModal } = useModalStore();
+  const { user } = useUserStore();
 
-  const { data: topRated } = useTopRated();
+  const { data: topRated } = useTopRated(user!.memberId);
 
   const selectedMovieCards = useMemo(() => {
     if (topRated) {

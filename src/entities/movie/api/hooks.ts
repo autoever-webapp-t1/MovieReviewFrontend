@@ -2,10 +2,10 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchTopRated, rateMovie } from "./movieApi";
 import { NewReviewDto } from "../model/types";
 
-export const useTopRated = () => {
+export const useTopRated = (userId: number) => {
   return useQuery({
     queryKey: ["movie/topRated"],
-    queryFn: fetchTopRated,
+    queryFn: () => fetchTopRated(userId),
   });
 };
 

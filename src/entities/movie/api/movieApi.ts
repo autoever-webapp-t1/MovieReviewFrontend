@@ -2,13 +2,16 @@ import { axios } from "@/shared/api/base";
 import { MovieCardDto, NewReviewDto } from "../model/types";
 import { AxiosResponse } from "axios";
 
-export const fetchTopRated = async () => {
+export const fetchTopRated = async (userId: number) => {
   const at = localStorage.getItem("at");
   if (!at) throw new Error();
 
-  const response = await axios.get<MovieCardDto[]>(`api/movie/topRated`, {
-    headers: { Authorization: `Bearer ${at}` },
-  });
+  const response = await axios.get<MovieCardDto[]>(
+    `api/movie/topRated/${userId}`,
+    {
+      headers: { Authorization: `Bearer ${at}` },
+    }
+  );
 
   return response.data;
 };
