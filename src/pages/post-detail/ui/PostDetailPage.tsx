@@ -12,6 +12,7 @@ export default function PostDetailPage() {
   const likeCount = 26;
   const isAuthor = false;
   const commentCount = 4;
+  const commentCount = 4;
 
   const [isLiked, setIsLiked] = useState(false);
 
@@ -24,7 +25,8 @@ export default function PostDetailPage() {
       <div className={`${styles.container} ${styles["post-header"]}`}>
         <div className={`${styles.title}`}>
           <span className="header-h2">
-            효율적인 시간 관리 방법, 이렇게 해보세요
+            효율적인 시간 관리 방법, 이렇게 해보세요 효율적인 시간 관리 방법,
+            이렇게 해보세요
           </span>
           <PostMeta
             authorProfileImage={authorProfileImage}
