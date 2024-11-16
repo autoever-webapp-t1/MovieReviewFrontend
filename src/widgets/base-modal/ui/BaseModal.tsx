@@ -12,7 +12,7 @@ export default function BaseModal({ title, children }: BaseModalProps) {
   const setOpenModal = useModalStore((state) => state.setOpenModal);
 
   const handleClose = useCallback(() => {
-    setOpenModal(null);
+    setOpenModal(null, null);
   }, []);
 
   return (
