@@ -46,6 +46,10 @@
   justify-content: center;
   justify-items: flex-start;
   overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .spinner-wrapper {
