@@ -1,0 +1,12 @@
+.css-tdpxrd-MuiSlider-root {
+  padding: 8px 0 !important;
+  margin-bottom: 11px !important;
+}
+
+.MuiSlider-markLabel {
+  color: var(--color-gray-100) !important;
+  font-size: var(--font-xs) !important;
+  line-height: var(--line-height-xs) !important;
+  font-weight: var(--font-weight-extralight) !important;
+  top: 20px !important;
+}

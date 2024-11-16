@@ -86,7 +86,7 @@ export default function ScoreChart({ size, data }: ScoreChartProps) {
         chartRef.current.destroy();
       }
     };
-  }, [size]);
+  }, [size, chartData]);
 
   return (
     <div

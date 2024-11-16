@@ -4,11 +4,17 @@ import router from "./router/index.tsx";
 import "./styles/global.css";
 import { Suspense } from "react";
 import { QueryProvider } from "./providers/QueryClientProvider.tsx";
+import AppModal from "@/widgets/app-modal/index.ts";
+import MuiThemeProvider from "./providers/MuiThemeProvider.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <QueryProvider>
-    <Suspense fallback={<div>Loading...</div>}>
-      <RouterProvider router={router} />
-    </Suspense>
+    <MuiThemeProvider>
+      <AppModal>
+        <Suspense fallback={<div>Loading...</div>}>
+          <RouterProvider router={router} />
+        </Suspense>
+      </AppModal>
+    </MuiThemeProvider>
   </QueryProvider>
 );
