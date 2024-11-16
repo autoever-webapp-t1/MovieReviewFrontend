@@ -1,0 +1,20 @@
+.credit-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.my-review {
+  width: 100%;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid var(--color-gray-800);
+  box-shadow: 0 0 4px var(--color-gray-800);
+  margin-bottom: 16px;
+}
+
+.review-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
