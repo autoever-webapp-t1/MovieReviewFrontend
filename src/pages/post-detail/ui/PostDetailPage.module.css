@@ -10,11 +10,17 @@
 
 .post-header {
   display: flex;
-  gap: 96px;
+  gap: 60px;
   padding: 12px;
 }
 
 .post-body {
+}
+
+.body-content {
+}
+
+.review {
 }
 
 .title {
@@ -22,6 +28,7 @@
   flex-direction: column;
   justify-content: flex-end;
   height: 300px;
+  width: 600px;
   gap: 24px;
   color: var(--color-gray-50);
 }
@@ -29,6 +36,19 @@
 .actions {
   display: flex;
   align-items: end;
+  justify-content: end;
+  width: 144px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.button {
+  cursor: pointer;
+  line-height: 0;
+
+  :hover {
+    opacity: 80%;
+  }
 }
 
 .divide-line {
