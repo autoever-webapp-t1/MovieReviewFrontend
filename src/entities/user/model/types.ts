@@ -9,4 +9,5 @@ export interface MemberDto {
   email: string; //카카오 사용자 이메일
   profile: string; //카카오 사용자 프로필사진
   refreshToken: string; //카카오 사용자 refreshToke
+  isExisted: boolean;
 }
