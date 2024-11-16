@@ -5,11 +5,15 @@ import BaseModal from "@/widgets/base-modal";
 import ScoreChart from "@/widgets/score-chart";
 import MainButton from "@/widgets/main-button/ui/MainButton";
 import { RatingModalProps } from "@/widgets/app-modal/model/types";
-import { useRateMovieForSignup } from "@/entities/movie";
+import { MovieCardDto, useRateMovieForSignup } from "@/entities/movie";
 import { useUserStore } from "@/entities/user";
+import { useQueryClient } from "@tanstack/react-query";
+import { useModalStore } from "@/widgets/app-modal/model/store";
 
 export default function RatingModal({ movieId }: RatingModalProps) {
   const { user } = useUserStore();
+  const { setOpenModal } = useModalStore();
+  const queryClient = useQueryClient();
 
   const [sceneScore, setSceneScore] = useState(0);
   const [actorScore, setActorScore] = useState(0);
@@ -64,19 +68,50 @@ export default function RatingModal({ movieId }: RatingModalProps) {
 
   const handleSaveButtonClick = useCallback(() => {
     if (user && movieId) {
-      rateMovie.mutate({
-        userId: user.memberId,
-        movieId,
-        newReview: {
-          content: null,
-          sceneSkill: sceneScore,
-          actorSkill: actorScore,
-          lineSkill: lineScore,
-          directorSkill: directorScore,
-          musicSkill: musicScore,
-          storySkill: storyScore,
+      rateMovie.mutate(
+        {
+          userId: user.memberId,
+          movieId,
+          newReview: {
+            content: null,
+            sceneSkill: sceneScore,
+            actorSkill: actorScore,
+            lineSkill: lineScore,
+            directorSkill: directorScore,
+            musicSkill: musicScore,
+            storySkill: storyScore,
+          },
         },
-      });
+        {
+          onSuccess: () => {
+            queryClient.setQueryData<MovieCardDto[]>(
+              ["movie/topRated"],
+              (old) => {
+                return old?.map<MovieCardDto>((movieCard) => {
+                  if (movieCard.id === movieId) {
+                    const newMovieCard: MovieCardDto = {
+                      ...movieCard,
+                      myScore: {
+                        sceneSkill: sceneScore,
+                        actorSkill: actorScore,
+                        lineSkill: lineScore,
+                        directorSkill: directorScore,
+                        musicSkill: musicScore,
+                        storySkill: storyScore,
+                        avgSkill: 0,
+                      },
+                    };
+
+                    return newMovieCard;
+                  } else return movieCard;
+                });
+              }
+            );
+
+            setOpenModal(null, null);
+          },
+        }
+      );
     }
   }, [
     user,
@@ -87,6 +122,8 @@ export default function RatingModal({ movieId }: RatingModalProps) {
     directorScore,
     musicScore,
     storyScore,
+    queryClient,
+    setOpenModal,
   ]);
 
   return (

@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { fetchTopRated, rateMovie } from "./movieApi";
 import { NewReviewDto } from "../model/types";
 
@@ -10,7 +10,7 @@ export const useTopRated = (userId: number) => {
 };
 
 export const useRateMovieForSignup = () => {
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
 
   return useMutation<
     string,
@@ -20,9 +20,9 @@ export const useRateMovieForSignup = () => {
     mutationFn: ({ userId, movieId, newReview }) =>
       rateMovie(userId, movieId, newReview),
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["movie/topRated"],
-      });
+      // queryClient.invalidateQueries({
+      //   queryKey: ["movie/topRated"],
+      // });
     },
   });
 };
