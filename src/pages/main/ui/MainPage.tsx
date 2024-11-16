@@ -4,8 +4,15 @@ import VisualImg from "@assets/visual.png";
 import TextButton from "@/widgets/text-button/ui/TextButton";
 import { useCallback } from "react";
 import MainSwiper from "@/widgets/main-swiper";
+import { useNowPlaing, useTopRated } from "@/entities/movie";
+import { useUserStore } from "@/entities/user";
 
 export default function MainPage() {
+  const { user } = useUserStore();
+
+  const { data: nowPlaying } = useNowPlaing(user!.memberId);
+  const { data: topRated } = useTopRated(user!.memberId);
+
   const handleAwardsButtonClick = useCallback(() => {}, []);
 
   const handleHistoryButtonClick = useCallback(() => {}, []);
@@ -34,10 +41,8 @@ export default function MainPage() {
       </div>
       <div className={styles["content-wrapper"]}>
         <div className={styles.content}>
-          <MainSwiper label={<>마녀배달부 키키를 재밌게 보셨다면</>} />
-          <MainSwiper label={<>마녀배달부 키키를 재밌게 보셨다면</>} />
-          <MainSwiper label={<>마녀배달부 키키를 재밌게 보셨다면</>} />
-          <MainSwiper label={<>마녀배달부 키키를 재밌게 보셨다면</>} />
+          <MainSwiper label={<>현재 상영 중</>} data={nowPlaying} />
+          <MainSwiper label={<>평점이 높은</>} data={topRated} />
         </div>
       </div>
     </div>
