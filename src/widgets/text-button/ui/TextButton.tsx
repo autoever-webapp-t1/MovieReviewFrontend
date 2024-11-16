@@ -19,6 +19,7 @@ export default function TextButton({
         color === "primary" ? styles.primary : styles.sub
       } text-md text-bold`}
       disabled={disabled}
+      onClick={onClick}
     >
       {children}
     </button>
