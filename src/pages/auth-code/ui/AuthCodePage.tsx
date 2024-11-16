@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { login as loginApi, postLogin } from "@features/login";
 import { useUserStore } from "@/entities/user";
+import SplashBackground from "@/widgets/splash-background";
+import styles from "./AuthCodePage.module.css";
 
 export default function AuthCodePage() {
   const params = useLocation();
@@ -18,11 +20,19 @@ export default function AuthCodePage() {
     const userInfo = await postLogin(accessToken, refreshToken);
     setUser(userInfo);
 
-    navigate("/main");
+    if (userInfo.isExisted) {
+      navigate("/main");
+    } else {
+      navigate("/signup");
+    }
   };
 
   useEffect(() => {
     login();
   }, []);
-  return <></>;
+  return (
+    <SplashBackground>
+      <div className={styles.spinner}></div>
+    </SplashBackground>
+  );
 }
