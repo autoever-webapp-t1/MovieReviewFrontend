@@ -1,8 +1,8 @@
 import PostMeta from "@/widgets/post-meta/ui/PostMeta";
-import styles from "./Comment.module.css";
+import styles from "./CommentBox.module.css";
 import MainButton from "@/widgets/main-button/ui/MainButton";
 
-interface CommentProps {
+interface CommentBoxProps {
   commentId: number;
   postId: number;
   content: string;
@@ -13,7 +13,7 @@ interface CommentProps {
   authorProfileImage: string;
 }
 
-export default function Comment({
+export default function CommentBox({
   commentId,
   postId,
   content,
@@ -22,7 +22,7 @@ export default function Comment({
   createdAt,
   updatedAt,
   authorProfileImage,
-}: CommentProps) {
+}: CommentBoxProps) {
   const myComment = true;
   return (
     <li>

@@ -1,3 +1,10 @@
+import MainButton from "@/widgets/main-button/ui/MainButton";
+import PostMeta from "@/widgets/post-meta/ui/PostMeta";
+import { Favorite, FavoriteBorder } from "@mui/icons-material";
+import { useState } from "react";
+import styles from "./PostDetailPage.module.css";
+import CommentBox from "./CommentBox";
+
 export default function PostDetailPage() {
   const authorProfileImage = "../../../src/assets/jackeylove.jpg";
   const author = "재키러브";
@@ -65,7 +72,7 @@ export default function PostDetailPage() {
         </div>
         <div>
           <ul>
-            <Comment
+            <CommentBox
               commentId={1}
               postId={1}
               memberId={12}
@@ -74,7 +81,7 @@ export default function PostDetailPage() {
               createdAt="2024-11-12 12:36:00"
               authorProfileImage={authorProfileImage}
             />
-            <Comment
+            <CommentBox
               commentId={2}
               postId={1}
               memberId={12}
@@ -84,7 +91,7 @@ export default function PostDetailPage() {
               updatedAt="2024-11-12 14:36:00"
               authorProfileImage={authorProfileImage}
             />
-            <Comment
+            <CommentBox
               commentId={2}
               postId={1}
               memberId={12}
