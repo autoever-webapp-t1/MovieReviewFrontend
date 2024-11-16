@@ -19,30 +19,47 @@ export default function MovieCard({
   return (
     <div className={styles.container} onClick={onClick}>
       <div className={styles["background-img-wrapper"]}>
-        <img src={poster_path} alt="PosterImg" />
+        <img
+          src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+          alt="PosterImg"
+        />
       </div>
 
       {!selected ? (
         <div className={styles["info-box"]}>
           <h3 className="text-md text-bold">{title}</h3>
           <p className="text-xs text-regular">
-            총점 {score.totalAverageSkill}/10
+            총점 {score ? score.totalAverageSkill : 0}/10
           </p>
           <p className="text-xs text-regular">{release_date}</p>
           <div className={styles["chart-wrapper"]}>
             <ScoreChart
               size="small"
-              data={[
-                {
-                  movieTitle: movieCard.title,
-                  sceneSkill: movieCard.score.avgSceneSkill,
-                  actorSkill: movieCard.score.avgActorSkill,
-                  directorSkill: movieCard.score.avgDirectorSkill,
-                  lineSkill: movieCard.score.avgLineSkill,
-                  musicSkill: movieCard.score.avgMusicSkill,
-                  storySkill: movieCard.score.avgStorySkill,
-                },
-              ]}
+              data={
+                score
+                  ? [
+                      {
+                        movieTitle: title,
+                        sceneSkill: score.avgSceneSkill,
+                        actorSkill: score.avgActorSkill,
+                        directorSkill: score.avgDirectorSkill,
+                        lineSkill: score.avgLineSkill,
+                        musicSkill: score.avgMusicSkill,
+                        storySkill: score.avgStorySkill,
+                      },
+                    ]
+                  : [
+                      {
+                        movieTitle: title,
+                        sceneSkill: 0,
+                        actorSkill: 0,
+                        directorSkill: 0,
+                        lineSkill: 0,
+                        musicSkill: 0,
+                        storySkill: 0,
+                      },
+                    ]
+              }
             />
           </div>
           <div className={styles["icon-wrapper"]}>
