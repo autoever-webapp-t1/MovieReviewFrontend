@@ -1,0 +1,31 @@
+.container {
+  width: 100%;
+  display: flex;
+  gap: 8px;
+
+  .profile-img-wrapper {
+    flex: 32px 0 0;
+    height: 32px;
+  }
+  .content {
+    flex-grow: 1;
+    text-wrap: wrap;
+    color: var(--color-gray-100);
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .rating {
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
+  .chart-wrapper {
+    flex: 60px 0 0;
+    height: 60px;
+  }
+}
