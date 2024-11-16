@@ -1,4 +1,4 @@
-import { formatDate } from "@shared/utils/dateUtils";
+import { formatDate } from "@/shared/lib/dateUtils";
 import styles from "./PostCard.module.css";
 import ProfileImage from "@/widgets/profile-image";
 import Separator from "@/widgets/separator";

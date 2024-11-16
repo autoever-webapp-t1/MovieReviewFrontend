@@ -108,7 +108,7 @@ img {
 }
 
 .text-xs {
-  font-size: var(--line-height-xs);
+  font-size: var(--font-xs);
   line-height: var(--line-height-xs);
 }
 
