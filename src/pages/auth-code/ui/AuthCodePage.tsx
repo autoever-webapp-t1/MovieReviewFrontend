@@ -1,21 +1,24 @@
-import axios from "axios";
 import { useEffect } from "react";
-import { useLocation, useParams, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { login as loginApi, postLogin } from "@features/login";
+import { useUserStore } from "@/entities/user";
 
 export default function AuthCodePage() {
   const params = useLocation();
+  const navigate = useNavigate();
 
-  console.log(params.search.substring(6));
+  const setUser = useUserStore((state) => state.setUser);
 
   const login = async () => {
-    const response = await axios.get(
-      `http://localhost:8080/login/oauth/kakao?code=${params.search.substring(
-        6
-      )}`,
-      { withCredentials: true }
-    );
+    const loginResponse = await loginApi(params.search.substring(6));
+    const { accessToken, refreshToken } = loginResponse;
+    localStorage.setItem("at", accessToken);
+    localStorage.setItem("rt", refreshToken);
 
-    console.log(response);
+    const userInfo = await postLogin(accessToken, refreshToken);
+    setUser(userInfo);
+
+    navigate("/main");
   };
 
   useEffect(() => {
