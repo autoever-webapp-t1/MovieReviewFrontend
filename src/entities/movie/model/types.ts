@@ -9,7 +9,7 @@ export interface Score {
 }
 
 export interface MovieCardDto {
-  movieId: number;
+  id: number;
   title: string;
   overview: string;
   poster_path: string;
@@ -17,4 +17,14 @@ export interface MovieCardDto {
   myScore: Score | null;
   release_date: string;
   genre_ids: number[];
+}
+
+export interface NewReviewDto {
+  content: string | null;
+  actorSkill: number;
+  directorSkill: number;
+  sceneSkill: number;
+  musicSkill: number;
+  storySkill: number;
+  lineSkill: number;
 }
