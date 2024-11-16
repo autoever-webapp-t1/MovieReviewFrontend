@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { login as loginApi, postLogin } from "@features/login";
 import { useUserStore } from "@/entities/user";
 import SplashBackground from "@/widgets/splash-background";
-import styles from "./AuthCodePage.module.css";
+import Spinner from "@/widgets/spinner";
 
 export default function AuthCodePage() {
   const params = useLocation();
@@ -20,7 +20,8 @@ export default function AuthCodePage() {
     const userInfo = await postLogin(accessToken, refreshToken);
     setUser(userInfo);
 
-    if (userInfo.isExisted) {
+    if (false) {
+      // if (userInfo.existed) {
       navigate("/main");
     } else {
       navigate("/signup");
@@ -32,7 +33,7 @@ export default function AuthCodePage() {
   }, []);
   return (
     <SplashBackground>
-      <div className={styles.spinner}></div>
+      <Spinner />
     </SplashBackground>
   );
 }
