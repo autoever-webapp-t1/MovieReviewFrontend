@@ -6,6 +6,7 @@ import MovieCard, { useTopRated } from "@/entities/movie";
 import { useCallback, useMemo } from "react";
 import { useModalStore } from "@/widgets/app-modal/model/store";
 import { useUserStore } from "@/entities/user";
+import Spinner from "@/widgets/spinner";
 
 export default function SignupPage() {
   const { setOpenModal } = useModalStore();
@@ -48,16 +49,22 @@ export default function SignupPage() {
             </TextButton>
           </div>
         </div>
-        <div className={styles["movie-list"]}>
-          {topRated?.map((movie, i) => (
-            <MovieCard
-              key={i}
-              movieCard={movie}
-              selected={selectedMovieCards.includes(movie.id)}
-              onClick={() => handleMovieCardClick(movie.id)}
-            />
-          ))}
-        </div>
+        {topRated ? (
+          <div className={styles["movie-list"]}>
+            {topRated?.map((movie, i) => (
+              <MovieCard
+                key={i}
+                movieCard={movie}
+                selected={selectedMovieCards.includes(movie.id)}
+                onClick={() => handleMovieCardClick(movie.id)}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className={styles["spinner-wrapper"]}>
+            <Spinner />
+          </div>
+        )}
       </div>
     </SplashBackground>
   );
