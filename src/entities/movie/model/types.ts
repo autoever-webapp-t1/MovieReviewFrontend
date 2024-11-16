@@ -13,7 +13,8 @@ export interface MovieCardDto {
   title: string;
   overview: string;
   poster_path: string;
-  score: Score;
+  score: Score | null;
+  myScore: Score | null;
   release_date: string;
   genre_ids: number[];
 }
