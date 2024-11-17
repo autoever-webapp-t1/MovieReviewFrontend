@@ -1,6 +1,6 @@
 import { noAuthAxios } from "@/shared/api/base";
 import { OauthResponseDto, OauthRequestDto } from "../model/types";
-import { MemberDto } from "@/entities/user";
+import { MemberAwardsResponseDto } from "@/entities/user";
 import { AxiosResponse } from "axios";
 
 export const login = async (code: string) => {
@@ -13,8 +13,8 @@ export const login = async (code: string) => {
 
 export const postLogin = async (at: string, rt: string) => {
   const response = await noAuthAxios.post<
-    MemberDto,
-    AxiosResponse<MemberDto>,
+    MemberAwardsResponseDto,
+    AxiosResponse<MemberAwardsResponseDto>,
     OauthRequestDto
   >("login/oauth/kakao", {
     accessToken: at,
