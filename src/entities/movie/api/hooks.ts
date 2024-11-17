@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   fetchNowPlaying,
+  fetchPopular,
   fetchTopRated,
   fetchUpComing,
   rateMovie,
@@ -25,6 +26,13 @@ export const useUpComing = (userId: number) => {
   return useQuery({
     queryKey: ["movie/upComing"],
     queryFn: () => fetchUpComing(userId),
+  });
+};
+
+export const usePopular = (userId: number) => {
+  return useQuery({
+    queryKey: ["movie/popular"],
+    queryFn: () => fetchPopular(userId),
   });
 };
 
