@@ -1,10 +1,10 @@
-import { axios } from "@/shared/api/base";
+import { noAuthAxios } from "@/shared/api/base";
 import { OauthResponseDto, OauthRequestDto } from "../model/types";
 import { MemberDto } from "@/entities/user";
 import { AxiosResponse } from "axios";
 
 export const login = async (code: string) => {
-  const response = await axios.get<OauthResponseDto>(
+  const response = await noAuthAxios.get<OauthResponseDto>(
     `login/oauth/kakao?code=${code}`
   );
 
@@ -12,7 +12,7 @@ export const login = async (code: string) => {
 };
 
 export const postLogin = async (at: string, rt: string) => {
-  const response = await axios.post<
+  const response = await noAuthAxios.post<
     MemberDto,
     AxiosResponse<MemberDto>,
     OauthRequestDto

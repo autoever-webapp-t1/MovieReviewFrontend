@@ -4,6 +4,7 @@ interface MainButtonProps {
   color: "primary" | "sub";
   onClick: () => void;
   children: string;
+  fontSize?: "xs" | "sm" | "md" | "lg" | "xl";
   disabled?: boolean;
 }
 
@@ -11,6 +12,7 @@ export default function MainButton({
   color,
   onClick,
   disabled,
+  fontSize = "md",
   children,
 }: MainButtonProps) {
   return (
@@ -18,7 +20,7 @@ export default function MainButton({
       disabled={disabled}
       className={`${styles.button} ${
         color === "primary" ? styles.primary : styles.sub
-      } text-md text-bold`}
+      } text-${fontSize} text-bold ${styles["padding-" + fontSize]}`}
       onClick={onClick}
     >
       {children}

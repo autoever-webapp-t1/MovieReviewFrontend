@@ -1,7 +1,4 @@
-import { formatDate } from "@shared/utils/dateUtils";
 import styles from "./PostCard.module.css";
-import ProfileImage from "@/widgets/profile-image";
-import Separator from "@/widgets/separator";
 import PostMeta from "@/widgets/post-meta/ui/PostMeta";
 
 interface PostCardProps {
