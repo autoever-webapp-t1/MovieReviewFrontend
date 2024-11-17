@@ -1,3 +1,5 @@
+import { AwardsDto } from "@/entities/awards";
+
 export interface User {
   userId: number;
   email: string;
@@ -10,4 +12,9 @@ export interface MemberDto {
   profile: string; //카카오 사용자 프로필사진
   refreshToken: string; //카카오 사용자 refreshToke
   existed: boolean;
+}
+
+export interface MemberAwardsResponseDto {
+  member: MemberDto;
+  award: AwardsDto;
 }
