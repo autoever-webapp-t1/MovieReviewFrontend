@@ -1,3 +1,5 @@
+import { Score } from "@/entities/movie";
+
 export interface AwardsDto {
   awardsId: number;
   awardName: string;
@@ -8,4 +10,16 @@ export interface AwardsDto {
   startDateTime: string;
   endDateTime: string;
   topMovieId: number;
+}
+
+export interface AwardsMovieCardDto {
+  movieId: number;
+  movieTitle: string;
+  score: Score;
+}
+
+export interface AwardsPastListDto {
+  awardsId: number;
+  awardsName: string;
+  nominatedMovies: AwardsMovieCardDto[];
 }
