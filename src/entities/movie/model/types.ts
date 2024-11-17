@@ -29,6 +29,33 @@ export interface MovieCardDto {
   genre_ids: number[];
 }
 
+export interface CreditDto {
+  type: string;
+  name: string;
+  profilePath: string;
+}
+
+export interface ReviewDetailDto {
+  reviewId: number;
+  movieId: number;
+  memberId: number;
+  title: string;
+  nickname: string;
+  profile: string;
+  content: string;
+  createdDate: string;
+  modifyDate: string;
+  totalHeart: number;
+  myHeart: boolean;
+  actorSkill: number;
+  directorSkill: number;
+  sceneSkill: number;
+  musicSkill: number;
+  storySkill: number;
+  lineSkill: number;
+  avgSkill: number;
+}
+
 export interface NewReviewDto {
   content: string | null;
   actorSkill: number;
