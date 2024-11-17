@@ -10,7 +10,7 @@ export default function Header() {
     <>
       <header className={styles.header}>
         <div className={styles.logo}>
-          <Link to="/">
+          <Link to="/main">
             <div className={styles.logoContainer}>
               <img src={Logo} alt="로고" width="90" />
             </div>
