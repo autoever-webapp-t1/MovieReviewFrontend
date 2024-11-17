@@ -6,12 +6,10 @@ import ScoreChart from "@/widgets/score-chart";
 import MainButton from "@/widgets/main-button/ui/MainButton";
 import { RatingModalProps } from "@/widgets/app-modal/model/types";
 import { MovieCardDto, useRateMovieForSignup } from "@/entities/movie";
-import { useUserStore } from "@/entities/user";
 import { useQueryClient } from "@tanstack/react-query";
 import { useModalStore } from "@/widgets/app-modal/model/store";
 
 export default function RatingModal({ movieId }: RatingModalProps) {
-  const { user } = useUserStore();
   const { setOpenModal } = useModalStore();
   const queryClient = useQueryClient();
 
@@ -67,10 +65,9 @@ export default function RatingModal({ movieId }: RatingModalProps) {
   );
 
   const handleSaveButtonClick = useCallback(() => {
-    if (user && movieId) {
+    if (movieId) {
       rateMovie.mutate(
         {
-          userId: user.memberId,
           movieId,
           newReview: {
             content: null,
@@ -114,7 +111,6 @@ export default function RatingModal({ movieId }: RatingModalProps) {
       );
     }
   }, [
-    user,
     movieId,
     sceneScore,
     actorScore,
