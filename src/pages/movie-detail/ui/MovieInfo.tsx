@@ -1,50 +1,93 @@
 import ScoreChart from "@/widgets/score-chart";
 import styles from "./MovieInfo.module.css";
+import { useMemo } from "react";
+import { GenreDto, ImageDto, MyScore, Score } from "@/entities/movie";
+import { ChartRawData } from "@/widgets/score-chart/model/types";
 
-export default function MovieInfo() {
+interface MovieInfoProps {
+  title: string;
+  images: ImageDto[];
+  genres: GenreDto[];
+  releaseDate: string;
+  runningTime: number;
+  overview: string;
+  score: Score;
+  myScore: MyScore | null;
+}
+
+export default function MovieInfo({
+  title,
+  images,
+  genres,
+  releaseDate,
+  runningTime,
+  overview,
+  score,
+  myScore,
+}: MovieInfoProps) {
+  const runningTimeStr = useMemo(() => {
+    const h = Math.floor(runningTime / 60);
+    const m = runningTime % 60;
+
+    return h === 0 ? `${m}분` : `${h}시간 ${m}분`;
+  }, [runningTime]);
+
+  const chartData = useMemo(() => {
+    const newChartData: ChartRawData[] = [];
+
+    newChartData.push({
+      movieTitle: title,
+      actorSkill: score.avgActorSkill,
+      lineSkill: score.avgLineSkill,
+      directorSkill: score.avgDirectorSkill,
+      musicSkill: score.avgMusicSkill,
+      sceneSkill: score.avgSceneSkill,
+      storySkill: score.avgStorySkill,
+    });
+
+    if (myScore) {
+      newChartData.push({
+        movieTitle: title,
+        actorSkill: myScore.actorSkill,
+        lineSkill: myScore.lineSkill,
+        directorSkill: myScore.directorSkill,
+        musicSkill: myScore.musicSkill,
+        sceneSkill: myScore.sceneSkill,
+        storySkill: myScore.storySkill,
+      });
+    }
+
+    return newChartData;
+  }, [title, score, myScore]);
+
   return (
     <div className={styles.info}>
       <div className={styles["movie-img-wrapper"]}>
         <img
-          src="https://static1.srcdn.com/wordpress/wp-content/uploads/2021/07/The-cast-of-The-Hateful-Eight-in-the-snow.jpg"
+          src={`https://image.tmdb.org/t/p/w780${images[0].backdrop_path}`}
           alt="MovieImg"
         />
       </div>
       <div className={styles["info-content"]}>
-        <h1 className="header-h1">헤이트풀8</h1>
-        <p className="text-md text-regular">2024 | 2시간 8분 | 액션</p>
+        <h1 className="header-h1">{title}</h1>
         <p className="text-md text-regular">
-          이제 와 뒤늦게 무엇을 더 보태려 하나? 귀 기울여 듣지 않고 달리 보면
-          그만인 것을 못 그린 내 빈 곳 무엇으로 채워지려나? 차라리 내 마음에
-          비친 내 모습 그려가리 이제 와 뒤늦게 무엇을 더 보태려 하나? 귀 기울여
-          듣지 않고 달리 보면 그만인 것을 못 그린 내 빈 곳 무엇으로 채워지려나
-          이제 와 뒤늦게 무엇을 더 보태려 하나? 귀 기울여 듣지 않고 달리 보면
-          그만인 것을 못 그린 내 빈 곳 무엇으로 채워지려나? 차라리 내 마음에
-          비친 내 모습 그려가리 이제 와 뒤늦게 무엇을 더 보태려 하나? 귀 기울여
-          듣지 않고 달리 보면 그만인 것을 못 그린 내 빈 곳 무엇으로 채워지려나
+          {releaseDate.substring(0, 4)} | {runningTimeStr} |{" "}
+          {genres.map((genre) => genre.name).join(", ")}
         </p>
+        <p className="text-md text-regular">{overview}</p>
         <div className={`${styles["score-text"]} text-bold text-lg`}>
-          <span className={styles["avg-score"]}>평균 총점 4.8</span>
+          <span className={styles["avg-score"]}>
+            평균 총점 {score.totalAverageSkill}
+          </span>
           <span className={styles["my-score"]}>
             나의 총점{" "}
-            <button className={`${styles["score-button"]}`}>평가하기</button>
+            <button className={`${styles["score-button"]}`}>
+              {myScore ? myScore.avgSkill : "평가하기"}
+            </button>
           </span>
         </div>
         <div className={styles["chart-wrapper"]}>
-          <ScoreChart
-            size="small"
-            data={[
-              {
-                movieTitle: "",
-                actorSkill: 7,
-                lineSkill: 6,
-                directorSkill: 6,
-                musicSkill: 6,
-                sceneSkill: 6,
-                storySkill: 6,
-              },
-            ]}
-          />
+          <ScoreChart size="small" data={chartData} />
         </div>
       </div>
     </div>

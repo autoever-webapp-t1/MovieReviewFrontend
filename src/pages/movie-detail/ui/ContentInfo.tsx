@@ -4,13 +4,6 @@ import ContentSegment from "./ContentSegment";
 import CreditItem from "./CreditItem";
 import ReviewItem from "./ReviewItem";
 
-const credit: CreditDto = {
-  name: "김철수",
-  type: "감독",
-  profilePath:
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Michael_Fassbender_by_Gage_Skidmore_2015.jpg/250px-Michael_Fassbender_by_Gage_Skidmore_2015.jpg",
-};
-
 const review: ReviewDetailDto = {
   reviewId: 1,
   movieId: 155,
@@ -33,8 +26,11 @@ const review: ReviewDetailDto = {
   avgSkill: 2.58,
 };
 
-export default function ContentInfo() {
-  const credits = Array.from({ length: 10 }, () => credit);
+interface ContentInfoProps {
+  credits: CreditDto[];
+}
+
+export default function ContentInfo({ credits }: ContentInfoProps) {
   const reviews = Array.from({ length: 10 }, () => review);
 
   return (
