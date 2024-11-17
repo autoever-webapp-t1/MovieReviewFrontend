@@ -3,17 +3,20 @@ import { MovieCardDto } from "../model/types";
 import styles from "./MovieCard.module.css";
 import AddLibraryImg from "@assets/add_library.svg";
 import CheckedLibraryImg from "@assets/checked_library.svg";
+import MovieInfoImg from "@assets/movie-info.svg";
 
 interface MovieCardProps {
   movieCard: MovieCardDto;
   selected?: boolean;
   onClick: () => void;
+  type?: "normal" | "check";
 }
 
 export default function MovieCard({
   movieCard,
   selected,
   onClick,
+  type = "normal",
 }: MovieCardProps) {
   const { title, score, release_date, poster_path } = movieCard;
   return (
@@ -63,7 +66,10 @@ export default function MovieCard({
             />
           </div>
           <div className={styles["icon-wrapper"]}>
-            <img src={AddLibraryImg} alt="AddLibraryImg" />
+            <img
+              src={type === "normal" ? MovieInfoImg : AddLibraryImg}
+              alt="AddLibraryImg"
+            />
           </div>
         </div>
       ) : (

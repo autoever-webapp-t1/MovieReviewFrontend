@@ -4,3 +4,9 @@
     padding: 8px 32px;
   }
 }
+
+.spinner-wrapper {
+  position: relative;
+  width: 100%;
+  height: 300px;
+}

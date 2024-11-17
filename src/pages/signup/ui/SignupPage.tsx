@@ -7,8 +7,11 @@ import { useCallback, useMemo } from "react";
 import { useModalStore } from "@/widgets/app-modal/model/store";
 import { useUserStore } from "@/entities/user";
 import Spinner from "@/widgets/spinner";
+import { useNavigate } from "react-router-dom";
 
 export default function SignupPage() {
+  const navigate = useNavigate();
+
   const { setOpenModal } = useModalStore();
   const { user } = useUserStore();
 
@@ -29,6 +32,10 @@ export default function SignupPage() {
     [selectedMovieCards]
   );
 
+  const handleNextButtonClick = useCallback(() => {
+    navigate("/main");
+  }, []);
+
   return (
     <SplashBackground>
       <div className={styles["signup-box"]}>
@@ -40,7 +47,7 @@ export default function SignupPage() {
           <div className={styles["button-wrapper"]}>
             <TextButton
               color="primary"
-              onClick={() => {}}
+              onClick={handleNextButtonClick}
               disabled={selectedMovieCards.length < 3}
             >
               {selectedMovieCards.length < 3
@@ -57,6 +64,7 @@ export default function SignupPage() {
                 movieCard={movie}
                 selected={selectedMovieCards.includes(movie.id)}
                 onClick={() => handleMovieCardClick(movie.id)}
+                type="check"
               />
             ))}
           </div>
