@@ -1,7 +1,9 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query";
 import {
+  fetchMovie,
   fetchNowPlaying,
   fetchPopular,
+  fetchReview,
   fetchTopRated,
   fetchUpComing,
   rateMovie,
@@ -33,6 +35,26 @@ export const usePopular = (userId: number) => {
   return useQuery({
     queryKey: ["movie/popular"],
     queryFn: () => fetchPopular(userId),
+  });
+};
+
+export const useMovie = (movieId: number, userId: number) => {
+  return useQuery({
+    queryKey: ["movie", movieId],
+    queryFn: () => fetchMovie(movieId, userId),
+  });
+};
+
+export const useReview = (movieId: number) => {
+  return useInfiniteQuery({
+    queryKey: ["movie", movieId, "review"],
+    queryFn: ({ pageParam }) => fetchReview(pageParam, movieId),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => {
+      return lastPage.current + 1 < lastPage.totalPage
+        ? lastPage.current + 1
+        : undefined;
+    },
   });
 };
 

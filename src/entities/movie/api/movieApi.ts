@@ -1,6 +1,12 @@
 import { authAxios } from "@/shared/api/base";
-import { MovieCardDto, NewReviewDto } from "../model/types";
+import {
+  MovieCardDto,
+  MovieDetailDto,
+  NewReviewDto,
+  ReviewDetailDto,
+} from "../model/types";
 import { AxiosResponse } from "axios";
+import { PageResponseDto } from "@/shared/model/types";
 
 export const fetchTopRated = async (userId: number) => {
   const response = await authAxios.get<MovieCardDto[]>(
@@ -29,6 +35,22 @@ export const fetchUpComing = async (userId: number) => {
 export const fetchPopular = async (userId: number) => {
   const response = await authAxios.get<MovieCardDto[]>(
     `api/movie/popular/${userId}`
+  );
+
+  return response.data;
+};
+
+export const fetchMovie = async (movieId: number, userId: number) => {
+  const response = await authAxios.get<MovieDetailDto>(
+    `api/movie/${movieId}/${userId}`
+  );
+
+  return response.data;
+};
+
+export const fetchReview = async (pageParam: number, movieId: number) => {
+  const response = await authAxios.get<PageResponseDto<ReviewDetailDto>>(
+    `api/movie/${movieId}/review?page=${pageParam}&size=10`
   );
 
   return response.data;

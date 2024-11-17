@@ -29,10 +29,39 @@ export interface MovieCardDto {
   genre_ids: number[];
 }
 
+export interface MovieDetailDto {
+  movieId: number;
+  title: string;
+  overview: string;
+  score: Score;
+  images: string;
+  videos: string;
+  credits: CreditDto[];
+  release_date: string;
+  runtime: number;
+  genres: string;
+  recommendations: RecommendDto[];
+  myScore: MyScore | null;
+}
+
+export interface RecommendDto {
+  id: number;
+}
+
+export interface ImageDto {
+  poster_path: string;
+  backdrop_path: string;
+}
+
+export interface GenreDto {
+  id: number;
+  name: string;
+}
+
 export interface CreditDto {
   type: string;
   name: string;
-  profilePath: string;
+  profile: string;
 }
 
 export interface ReviewDetailDto {
