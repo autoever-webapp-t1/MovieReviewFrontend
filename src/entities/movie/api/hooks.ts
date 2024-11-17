@@ -10,31 +10,31 @@ import {
 } from "./movieApi";
 import { NewReviewDto } from "../model/types";
 
-export const useTopRated = (userId: number) => {
+export const useTopRated = () => {
   return useQuery({
     queryKey: ["movie/topRated"],
-    queryFn: () => fetchTopRated(userId),
+    queryFn: () => fetchTopRated(),
   });
 };
 
-export const useNowPlaing = (userId: number) => {
+export const useNowPlaing = () => {
   return useQuery({
     queryKey: ["movie/nowPlaying"],
-    queryFn: () => fetchNowPlaying(userId),
+    queryFn: () => fetchNowPlaying(),
   });
 };
 
-export const useUpComing = (userId: number) => {
+export const useUpComing = () => {
   return useQuery({
     queryKey: ["movie/upComing"],
-    queryFn: () => fetchUpComing(userId),
+    queryFn: () => fetchUpComing(),
   });
 };
 
-export const usePopular = (userId: number) => {
+export const usePopular = () => {
   return useQuery({
     queryKey: ["movie/popular"],
-    queryFn: () => fetchPopular(userId),
+    queryFn: () => fetchPopular(),
   });
 };
 
@@ -59,19 +59,9 @@ export const useReview = (movieId: number) => {
 };
 
 export const useRateMovieForSignup = () => {
-  // const queryClient = useQueryClient();
-
-  return useMutation<
-    string,
-    any,
-    { userId: number; movieId: number; newReview: NewReviewDto }
-  >({
-    mutationFn: ({ userId, movieId, newReview }) =>
-      rateMovie(userId, movieId, newReview),
-    onSuccess: () => {
-      // queryClient.invalidateQueries({
-      //   queryKey: ["movie/topRated"],
-      // });
-    },
-  });
+  return useMutation<string, any, { movieId: number; newReview: NewReviewDto }>(
+    {
+      mutationFn: ({ movieId, newReview }) => rateMovie(movieId, newReview),
+    }
+  );
 };
