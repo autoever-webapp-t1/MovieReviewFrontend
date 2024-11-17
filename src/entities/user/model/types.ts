@@ -17,4 +17,5 @@ export interface MemberDto {
 export interface MemberAwardsResponseDto {
   member: MemberDto;
   award: AwardsDto;
+  jwtToken: string;
 }
