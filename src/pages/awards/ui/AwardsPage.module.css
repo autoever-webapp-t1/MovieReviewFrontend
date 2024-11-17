@@ -1,0 +1,27 @@
+.container {
+  height: calc(100vh - 60px);
+  background: linear-gradient(
+    105deg,
+    rgba(255, 252, 0, 0.1) 0%,
+    rgba(36, 28, 36, 1) 30%,
+    rgba(36, 28, 36, 1) 70%,
+    rgba(255, 252, 0, 0.1) 100%
+  );
+}
+
+.title {
+  height: 88px;
+  display: flex;
+  align-items: flex-end;
+  padding: 16px 64px;
+  h1 {
+    color: var(--color-primary);
+  }
+}
+
+.nominated-list {
+  height: calc(100% - 88px);
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+}
