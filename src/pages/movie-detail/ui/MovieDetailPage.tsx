@@ -11,11 +11,9 @@ export default function MovieDetailPage() {
   const { data: movieWithReview } = useMovie(Number.parseInt(movieId!));
   const movieData = movieWithReview?.movieDetails;
   const myReview =
-    movieWithReview?.reviews.length === 1
-      ? movieWithReview.reviews[0]
-      : undefined;
+    movieWithReview?.reviews.length === 1 ? movieWithReview.reviews[0] : null;
 
-  const { data: pagedReviews } = useReview(parseInt(movieId!));
+  const { data: pagedReviews, hasNextPage } = useReview(parseInt(movieId!));
 
   const reviews: ReviewDetailDto[] = useMemo(() => {
     return pagedReviews
@@ -31,7 +29,7 @@ export default function MovieDetailPage() {
         {movieData ? (
           <>
             <MovieInfo
-              movieId={movieData.movieId}
+              movieId={movieData.id}
               title={movieData.title}
               images={JSON.parse(movieData.images)}
               genres={JSON.parse(movieData.genres)}
@@ -47,6 +45,7 @@ export default function MovieDetailPage() {
               videos={JSON.parse(movieData.videos)}
               reviews={reviews}
               myReview={myReview}
+              hasNextPage={hasNextPage}
             />
           </>
         ) : (

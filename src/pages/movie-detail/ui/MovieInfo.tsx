@@ -21,7 +21,7 @@ interface MovieInfoProps {
   overview: string;
   score: Score;
   myScore: MyScore | null;
-  myReview: ReviewDetailDto | undefined;
+  myReview: ReviewDetailDto | null;
 }
 
 export default function MovieInfo({
@@ -78,7 +78,7 @@ export default function MovieInfo({
       movieId,
       myReview,
     });
-  }, [movieId, myReview]);
+  }, [setOpenModal, movieId, myReview]);
 
   return (
     <div className={styles.info}>

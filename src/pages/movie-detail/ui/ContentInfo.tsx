@@ -9,7 +9,8 @@ interface ContentInfoProps {
   credits: CreditDto[];
   videos: VideoDto[];
   reviews: ReviewDetailDto[];
-  myReview: ReviewDetailDto | undefined;
+  myReview: ReviewDetailDto | null;
+  hasNextPage: boolean;
 }
 
 export default function ContentInfo({
@@ -17,6 +18,7 @@ export default function ContentInfo({
   videos,
   reviews,
   myReview,
+  hasNextPage,
 }: ContentInfoProps) {
   return (
     <div>
@@ -41,7 +43,7 @@ export default function ContentInfo({
       <ContentSegment label="리뷰">
         <div className={styles["review-container"]}>
           <div className={styles["my-review"]}>
-            {myReview === undefined ? (
+            {myReview === null ? (
               <div className={styles["please-rating"]}>
                 평가를 먼저 남겨주세요
               </div>
@@ -51,9 +53,14 @@ export default function ContentInfo({
           </div>
           <div className={styles["review-list"]}>
             {reviews.length > 0 ? (
-              reviews.map((r, i) => (
-                <ReviewItem key={i} review={r} isMine={false} />
-              ))
+              <>
+                {reviews.map((r, i) => (
+                  <ReviewItem key={i} review={r} isMine={false} />
+                ))}
+                {hasNextPage && (
+                  <button className={styles["more-button"]}>MORE</button>
+                )}
+              </>
             ) : (
               <div className={`${styles["no-review"]} text-bold text-lg`}>
                 작성된 리뷰가 없습니다

@@ -7,7 +7,8 @@ interface MovieContentProps {
   credits: CreditDto[];
   videos: VideoDto[];
   reviews: ReviewDetailDto[];
-  myReview: ReviewDetailDto | undefined;
+  myReview: ReviewDetailDto | null;
+  hasNextPage: boolean;
 }
 
 export default function MovieContent({
@@ -15,6 +16,7 @@ export default function MovieContent({
   videos,
   reviews,
   myReview,
+  hasNextPage,
 }: MovieContentProps) {
   const [currentTab, setCurrentTab] = useState(0);
 
@@ -48,6 +50,7 @@ export default function MovieContent({
           videos={videos}
           reviews={reviews}
           myReview={myReview}
+          hasNextPage={hasNextPage}
         />
       ) : (
         <></>

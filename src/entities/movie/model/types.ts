@@ -30,7 +30,7 @@ export interface MovieCardDto {
 }
 
 export interface MovieDetailDto {
-  movieId: number;
+  id: number;
   title: string;
   overview: string;
   score: Score;
