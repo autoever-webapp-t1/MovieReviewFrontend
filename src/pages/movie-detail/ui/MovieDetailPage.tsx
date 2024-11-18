@@ -2,20 +2,25 @@ import { useParams } from "react-router-dom";
 import styles from "./MovieDetailPage.module.css";
 import MovieInfo from "./MovieInfo";
 import MovieContent from "./MovieContent";
-import { useMovie, useReview } from "@/entities/movie";
-import { useUserStore } from "@/entities/user";
+import { ReviewDetailDto, useMovie, useReview } from "@/entities/movie";
+import { useMemo } from "react";
 
 export default function MovieDetailPage() {
-  const { user } = useUserStore();
   const { movieId } = useParams();
 
-  const { data: movieData } = useMovie(
-    Number.parseInt(movieId!),
-    user!.memberId
-  );
-  console.log(movieData);
+  const { data: movieData } = useMovie(Number.parseInt(movieId!));
 
-  const { data: reviews } = useReview(parseInt(movieId!));
+  const { data: pagedReviews } = useReview(parseInt(movieId!));
+  console.log(pagedReviews);
+
+  const reviews: ReviewDetailDto[] = useMemo(() => {
+    return pagedReviews
+      ? pagedReviews.pages
+          .flatMap((page) => page.dtoList)
+          .filter((review) => review.content !== null)
+      : [];
+  }, [pagedReviews]);
+  console.log(reviews);
 
   return (
     <div className={styles.wrapper}>
@@ -23,6 +28,7 @@ export default function MovieDetailPage() {
         {movieData ? (
           <>
             <MovieInfo
+              movieId={movieData.movieId}
               title={movieData.title}
               images={JSON.parse(movieData.images)}
               genres={JSON.parse(movieData.genres)}
@@ -32,7 +38,7 @@ export default function MovieDetailPage() {
               score={movieData.score}
               myScore={movieData.myScore}
             />
-            <MovieContent credits={movieData.credits} />
+            <MovieContent credits={movieData.credits} reviews={reviews} />
           </>
         ) : (
           <></>

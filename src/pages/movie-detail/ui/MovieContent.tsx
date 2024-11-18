@@ -1,13 +1,14 @@
 import { useCallback, useState } from "react";
 import styles from "./MovieContent.module.css";
 import ContentInfo from "./ContentInfo";
-import { CreditDto } from "@/entities/movie";
+import { CreditDto, ReviewDetailDto } from "@/entities/movie";
 
 interface MovieContentProps {
   credits: CreditDto[];
+  reviews: ReviewDetailDto[];
 }
 
-export default function MovieContent({ credits }: MovieContentProps) {
+export default function MovieContent({ credits, reviews }: MovieContentProps) {
   const [currentTab, setCurrentTab] = useState(0);
 
   const handleTabClick = useCallback((idx: number) => {
@@ -34,7 +35,11 @@ export default function MovieContent({ credits }: MovieContentProps) {
           관련 콘텐츠
         </button>
       </div>
-      {currentTab === 0 ? <ContentInfo credits={credits} /> : <></>}
+      {currentTab === 0 ? (
+        <ContentInfo credits={credits} reviews={reviews} />
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

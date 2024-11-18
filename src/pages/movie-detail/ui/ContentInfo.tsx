@@ -28,11 +28,10 @@ const review: ReviewDetailDto = {
 
 interface ContentInfoProps {
   credits: CreditDto[];
+  reviews: ReviewDetailDto[];
 }
 
-export default function ContentInfo({ credits }: ContentInfoProps) {
-  const reviews = Array.from({ length: 10 }, () => review);
-
+export default function ContentInfo({ credits, reviews }: ContentInfoProps) {
   return (
     <div>
       <ContentSegment label="감독/출연">
@@ -48,9 +47,13 @@ export default function ContentInfo({ credits }: ContentInfoProps) {
             <ReviewItem review={review} />
           </div>
           <div className={styles["review-list"]}>
-            {reviews.map((r, i) => (
-              <ReviewItem key={i} review={r} />
-            ))}
+            {reviews.length > 0 ? (
+              reviews.map((r, i) => <ReviewItem key={i} review={r} />)
+            ) : (
+              <div className={`${styles["no-review"]} text-bold text-lg`}>
+                작성된 리뷰가 없습니다
+              </div>
+            )}
           </div>
         </div>
       </ContentSegment>
