@@ -72,4 +72,9 @@ export interface MovieSearchResponse {
   pageRequestDto: object;
   prev: boolean;
   next: boolean;
+  totalCount: number;
+  prevPage: number;
+  nextPage: number;
+  totalPage: number;
+  current: number;
 }

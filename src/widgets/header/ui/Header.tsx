@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import styles from "./Header.module.css";
 import Logo from "@assets/logo.svg";
 import UserImage from "@assets/song.jpg";
@@ -17,10 +17,13 @@ function debounce<T extends (...args: any[]) => void>(func: T, delay: number) {
 export default function Header() {
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleClick = () => {
     inputRef.current?.focus();
-    navigate("/search");
+    if (location.pathname !== "/search") {
+      navigate("/search");
+    }
   };
 
   const debouncedNavigate = debounce((term: string) => {

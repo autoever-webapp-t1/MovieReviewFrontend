@@ -41,9 +41,16 @@ export const rateMovie = async (movieId: number, newReview: NewReviewDto) => {
   return response.data;
 };
 
-export const searchMovie = async (keyword: string) => {
+export const searchMovie = async (
+  keyword: string,
+  page: number,
+  size: number
+) => {
+  console.log(`api/movie/search/${keyword}?page=${page}&size=${size}`);
   const response = await authAxios.get<MovieSearchResponse>(
-    `api/movie/search/${keyword}`
+    `api/movie/search/${keyword}`,
+    { params: { page, size } }
   );
+  console.log(response);
   return response.data;
 };
