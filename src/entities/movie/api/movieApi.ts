@@ -4,6 +4,7 @@ import {
   MovieWithReviewsDto,
   NewReviewDto,
   ReviewDetailDto,
+  MovieSearchResponse,
 } from "../model/types";
 import { AxiosResponse } from "axios";
 import { PageResponseDto } from "@/shared/model/types";
@@ -66,5 +67,19 @@ export const updateReview = async (
     review
   );
 
+  return response.data;
+};
+
+export const searchMovie = async (
+  keyword: string,
+  page: number,
+  size: number
+) => {
+  console.log(`api/movie/search/${keyword}?page=${page}&size=${size}`);
+  const response = await authAxios.get<MovieSearchResponse>(
+    `api/movie/search/${keyword}`,
+    { params: { page, size } }
+  );
+  console.log(response);
   return response.data;
 };

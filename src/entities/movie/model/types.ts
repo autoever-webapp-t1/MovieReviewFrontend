@@ -104,3 +104,16 @@ export interface MovieWithReviewsDto {
   movieDetails: MovieDetailDto;
   reviews: ReviewDetailDto[];
 }
+
+export interface MovieSearchResponse {
+  dtoList: MovieCardDto[];
+  pageNumList: number[];
+  pageRequestDto: object;
+  prev: boolean;
+  next: boolean;
+  totalCount: number;
+  prevPage: number;
+  nextPage: number;
+  totalPage: number;
+  current: number;
+}
