@@ -12,7 +12,9 @@ export default function LoginPage() {
           <img src={TextLogoImg} alt="LogoImg" />
         </div>
         <Link
-          to="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=7afd832d40c601c8d991c2096ac2b039&redirect_uri=http://localhost:5173/login/oauth/kakao"
+          to={`https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${
+            import.meta.env.VITE_CLIENT_ID
+          }&redirect_uri=${import.meta.env.VITE_REDIRECT_URI}`}
           className={styles["login-button"]}
         >
           <img src={KakaoLoginButtonImg} alt="KakaoLoginButtonImg" />

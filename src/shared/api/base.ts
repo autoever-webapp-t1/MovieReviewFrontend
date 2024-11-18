@@ -1,7 +1,9 @@
 import axios from "axios";
 
+const serverUrl = import.meta.env.VITE_SERVER_URL;
+
 const authAxios = axios.create({
-  baseURL: "http://api.gasanne.site:8080/",
+  baseURL: serverUrl,
 });
 
 authAxios.interceptors.request.use((config) => {
@@ -13,7 +15,7 @@ authAxios.interceptors.request.use((config) => {
 });
 
 const noAuthAxios = axios.create({
-  baseURL: "http://api.gasanne.site:8080/",
+  baseURL: serverUrl,
 });
 
 export { authAxios, noAuthAxios };
