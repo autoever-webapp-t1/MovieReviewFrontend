@@ -1,10 +1,12 @@
 import ScoreChart from "@/widgets/score-chart";
 import styles from "./MovieInfo.module.css";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { GenreDto, ImageDto, MyScore, Score } from "@/entities/movie";
 import { ChartRawData } from "@/widgets/score-chart/model/types";
+import { useModalStore } from "@/widgets/app-modal/model/store";
 
 interface MovieInfoProps {
+  movieId: number;
   title: string;
   images: ImageDto[];
   genres: GenreDto[];
@@ -16,6 +18,7 @@ interface MovieInfoProps {
 }
 
 export default function MovieInfo({
+  movieId,
   title,
   images,
   genres,
@@ -25,6 +28,8 @@ export default function MovieInfo({
   score,
   myScore,
 }: MovieInfoProps) {
+  const { setOpenModal } = useModalStore();
+
   const runningTimeStr = useMemo(() => {
     const h = Math.floor(runningTime / 60);
     const m = runningTime % 60;
@@ -60,6 +65,13 @@ export default function MovieInfo({
     return newChartData;
   }, [title, score, myScore]);
 
+  const handleRatingButtonClick = useCallback(() => {
+    setOpenModal("ratingModal", {
+      movieId,
+      score: myScore,
+    });
+  }, [movieId, myScore]);
+
   return (
     <div className={styles.info}>
       <div className={styles["movie-img-wrapper"]}>
@@ -81,7 +93,10 @@ export default function MovieInfo({
           </span>
           <span className={styles["my-score"]}>
             나의 총점{" "}
-            <button className={`${styles["score-button"]}`}>
+            <button
+              className={`${styles["score-button"]}`}
+              onClick={handleRatingButtonClick}
+            >
               {myScore ? myScore.avgSkill : "평가하기"}
             </button>
           </span>

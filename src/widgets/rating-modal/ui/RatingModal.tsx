@@ -9,16 +9,16 @@ import { MovieCardDto, useRateMovieForSignup } from "@/entities/movie";
 import { useQueryClient } from "@tanstack/react-query";
 import { useModalStore } from "@/widgets/app-modal/model/store";
 
-export default function RatingModal({ movieId }: RatingModalProps) {
+export default function RatingModal({ movieId, score }: RatingModalProps) {
   const { setOpenModal } = useModalStore();
   const queryClient = useQueryClient();
 
-  const [sceneScore, setSceneScore] = useState(0);
-  const [actorScore, setActorScore] = useState(0);
-  const [lineScore, setLineScore] = useState(0);
-  const [directorScore, setDirectorScore] = useState(0);
-  const [musicScore, setMusicScore] = useState(0);
-  const [storyScore, setStoryScore] = useState(0);
+  const [sceneScore, setSceneScore] = useState(score?.sceneSkill || 0);
+  const [actorScore, setActorScore] = useState(score?.actorSkill || 0);
+  const [lineScore, setLineScore] = useState(score?.lineSkill || 0);
+  const [directorScore, setDirectorScore] = useState(score?.directorSkill || 0);
+  const [musicScore, setMusicScore] = useState(score?.musicSkill || 0);
+  const [storyScore, setStoryScore] = useState(score?.storySkill || 0);
 
   const rateMovie = useRateMovieForSignup();
 
