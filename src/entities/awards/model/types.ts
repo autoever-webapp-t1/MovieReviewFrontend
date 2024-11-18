@@ -15,6 +15,7 @@ export interface AwardsDto {
 export interface AwardsMovieCardDto {
   movieId: number;
   movieTitle: string;
+  posterPath: string;
   score: Score;
 }
 
