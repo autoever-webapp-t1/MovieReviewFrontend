@@ -8,12 +8,14 @@ interface ScoreChartProps {
   data: ChartRawData[];
 }
 
+const colors = ["#f3bb4b", "#a72608", "#0075f2", "#358600"];
+
 export default function ScoreChart({ size, data }: ScoreChartProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const chartRef = useRef<Chart>();
 
   const chartData: ChartData = useMemo(() => {
-    const datasets = data.map((score) => ({
+    const datasets = data.map((score, i) => ({
       label: score.movieTitle,
       data: [
         score.sceneSkill * 10,
@@ -24,8 +26,8 @@ export default function ScoreChart({ size, data }: ScoreChartProps) {
         score.storySkill * 10,
       ],
       fill: true,
-      borderColor: "rgba(243, 187, 75, 1)",
-      pointBackgroundColor: "rgba(243, 187, 75, 1)",
+      borderColor: colors[i],
+      pointBackgroundColor: colors[i],
       borderWidth: 2,
       pointRadius: 1,
       pointHoverRadius: 1,
