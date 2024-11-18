@@ -7,8 +7,9 @@ import {
   fetchTopRated,
   fetchUpComing,
   rateMovie,
+  updateReview,
 } from "./movieApi";
-import { NewReviewDto } from "../model/types";
+import { NewReviewDto, ReviewDetailDto } from "../model/types";
 
 export const useTopRated = () => {
   return useQuery({
@@ -62,6 +63,14 @@ export const useRateMovieForSignup = () => {
   return useMutation<string, any, { movieId: number; newReview: NewReviewDto }>(
     {
       mutationFn: ({ movieId, newReview }) => rateMovie(movieId, newReview),
+    }
+  );
+};
+
+export const useUpdateReview = () => {
+  return useMutation<string, any, { movieId: number; review: ReviewDetailDto }>(
+    {
+      mutationFn: ({ movieId, review }) => updateReview(movieId, review),
     }
   );
 };

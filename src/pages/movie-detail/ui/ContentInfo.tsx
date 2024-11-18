@@ -45,15 +45,15 @@ export default function ContentInfo({
               <div className={styles["please-rating"]}>
                 평가를 먼저 남겨주세요
               </div>
-            ) : myReview.content === null ? (
-              <></>
             ) : (
-              <ReviewItem review={myReview} />
+              <ReviewItem review={myReview} isMine />
             )}
           </div>
           <div className={styles["review-list"]}>
             {reviews.length > 0 ? (
-              reviews.map((r, i) => <ReviewItem key={i} review={r} />)
+              reviews.map((r, i) => (
+                <ReviewItem key={i} review={r} isMine={false} />
+              ))
             ) : (
               <div className={`${styles["no-review"]} text-bold text-lg`}>
                 작성된 리뷰가 없습니다

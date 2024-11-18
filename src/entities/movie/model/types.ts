@@ -76,7 +76,7 @@ export interface ReviewDetailDto {
   title: string;
   nickname: string;
   profile: string;
-  content: string;
+  content: string | null;
   createdDate: string;
   modifyDate: string;
   totalHeart: number;

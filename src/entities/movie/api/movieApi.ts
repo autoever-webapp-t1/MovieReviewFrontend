@@ -54,7 +54,17 @@ export const rateMovie = async (movieId: number, newReview: NewReviewDto) => {
     newReview
   );
 
-  console.log(response);
+  return response.data;
+};
+
+export const updateReview = async (
+  movieId: number,
+  review: ReviewDetailDto
+) => {
+  const response = await authAxios.put(
+    `api/movie/${movieId}/review/${review.reviewId}`,
+    review
+  );
 
   return response.data;
 };
