@@ -40,6 +40,7 @@ export default function MovieDetailPage() {
               overview={movieData.overview}
               score={movieData.score}
               myScore={movieData.myScore}
+              myReview={myReview}
             />
             <MovieContent
               credits={movieData.credits}

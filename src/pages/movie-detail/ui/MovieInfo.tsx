@@ -1,7 +1,13 @@
 import ScoreChart from "@/widgets/score-chart";
 import styles from "./MovieInfo.module.css";
 import { useCallback, useMemo } from "react";
-import { GenreDto, ImageDto, MyScore, Score } from "@/entities/movie";
+import {
+  GenreDto,
+  ImageDto,
+  MyScore,
+  ReviewDetailDto,
+  Score,
+} from "@/entities/movie";
 import { ChartRawData } from "@/widgets/score-chart/model/types";
 import { useModalStore } from "@/widgets/app-modal/model/store";
 
@@ -15,6 +21,7 @@ interface MovieInfoProps {
   overview: string;
   score: Score;
   myScore: MyScore | null;
+  myReview: ReviewDetailDto | undefined;
 }
 
 export default function MovieInfo({
@@ -27,6 +34,7 @@ export default function MovieInfo({
   overview,
   score,
   myScore,
+  myReview,
 }: MovieInfoProps) {
   const { setOpenModal } = useModalStore();
 
@@ -68,9 +76,9 @@ export default function MovieInfo({
   const handleRatingButtonClick = useCallback(() => {
     setOpenModal("ratingModal", {
       movieId,
-      score: myScore,
+      myReview,
     });
-  }, [movieId, myScore]);
+  }, [movieId, myReview]);
 
   return (
     <div className={styles.info}>

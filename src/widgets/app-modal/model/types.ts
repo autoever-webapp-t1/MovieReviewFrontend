@@ -1,8 +1,8 @@
-import { MyScore } from "@/entities/movie";
+import { ReviewDetailDto } from "@/entities/movie";
 
 export interface RatingModalProps {
   movieId: number;
-  score?: MyScore | null;
+  myReview?: ReviewDetailDto | null;
 }
 
 export type ModalPropsType = RatingModalProps | null;
