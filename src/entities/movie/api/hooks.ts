@@ -38,10 +38,10 @@ export const usePopular = () => {
   });
 };
 
-export const useMovie = (movieId: number, userId: number) => {
+export const useMovie = (movieId: number) => {
   return useQuery({
     queryKey: ["movie", movieId],
-    queryFn: () => fetchMovie(movieId, userId),
+    queryFn: () => fetchMovie(movieId),
   });
 };
 

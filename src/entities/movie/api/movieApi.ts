@@ -32,10 +32,8 @@ export const fetchPopular = async () => {
   return response.data;
 };
 
-export const fetchMovie = async (movieId: number, userId: number) => {
-  const response = await authAxios.get<MovieDetailDto>(
-    `api/movie/${movieId}/${userId}`
-  );
+export const fetchMovie = async (movieId: number) => {
+  const response = await authAxios.get<MovieDetailDto>(`api/movie/${movieId}`);
 
   return response.data;
 };
