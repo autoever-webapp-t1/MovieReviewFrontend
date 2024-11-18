@@ -1,0 +1,78 @@
+.container {
+  flex: 200px 0 0;
+}
+
+.awards-name {
+  color: var(--color-primary);
+  margin-bottom: 8px;
+}
+
+.card-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  box-shadow: 0 0 4px var(--color-gray-900-50);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.background-img-wrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.info-box {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  background-color: var(--color-gray-900-75);
+  padding: 8px;
+  padding-right: 88px;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+
+  color: var(--color-gray-100);
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.icon-wrapper {
+  position: absolute;
+  top: calc(50% - 32px);
+  left: calc(50% - 32px);
+  width: 64px;
+  height: 64px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    color: var(--color-gray-100);
+    opacity: 0.5;
+  }
+}
+
+.chart-wrapper {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  top: 8px;
+  right: 8px;
+}
+
+.strong {
+  box-shadow: 0 0 16px var(--color-primary);
+}
