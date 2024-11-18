@@ -64,6 +64,11 @@ export interface CreditDto {
   profile: string;
 }
 
+export interface VideoDto {
+  key: string;
+  type: string;
+}
+
 export interface ReviewDetailDto {
   reviewId: number;
   movieId: number;

@@ -11,7 +11,6 @@ export default function MovieDetailPage() {
   const { data: movieData } = useMovie(Number.parseInt(movieId!));
 
   const { data: pagedReviews } = useReview(parseInt(movieId!));
-  console.log(pagedReviews);
 
   const reviews: ReviewDetailDto[] = useMemo(() => {
     return pagedReviews
@@ -20,7 +19,6 @@ export default function MovieDetailPage() {
           .filter((review) => review.content !== null)
       : [];
   }, [pagedReviews]);
-  console.log(reviews);
 
   return (
     <div className={styles.wrapper}>
@@ -38,7 +36,11 @@ export default function MovieDetailPage() {
               score={movieData.score}
               myScore={movieData.myScore}
             />
-            <MovieContent credits={movieData.credits} reviews={reviews} />
+            <MovieContent
+              credits={movieData.credits}
+              videos={JSON.parse(movieData.videos)}
+              reviews={reviews}
+            />
           </>
         ) : (
           <></>

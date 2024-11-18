@@ -1,8 +1,9 @@
-import { CreditDto, ReviewDetailDto } from "@/entities/movie";
+import { CreditDto, ReviewDetailDto, VideoDto } from "@/entities/movie";
 import styles from "./ContentInfo.module.css";
 import ContentSegment from "./ContentSegment";
 import CreditItem from "./CreditItem";
 import ReviewItem from "./ReviewItem";
+import VideoItem from "./VideoItem";
 
 const review: ReviewDetailDto = {
   reviewId: 1,
@@ -28,10 +29,15 @@ const review: ReviewDetailDto = {
 
 interface ContentInfoProps {
   credits: CreditDto[];
+  videos: VideoDto[];
   reviews: ReviewDetailDto[];
 }
 
-export default function ContentInfo({ credits, reviews }: ContentInfoProps) {
+export default function ContentInfo({
+  credits,
+  videos,
+  reviews,
+}: ContentInfoProps) {
   return (
     <div>
       <ContentSegment label="감독/출연">
@@ -41,6 +47,17 @@ export default function ContentInfo({ credits, reviews }: ContentInfoProps) {
           ))}
         </div>
       </ContentSegment>
+      {videos.length > 0 ? (
+        <ContentSegment label="동영상">
+          <div className={styles["video-container"]}>
+            {videos.map((v, i) => (
+              <VideoItem key={i} src={v.key} />
+            ))}
+          </div>
+        </ContentSegment>
+      ) : (
+        <></>
+      )}
       <ContentSegment label="리뷰">
         <div className={styles["review-container"]}>
           <div className={styles["my-review"]}>
