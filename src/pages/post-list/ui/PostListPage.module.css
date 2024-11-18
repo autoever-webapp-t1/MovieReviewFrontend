@@ -4,6 +4,7 @@
 }
 
 .postList {
+  cursor: pointer;
 }
 
 .searchBar {

@@ -3,9 +3,13 @@ export interface PostDetailDto {
   memberId: number;
   title: string;
   content: string;
+  profileImage: string;
+  thumbnail?: string;
   nickname: string;
   likesCount: number;
-  isLiked: boolean;
+  liked: boolean;
   createdDate: string;
   updatedDate: string;
 }
+
+export interface CommentDto {}

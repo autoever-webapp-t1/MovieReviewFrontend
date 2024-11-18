@@ -5,6 +5,7 @@ import UserImage from "@assets/song.jpg";
 import ProfileImage from "@/widgets/profile-image";
 import SearchIcon from "@mui/icons-material/Search";
 import { useRef } from "react";
+import { useUserStore } from "@/entities/user";
 
 function debounce<T extends (...args: any[]) => void>(func: T, delay: number) {
   let timeout: number | null = null;
@@ -18,6 +19,7 @@ export default function Header() {
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const location = useLocation();
+  const { user } = useUserStore();
 
   const handleClick = () => {
     inputRef.current?.focus();
@@ -75,8 +77,14 @@ export default function Header() {
               />
             </div>
             <div className={styles.profile}>
-              <ProfileImage src={UserImage} alt="" size={32} />
-              <img />
+              <ProfileImage
+                src={
+                  user?.profile ||
+                  "http://img1.kakaocdn.net/thumb/R640x640.q70/?fname=http://t1.kakaocdn.net/account_images/default_profile.jpeg"
+                }
+                alt=""
+                size={32}
+              />
             </div>
           </div>
         </div>
