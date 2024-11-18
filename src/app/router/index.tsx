@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { lazy } from "react";
 import App from "../App";
+import AwardsAdminPage from "@/pages/awards-admin/ui/AwardsAdminPage";
 
 const LoginPage = lazy(() => import("@/pages/login"));
 const SignupPage = lazy(() => import("@/pages/signup"));
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
       {
         path: "/login/oauth/kakao",
         element: <AuthCodePage />,
+      },
+      {
+        path: "/admin/add",
+        element: <AwardsAdminPage />,
       },
     ],
   },

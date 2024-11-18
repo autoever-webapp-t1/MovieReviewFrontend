@@ -13,7 +13,10 @@ export default function AppModal({ children }: AppModalProps) {
     <>
       {children}
       {openModal === "ratingModal" ? (
-        <RatingModal movieId={modalProps!.movieId} />
+        <RatingModal
+          movieId={modalProps!.movieId}
+          myReview={modalProps!.myReview}
+        />
       ) : (
         <></>
       )}

@@ -5,22 +5,50 @@ import BaseModal from "@/widgets/base-modal";
 import ScoreChart from "@/widgets/score-chart";
 import MainButton from "@/widgets/main-button/ui/MainButton";
 import { RatingModalProps } from "@/widgets/app-modal/model/types";
-import { MovieCardDto, useRateMovieForSignup } from "@/entities/movie";
-import { useQueryClient } from "@tanstack/react-query";
+import {
+  MovieCardDto,
+  NewReviewDto,
+  ReviewDetailDto,
+  useRateMovieForSignup,
+  useUpdateReview,
+} from "@/entities/movie";
+import { UseMutationResult, useQueryClient } from "@tanstack/react-query";
 import { useModalStore } from "@/widgets/app-modal/model/store";
 
-export default function RatingModal({ movieId }: RatingModalProps) {
+type NewReview = UseMutationResult<
+  string,
+  any,
+  {
+    movieId: number;
+    newReview: NewReviewDto;
+  },
+  unknown
+>;
+
+type UpdateReview = UseMutationResult<
+  string,
+  any,
+  {
+    movieId: number;
+    review: ReviewDetailDto;
+  },
+  unknown
+>;
+
+export default function RatingModal({ movieId, myReview }: RatingModalProps) {
   const { setOpenModal } = useModalStore();
   const queryClient = useQueryClient();
 
-  const [sceneScore, setSceneScore] = useState(0);
-  const [actorScore, setActorScore] = useState(0);
-  const [lineScore, setLineScore] = useState(0);
-  const [directorScore, setDirectorScore] = useState(0);
-  const [musicScore, setMusicScore] = useState(0);
-  const [storyScore, setStoryScore] = useState(0);
+  const [sceneScore, setSceneScore] = useState(myReview?.sceneSkill || 0);
+  const [actorScore, setActorScore] = useState(myReview?.actorSkill || 0);
+  const [lineScore, setLineScore] = useState(myReview?.lineSkill || 0);
+  const [directorScore, setDirectorScore] = useState(
+    myReview?.directorSkill || 0
+  );
+  const [musicScore, setMusicScore] = useState(myReview?.musicSkill || 0);
+  const [storyScore, setStoryScore] = useState(myReview?.storySkill || 0);
 
-  const rateMovie = useRateMovieForSignup();
+  const rateMovie = myReview ? useUpdateReview() : useRateMovieForSignup();
 
   const handleSceneScoreChange = useCallback(
     (_: Event, value: number | number[]) => {
@@ -65,8 +93,8 @@ export default function RatingModal({ movieId }: RatingModalProps) {
   );
 
   const handleSaveButtonClick = useCallback(() => {
-    if (movieId) {
-      rateMovie.mutate(
+    if (!myReview) {
+      (rateMovie as NewReview).mutate(
         {
           movieId,
           newReview: {
@@ -81,29 +109,67 @@ export default function RatingModal({ movieId }: RatingModalProps) {
         },
         {
           onSuccess: () => {
-            queryClient.setQueryData<MovieCardDto[]>(
-              ["movie/topRated"],
-              (old) => {
-                return old?.map<MovieCardDto>((movieCard) => {
-                  if (movieCard.id === movieId) {
-                    const newMovieCard: MovieCardDto = {
-                      ...movieCard,
-                      myScore: {
-                        sceneSkill: sceneScore,
-                        actorSkill: actorScore,
-                        lineSkill: lineScore,
-                        directorSkill: directorScore,
-                        musicSkill: musicScore,
-                        storySkill: storyScore,
-                        avgSkill: 0,
-                      },
-                    };
+            if (myReview === undefined) {
+              queryClient.setQueryData<MovieCardDto[]>(
+                ["movie/topRated"],
+                (old) => {
+                  return old?.map<MovieCardDto>((movieCard) => {
+                    if (movieCard.id === movieId) {
+                      const newMovieCard: MovieCardDto = {
+                        ...movieCard,
+                        myScore: {
+                          sceneSkill: sceneScore,
+                          actorSkill: actorScore,
+                          lineSkill: lineScore,
+                          directorSkill: directorScore,
+                          musicSkill: musicScore,
+                          storySkill: storyScore,
+                          avgSkill: 0,
+                        },
+                      };
 
-                    return newMovieCard;
-                  } else return movieCard;
-                });
-              }
-            );
+                      return newMovieCard;
+                    } else return movieCard;
+                  });
+                }
+              );
+            } else {
+              queryClient.invalidateQueries({
+                queryKey: ["movie", movieId],
+              });
+              queryClient.invalidateQueries({
+                queryKey: ["movie", movieId, "review"],
+              });
+            }
+
+            setOpenModal(null, null);
+          },
+        }
+      );
+    } else {
+      const newReview: ReviewDetailDto = {
+        ...myReview,
+        actorSkill: actorScore,
+        directorSkill: directorScore,
+        lineSkill: lineScore,
+        storySkill: storyScore,
+        musicSkill: musicScore,
+        sceneSkill: sceneScore,
+      };
+
+      (rateMovie as UpdateReview).mutate(
+        {
+          movieId: myReview.movieId,
+          review: newReview,
+        },
+        {
+          onSuccess: () => {
+            queryClient.invalidateQueries({
+              queryKey: ["movie", movieId],
+            });
+            queryClient.invalidateQueries({
+              queryKey: ["movie", movieId, "review"],
+            });
 
             setOpenModal(null, null);
           },
@@ -112,6 +178,7 @@ export default function RatingModal({ movieId }: RatingModalProps) {
     }
   }, [
     movieId,
+    myReview,
     sceneScore,
     actorScore,
     lineScore,

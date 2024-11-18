@@ -5,18 +5,12 @@ import styles from "./SearchPage.module.css";
 import Spinner from "@/widgets/spinner";
 
 export default function SearchPage() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const query = searchParams.get("query");
   const size = 10;
   const navigate = useNavigate();
-  const {
-    data,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-    isLoading,
-    error,
-  } = useInfiniteSearchMovies(query || "", size);
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
+    useInfiniteSearchMovies(query || "", size);
   const movies = data?.pages.flatMap((page) => page.dtoList);
 
   const handleMovieCardClick = useCallback((movieId: number) => {
