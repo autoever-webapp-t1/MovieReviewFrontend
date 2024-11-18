@@ -1,18 +1,5 @@
-import NominatedCard from "@/pages/awards/ui/NominatedCard";
 import styles from "./AwardsAdminPage.module.css";
-import { useState } from "react";
 import AwardAddForm from "./AwardAddForm";
-import { Score } from "@/entities/movie";
-
-const score: Score = {
-  avgActorSkill: 0,
-  avgDirectorSkill: 0,
-  avgLineSkill: 0,
-  avgMusicSkill: 0,
-  avgSceneSkill: 0,
-  avgStorySkill: 0,
-  totalAverageSkill: 0,
-};
 
 export default function AwardsAdminPage() {
   return (

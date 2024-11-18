@@ -14,10 +14,7 @@ interface CommentBoxProps {
 }
 
 export default function CommentBox({
-  commentId,
-  postId,
   content,
-  memberId,
   author,
   createdAt,
   updatedAt,
