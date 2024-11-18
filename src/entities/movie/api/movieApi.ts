@@ -1,7 +1,7 @@
 import { authAxios } from "@/shared/api/base";
 import {
   MovieCardDto,
-  MovieDetailDto,
+  MovieWithReviewsDto,
   NewReviewDto,
   ReviewDetailDto,
 } from "../model/types";
@@ -33,7 +33,9 @@ export const fetchPopular = async () => {
 };
 
 export const fetchMovie = async (movieId: number) => {
-  const response = await authAxios.get<MovieDetailDto>(`api/movie/${movieId}`);
+  const response = await authAxios.get<MovieWithReviewsDto>(
+    `api/movie/${movieId}`
+  );
 
   return response.data;
 };

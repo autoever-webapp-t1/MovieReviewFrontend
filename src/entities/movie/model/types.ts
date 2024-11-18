@@ -99,3 +99,8 @@ export interface NewReviewDto {
   storySkill: number;
   lineSkill: number;
 }
+
+export interface MovieWithReviewsDto {
+  movieDetails: MovieDetailDto;
+  reviews: ReviewDetailDto[];
+}

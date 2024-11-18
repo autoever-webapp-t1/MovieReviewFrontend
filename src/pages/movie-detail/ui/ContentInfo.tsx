@@ -5,38 +5,18 @@ import CreditItem from "./CreditItem";
 import ReviewItem from "./ReviewItem";
 import VideoItem from "./VideoItem";
 
-const review: ReviewDetailDto = {
-  reviewId: 1,
-  movieId: 155,
-  memberId: 3758970850,
-  title: "다크 나이트",
-  nickname: "혜지",
-  profile:
-    "http://k.kakaocdn.net/dn/lWMYq/btsJcJApD2r/6ybIUL3Ge2bk14rm4kURDk/img_640x640.jpg",
-  content: "happy ending movie",
-  createdDate: "2024-11-14T12:22:25.494286",
-  modifyDate: "2024-11-14T12:22:25.494286",
-  totalHeart: 0,
-  myHeart: false,
-  actorSkill: 3,
-  directorSkill: 8,
-  sceneSkill: 6,
-  musicSkill: 1,
-  storySkill: 9,
-  lineSkill: 4,
-  avgSkill: 2.58,
-};
-
 interface ContentInfoProps {
   credits: CreditDto[];
   videos: VideoDto[];
   reviews: ReviewDetailDto[];
+  myReview: ReviewDetailDto | undefined;
 }
 
 export default function ContentInfo({
   credits,
   videos,
   reviews,
+  myReview,
 }: ContentInfoProps) {
   return (
     <div>
@@ -61,7 +41,15 @@ export default function ContentInfo({
       <ContentSegment label="리뷰">
         <div className={styles["review-container"]}>
           <div className={styles["my-review"]}>
-            <ReviewItem review={review} />
+            {myReview === undefined ? (
+              <div className={styles["please-rating"]}>
+                평가를 먼저 남겨주세요
+              </div>
+            ) : myReview.content === null ? (
+              <></>
+            ) : (
+              <ReviewItem review={myReview} />
+            )}
           </div>
           <div className={styles["review-list"]}>
             {reviews.length > 0 ? (

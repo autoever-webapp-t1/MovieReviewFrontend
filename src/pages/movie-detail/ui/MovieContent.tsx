@@ -7,12 +7,14 @@ interface MovieContentProps {
   credits: CreditDto[];
   videos: VideoDto[];
   reviews: ReviewDetailDto[];
+  myReview: ReviewDetailDto | undefined;
 }
 
 export default function MovieContent({
   credits,
   videos,
   reviews,
+  myReview,
 }: MovieContentProps) {
   const [currentTab, setCurrentTab] = useState(0);
 
@@ -41,7 +43,12 @@ export default function MovieContent({
         </button>
       </div>
       {currentTab === 0 ? (
-        <ContentInfo credits={credits} videos={videos} reviews={reviews} />
+        <ContentInfo
+          credits={credits}
+          videos={videos}
+          reviews={reviews}
+          myReview={myReview}
+        />
       ) : (
         <></>
       )}

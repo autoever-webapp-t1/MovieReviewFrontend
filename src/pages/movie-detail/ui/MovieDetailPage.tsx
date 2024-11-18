@@ -8,7 +8,12 @@ import { useMemo } from "react";
 export default function MovieDetailPage() {
   const { movieId } = useParams();
 
-  const { data: movieData } = useMovie(Number.parseInt(movieId!));
+  const { data: movieWithReview } = useMovie(Number.parseInt(movieId!));
+  const movieData = movieWithReview?.movieDetails;
+  const myReview =
+    movieWithReview?.reviews.length === 1
+      ? movieWithReview.reviews[0]
+      : undefined;
 
   const { data: pagedReviews } = useReview(parseInt(movieId!));
 
@@ -40,6 +45,7 @@ export default function MovieDetailPage() {
               credits={movieData.credits}
               videos={JSON.parse(movieData.videos)}
               reviews={reviews}
+              myReview={myReview}
             />
           </>
         ) : (
