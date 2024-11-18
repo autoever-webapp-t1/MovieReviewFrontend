@@ -1,13 +1,16 @@
 import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query";
 import {
+  fetchMovie,
   fetchNowPlaying,
   fetchPopular,
+  fetchReview,
   fetchTopRated,
   fetchUpComing,
   rateMovie,
+  updateReview,
   searchMovie,
 } from "./movieApi";
-import { NewReviewDto } from "../model/types";
+import { NewReviewDto, ReviewDetailDto } from "../model/types";
 
 export const useTopRated = () => {
   return useQuery({
@@ -37,10 +40,38 @@ export const usePopular = () => {
   });
 };
 
+export const useMovie = (movieId: number) => {
+  return useQuery({
+    queryKey: ["movie", movieId],
+    queryFn: () => fetchMovie(movieId),
+  });
+};
+
+export const useReview = (movieId: number) => {
+  return useInfiniteQuery({
+    queryKey: ["movie", movieId, "review"],
+    queryFn: ({ pageParam }) => fetchReview(pageParam, movieId),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => {
+      return lastPage.current + 1 < lastPage.totalPage
+        ? lastPage.current + 1
+        : undefined;
+    },
+  });
+};
+
 export const useRateMovieForSignup = () => {
   return useMutation<string, any, { movieId: number; newReview: NewReviewDto }>(
     {
       mutationFn: ({ movieId, newReview }) => rateMovie(movieId, newReview),
+    }
+  );
+};
+
+export const useUpdateReview = () => {
+  return useMutation<string, any, { movieId: number; review: ReviewDetailDto }>(
+    {
+      mutationFn: ({ movieId, review }) => updateReview(movieId, review),
     }
   );
 };

@@ -1,15 +1,26 @@
-import { ReviewDetailDto } from "@/entities/movie";
+import { ReviewDetailDto, useUpdateReview } from "@/entities/movie";
 import styles from "./ReviewItem.module.css";
 import ProfileImage from "@/widgets/profile-image";
 import ScoreChart from "@/widgets/score-chart";
-import { useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import CustomRating from "@/widgets/CustomRating";
+import MainButton from "@/widgets/main-button/ui/MainButton";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface ReviewItemProps {
   review: ReviewDetailDto;
+  isMine: boolean;
 }
 
-export default function ReviewItem({ review }: ReviewItemProps) {
+export default function ReviewItem({ review, isMine }: ReviewItemProps) {
+  console.log(review);
+  const [isEdit, setEdit] = useState(review.content === null ? true : false);
+  const [editValue, setEditValue] = useState(review.content || "");
+
+  const queryClient = useQueryClient();
+
+  const { mutate } = useUpdateReview();
+
   const {
     profile,
     nickname,
@@ -44,7 +55,30 @@ export default function ReviewItem({ review }: ReviewItemProps) {
     musicSkill,
   ]);
 
-  console.log(totalSkill);
+  const handleSaveClick = useCallback(() => {
+    const newReview: ReviewDetailDto = {
+      ...review,
+      content: editValue.length === 0 ? null : editValue,
+    };
+
+    mutate(
+      { movieId: review.movieId, review: newReview },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            queryKey: ["movie", review.movieId],
+          });
+          queryClient.invalidateQueries({
+            queryKey: ["movie", review.movieId, "review"],
+          });
+
+          if (editValue.length === 0) {
+            setEdit(true);
+          } else setEdit(false);
+        },
+      }
+    );
+  }, [review, editValue, queryClient]);
 
   return (
     <div className={styles.container}>
@@ -60,7 +94,58 @@ export default function ReviewItem({ review }: ReviewItemProps) {
             <CustomRating size="small" value={totalSkill} />
           </div>
         </div>
-        {content}
+        {isEdit ? (
+          <>
+            <textarea
+              className={`text-regular text-sm`}
+              value={editValue}
+              onChange={(e) => {
+                setEditValue(e.target.value);
+              }}
+            />
+          </>
+        ) : (
+          content
+        )}
+        {isMine && (
+          <div className={styles["submit-wrapper"]}>
+            {!isEdit ? (
+              <>
+                <MainButton
+                  color="primary"
+                  onClick={() => {
+                    setEdit(true);
+                  }}
+                  fontSize="sm"
+                >
+                  수정
+                </MainButton>
+              </>
+            ) : (
+              <>
+                {review.content !== null && (
+                  <MainButton
+                    color="primary"
+                    onClick={() => {
+                      setEdit(false);
+                      setEditValue(review.content!);
+                    }}
+                    fontSize="sm"
+                  >
+                    취소
+                  </MainButton>
+                )}
+                <MainButton
+                  color="primary"
+                  onClick={handleSaveClick}
+                  fontSize="sm"
+                >
+                  저장
+                </MainButton>
+              </>
+            )}
+          </div>
+        )}
       </div>
       <div className={styles["chart-wrapper"]}>
         <ScoreChart

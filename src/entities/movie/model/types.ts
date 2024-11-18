@@ -29,10 +29,44 @@ export interface MovieCardDto {
   genre_ids: number[];
 }
 
+export interface MovieDetailDto {
+  id: number;
+  title: string;
+  overview: string;
+  score: Score;
+  images: string;
+  videos: string;
+  credits: CreditDto[];
+  release_date: string;
+  runtime: number;
+  genres: string;
+  recommendations: RecommendDto[];
+  myScore: MyScore | null;
+}
+
+export interface RecommendDto {
+  id: number;
+}
+
+export interface ImageDto {
+  poster_path: string;
+  backdrop_path: string;
+}
+
+export interface GenreDto {
+  id: number;
+  name: string;
+}
+
 export interface CreditDto {
   type: string;
   name: string;
-  profilePath: string;
+  profile: string;
+}
+
+export interface VideoDto {
+  key: string;
+  type: string;
 }
 
 export interface ReviewDetailDto {
@@ -42,7 +76,7 @@ export interface ReviewDetailDto {
   title: string;
   nickname: string;
   profile: string;
-  content: string;
+  content: string | null;
   createdDate: string;
   modifyDate: string;
   totalHeart: number;
@@ -64,6 +98,11 @@ export interface NewReviewDto {
   musicSkill: number;
   storySkill: number;
   lineSkill: number;
+}
+
+export interface MovieWithReviewsDto {
+  movieDetails: MovieDetailDto;
+  reviews: ReviewDetailDto[];
 }
 
 export interface MovieSearchResponse {

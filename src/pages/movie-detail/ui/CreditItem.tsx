@@ -7,12 +7,16 @@ interface CreditItemProps {
 }
 
 export default function CreditItem({ credit }: CreditItemProps) {
-  const { profilePath, name, type } = credit;
+  const { profile, name, type } = credit;
 
   return (
     <div className={styles.container}>
       <div className={styles["avatar-wrapper"]}>
-        <ProfileImage src={profilePath} alt="CreditImg" size={60} />
+        <ProfileImage
+          src={`https://image.tmdb.org/t/p/w45${profile}`}
+          alt="CreditImg"
+          size={60}
+        />
       </div>
       <div className={styles.content}>
         <p className="text-bold text-md">{name}</p>
