@@ -1,5 +1,9 @@
 import { authAxios } from "@/shared/api/base";
-import { MovieCardDto, NewReviewDto } from "../model/types";
+import {
+  MovieCardDto,
+  MovieSearchResponse,
+  NewReviewDto,
+} from "../model/types";
 import { AxiosResponse } from "axios";
 
 export const fetchTopRated = async () => {
@@ -34,5 +38,12 @@ export const rateMovie = async (movieId: number, newReview: NewReviewDto) => {
 
   console.log(response);
 
+  return response.data;
+};
+
+export const searchMovie = async (keyword: string) => {
+  const response = await authAxios.get<MovieSearchResponse>(
+    `api/movie/search/${keyword}`
+  );
   return response.data;
 };

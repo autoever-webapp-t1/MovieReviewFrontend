@@ -5,6 +5,7 @@ import {
   fetchTopRated,
   fetchUpComing,
   rateMovie,
+  searchMovie,
 } from "./movieApi";
 import { NewReviewDto } from "../model/types";
 
@@ -42,4 +43,12 @@ export const useRateMovieForSignup = () => {
       mutationFn: ({ movieId, newReview }) => rateMovie(movieId, newReview),
     }
   );
+};
+
+export const useSearchMovie = (keyword: string) => {
+  return useQuery({
+    queryKey: ["movie/search", keyword],
+    queryFn: () => searchMovie(keyword),
+    enabled: !!keyword,
+  });
 };

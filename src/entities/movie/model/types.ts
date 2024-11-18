@@ -65,3 +65,11 @@ export interface NewReviewDto {
   storySkill: number;
   lineSkill: number;
 }
+
+export interface MovieSearchResponse {
+  dtoList: MovieCardDto[];
+  pageNumList: number[];
+  pageRequestDto: object;
+  prev: boolean;
+  next: boolean;
+}

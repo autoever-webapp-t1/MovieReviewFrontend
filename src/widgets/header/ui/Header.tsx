@@ -20,6 +20,7 @@ export default function Header() {
 
   const handleClick = () => {
     inputRef.current?.focus();
+    navigate("/search");
   };
 
   const debouncedNavigate = debounce((term: string) => {
