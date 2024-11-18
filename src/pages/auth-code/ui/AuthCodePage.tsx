@@ -14,11 +14,10 @@ export default function AuthCodePage() {
   const login = async () => {
     const loginResponse = await loginApi(params.search.substring(6));
     const { accessToken, refreshToken } = loginResponse;
-    localStorage.setItem("at", accessToken);
-    localStorage.setItem("rt", refreshToken);
 
     const userInfo = await postLogin(accessToken, refreshToken);
     setUser(userInfo);
+    localStorage.setItem("at", userInfo.jwtToken);
 
     if (false) {
       // if (userInfo.existed) {

@@ -10,15 +10,12 @@ import {
   useTopRated,
   useUpComing,
 } from "@/entities/movie";
-import { useUserStore } from "@/entities/user";
 
 export default function MainPage() {
-  const { user } = useUserStore();
-
-  const { data: nowPlaying } = useNowPlaing(user!.memberId);
-  const { data: topRated } = useTopRated(user!.memberId);
-  const { data: upComing } = useUpComing(user!.memberId);
-  const { data: popular } = usePopular(user!.memberId);
+  const { data: nowPlaying } = useNowPlaing();
+  const { data: topRated } = useTopRated();
+  const { data: upComing } = useUpComing();
+  const { data: popular } = usePopular();
 
   const handleAwardsButtonClick = useCallback(() => {}, []);
 
