@@ -55,22 +55,12 @@ export default function Header() {
           <ul>
             <li>
               <NavLink
-                to="/"
-                className={({ isActive }) =>
-                  isActive ? `${styles.active}` : undefined
-                }
-              >
-                리뷰
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
                 to="/awards"
                 className={({ isActive }) =>
                   isActive ? `${styles.active}` : undefined
                 }
               >
-                어워드
+                Awards
               </NavLink>
             </li>
             <li>
@@ -80,7 +70,7 @@ export default function Header() {
                   isActive ? `${styles.active}` : undefined
                 }
               >
-                포스트
+                Post
               </NavLink>
             </li>
           </ul>
