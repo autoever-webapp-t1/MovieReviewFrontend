@@ -17,7 +17,7 @@ export default function NominatedCard({ movie, idx }: NominatedCardProps) {
   return (
     <div className={`${styles.container} ${styles[`idx-${idx}`]}`}>
       <img
-        src={`https://image.tmdb.org/t/p/w200${posterPath}`}
+        src={`https://image.tmdb.org/t/p/w400${posterPath}`}
         alt="NominatedImg"
       />
 

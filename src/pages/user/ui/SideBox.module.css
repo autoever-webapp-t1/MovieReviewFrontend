@@ -1,0 +1,69 @@
+.container {
+  flex: 200px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.profile-box {
+  width: 100%;
+  padding: 16px 0;
+}
+
+.profile-img-wrapper {
+  width: 100%;
+  height: 166px;
+  padding: 8px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.nickname {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-gray-100);
+}
+
+.input-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.nickname-input {
+  color: var(--color-gray-100);
+  width: 120px;
+  border: none;
+  background: none;
+  border-bottom: 1px solid var(--color-gray-100);
+  outline: none;
+  padding: 0 8px;
+}
+
+.email {
+  color: var(--color-gray-100);
+  display: flex;
+  justify-content: center;
+}
+
+.icon-button {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.menu-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 0;
+}

@@ -1,0 +1,21 @@
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-gray-100);
+  align-items: center;
+  cursor: pointer;
+  outline: none;
+
+  &:hover .name {
+    font-weight: var(--font-weight-bold);
+  }
+}
+
+.sub-label {
+  color: var(--color-gray-500);
+}
+
+.warning {
+  color: var(--color-error);
+}

@@ -13,8 +13,9 @@ interface ReviewItemProps {
 }
 
 export default function ReviewItem({ review, isMine }: ReviewItemProps) {
-  console.log(review);
-  const [isEdit, setEdit] = useState(review.content === null ? true : false);
+  const [isEdit, setEdit] = useState(
+    review.content === null && isMine ? true : false
+  );
   const [editValue, setEditValue] = useState(review.content || "");
 
   const queryClient = useQueryClient();
