@@ -20,7 +20,7 @@ export default function PostMeta({
 }: PostMetaProps) {
   return (
     <div className={styles.postMeta}>
-      <ProfileImage src={authorProfileImage} size={32} />
+      <ProfileImage src={authorProfileImage} size={40} />
       <span className={styles.author}>{author}</span>
       <Separator />
       <span className={styles.createdDate}>

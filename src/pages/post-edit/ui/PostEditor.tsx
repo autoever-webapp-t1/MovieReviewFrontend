@@ -100,7 +100,7 @@ const PostEditor = forwardRef(({ value, onChange }: PostEditorProps, ref) => {
       modules={{
         toolbar: {
           container: [
-            ["link", "image", "video"],
+            ["image"],
             [{ header: [1, 2, 3, false] }],
             ["bold", "italic", "underline", "strike"],
             ["blockquote"],
