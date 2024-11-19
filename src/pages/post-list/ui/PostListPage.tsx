@@ -106,7 +106,6 @@ export default function PostListPage() {
             />
           ))}
         </ul>
-
         {/* 페이지네이션 */}
         <div className={styles.pagination}>
           <ReactPaginate
