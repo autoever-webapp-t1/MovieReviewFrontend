@@ -17,13 +17,14 @@ import { useNavigate } from "react-router-dom";
 export default function MainPage() {
   const navigate = useNavigate();
 
+  const awardsName = sessionStorage.getItem("awardsName");
+
   const { data: nowPlaying } = useNowPlaing();
   const { data: topRated } = useTopRated();
   const { data: upComing } = useUpComing();
   const { data: popular } = usePopular();
   const { data: recommendations } = useRecommendations();
   const { data: myMovie } = useMyMovie();
-  console.log(myMovie);
 
   const handleAwardsButtonClick = useCallback(() => {
     navigate("/awards");
@@ -41,7 +42,7 @@ export default function MainPage() {
         </div>
         <div className={styles["visual-content"]}>
           <div className={styles.info}>
-            <h1 className="header-h1">제 13회 고전 공포 어워즈</h1>
+            <h1 className="header-h1">{awardsName}</h1>
             <p className="header-h2">후보작들이 발표되었습니다</p>
             <p className="header-h2">지금 바로 후보들을 확인해보세요</p>
           </div>
