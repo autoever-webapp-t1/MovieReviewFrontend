@@ -60,3 +60,16 @@ export const deleteComment = async (commentId: number) => {
   const response = await authAxios.delete(`/api/comments/${commentId}`);
   return response.data;
 };
+
+export const createComment = async (postId: number, content: string) => {
+  const response = await authAxios.post(
+    `/api/posts/${postId}/comments`,
+    { content },
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return response.data;
+};

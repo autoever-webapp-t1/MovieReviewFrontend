@@ -15,9 +15,11 @@
 }
 
 .post-body {
+  margin-bottom: 50px;
 }
 
 .body-content {
+  min-height: 300px;
 }
 
 .comment-container {
