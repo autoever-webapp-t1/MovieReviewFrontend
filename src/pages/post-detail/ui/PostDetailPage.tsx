@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import { PostDetailDto } from "@/entities/post/model/types";
 import { useUserStore } from "@/entities/user";
 import { fetchPostDetail, toggleLike } from "@/entities/post/api/postApi";
+import Viewer from "./Viewer";
 
 // const post: PostDetailDto = {
 //   postId: 123,
@@ -24,7 +25,7 @@ import { fetchPostDetail, toggleLike } from "@/entities/post/api/postApi";
 // };
 
 export default function PostDetailPage() {
-  const { user } = useUserStore();
+  const userId = sessionStorage.getItem("userId") ?? "";
   const authorProfileImage = "../../../src/assets/jackeylove.jpg";
   const commentCount = 4;
 
@@ -68,7 +69,7 @@ export default function PostDetailPage() {
               />
             </div>
             <div className={styles.actions}>
-              {user?.memberId == post.memberId ? (
+              {Number(userId) === post.memberId ? (
                 <>
                   <MainButton
                     color="primary"
@@ -104,8 +105,8 @@ export default function PostDetailPage() {
           </div>
           <div className={styles["divide-line"]} />
           <div className={`${styles["post-body"]} ${styles.container}`}>
-            <div className={styles["body-content"]} style={{ height: "500px" }}>
-              {post.content}
+            <div className={styles["body-content"]}>
+              <Viewer value={post.content}></Viewer>
             </div>
           </div>
           <div className={`${styles["comment-container"]} ${styles.container}`}>

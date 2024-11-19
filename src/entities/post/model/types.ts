@@ -3,8 +3,10 @@ export interface PostDetailDto {
   memberId: number;
   title: string;
   content: string;
+  textContent: string;
+  mainImgUrl: string;
   profileImage: string;
-  thumbnail?: string;
+  img: string;
   nickname: string;
   likesCount: number;
   liked: boolean;

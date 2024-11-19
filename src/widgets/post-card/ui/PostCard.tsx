@@ -37,12 +37,14 @@ export default function PostCard({
         />
       </div>
       <div className={styles["post-thumbnail-container"]}>
-        <img
-          src={thumbnail}
-          width={120}
-          height={120}
-          className={styles.postThumbnail}
-        ></img>
+        {thumbnail && (
+          <img
+            src={thumbnail}
+            width={120}
+            height={120}
+            className={styles.postThumbnail}
+          ></img>
+        )}
       </div>
     </li>
   );

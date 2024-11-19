@@ -23,3 +23,22 @@ export const toggleLike = async (postId: number, liked: boolean) => {
     await authAxios.post(`/api/posts/${postId}/like`);
   }
 };
+
+export const createPost = async (
+  title: string,
+  content: string,
+  textContent: string,
+  thumbnail: string
+) => {
+  const response = await authAxios.post(
+    `/api/post`,
+    { title, content, textContent, mainImgUrl: thumbnail },
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  console.log(response.data);
+  return response.data;
+};

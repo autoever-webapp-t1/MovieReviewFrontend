@@ -6,6 +6,7 @@ import { fetchPosts } from "@/entities/post/api/postApi";
 import { PostDetailDto } from "@/entities/post/model/types";
 import { PageResponseDto } from "@/shared/model/types";
 import { useNavigate } from "react-router-dom";
+import MainButton from "@/widgets/main-button/ui/MainButton";
 
 export default function PostListPage() {
   const [posts, setPosts] = useState<PageResponseDto<PostDetailDto>>();
@@ -18,12 +19,28 @@ export default function PostListPage() {
       console.log(data);
     };
     loadPosts();
+    console.log(posts);
   }, []);
   return (
     <div className={styles.container}>
-      <div className={styles.searchBar}>
-        <input type="text" placeholder="제목으로 검색" />
-        <SearchIcon sx={{ color: "var(--color-gray-400)", fontSize: "32px" }} />
+      <div className={styles.top}>
+        <div className={styles.searchBar}>
+          <input type="text" placeholder="제목으로 검색" />
+          <SearchIcon
+            sx={{ color: "var(--color-gray-400)", fontSize: "32px" }}
+          />
+        </div>
+        <div className={styles.buttonWrappers}>
+          <MainButton
+            color="primary"
+            onClick={() => {
+              navigate("/post-edit");
+            }}
+            fontSize="md"
+          >
+            글 쓰기
+          </MainButton>
+        </div>
       </div>
       <div className={styles.postList}>
         <ul>
@@ -32,11 +49,11 @@ export default function PostListPage() {
               <PostCard
                 key={i}
                 title={post.title}
-                preview={post.content}
+                preview={post.textContent}
                 author={post.nickname}
-                authorProfileImage={"../../../src/assets/jackeylove.jpg"}
+                authorProfileImage={post.profileImage}
                 likeCount={post.likesCount}
-                thumbnail="https://pds.joongang.co.kr//news/component/htmlphoto_mmdata/201805/19/5c5d6ec8-7fc7-4b5a-8897-a1ec06ae41f2.jpg"
+                thumbnail={post.mainImgUrl || ""}
                 createdAt={post.createdDate}
                 onClick={() => {
                   navigate(`/post/${post.postId}`);
