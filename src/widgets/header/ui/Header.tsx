@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, NavLink } from "react-router-dom";
 import styles from "./Header.module.css";
 import Logo from "@assets/logo.svg";
 import ProfileImage from "@/widgets/profile-image";
@@ -83,7 +83,7 @@ export default function Header() {
             </div>
           </div>
         </div>
-      </header>
-    </>
+      </div>
+    </header>
   );
 }
