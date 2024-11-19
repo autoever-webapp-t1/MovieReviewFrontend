@@ -92,7 +92,7 @@ export default function Header() {
                 "http://img1.kakaocdn.net/thumb/R640x640.q70/?fname=http://t1.kakaocdn.net/account_images/default_profile.jpeg"
               }
               alt=""
-              size={40}
+              size={50}
             />
           </div>
         </div>
