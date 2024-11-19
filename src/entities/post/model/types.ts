@@ -7,13 +7,8 @@ export interface PostDetailDto {
   mainImgUrl: string;
   profileImage: string;
   img: string;
-  textContent: string;
-  mainImgUrl: string;
-  profileImage: string;
-  img: string;
   nickname: string;
   likesCount: number;
-  liked: boolean;
   liked: boolean;
   createdDate: string;
   updatedDate: string;
