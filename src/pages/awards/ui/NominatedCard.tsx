@@ -1,17 +1,23 @@
-import { Score } from "@/entities/movie";
+import { MovieDetailDto } from "@/entities/movie";
 import styles from "./NominatedCard.module.css";
 import ScoreChart from "@/widgets/score-chart";
+import { useMemo } from "react";
 
 interface NominatedCardProps {
+  movie: MovieDetailDto;
   idx: number;
-  score: Score;
 }
 
-export default function NominatedCard({ idx, score }: NominatedCardProps) {
+export default function NominatedCard({ movie, idx }: NominatedCardProps) {
+  const { score, images } = movie;
+  const posterPath: string = useMemo(() => {
+    return JSON.parse(images)[0].poster_path;
+  }, []);
+
   return (
     <div className={`${styles.container} ${styles[`idx-${idx}`]}`}>
       <img
-        src="https://i.namu.wiki/i/hwTmapI5x7fN8IuqFHO4HfoFeItPIRL5V2NBdqFtuc9CWJUGeKbMCNLCEq3u1ZIlINTrzA9xr81_aX_v7b8hng.webp"
+        src={`https://image.tmdb.org/t/p/w200${posterPath}`}
         alt="NominatedImg"
       />
 

@@ -2,6 +2,10 @@
   flex: 200px 0 0;
 }
 
+.container-strong {
+  flex: 300px 0 0;
+}
+
 .awards-name {
   color: var(--color-primary);
   margin-bottom: 8px;
@@ -75,4 +79,5 @@
 
 .strong {
   box-shadow: 0 0 16px var(--color-primary);
+  height: 450px;
 }
