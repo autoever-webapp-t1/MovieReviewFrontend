@@ -33,17 +33,19 @@
 }
 
 .top {
-  display: flex;
-  justify-content: end;
-  align-items: end;
-  height: 60px;
-  gap: 32px;
-  padding: 0 32px;
-}
-
-.button {
-  display: block;
+  display: flex; /* flexbox 사용 */
+  flex-direction: row; /* 가로 방향 정렬 (기본값) */
+  justify-content: space-between; /* 양쪽 끝으로 요소 배치 */
+  align-items: center; /* 세로축 가운데 정렬 */
+  width: 100%; /* 부모 컨테이너의 너비 사용 */
+  padding: 100px 50px 20px 50px; /* 위아래 20px, 좌우 50px 간격 */
+  gap: 16px; /* 요소 간 간격 */
 }
 
 .buttonWrapper {
+  display: flex; /* 내부 정렬에 flexbox 사용 */
+}
+
+.button {
+  margin-top: auto; /* 내부 요소를 아래로 밀기 */
 }

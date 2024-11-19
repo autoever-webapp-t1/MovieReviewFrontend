@@ -38,7 +38,7 @@ export default function PostListPage() {
             }}
             fontSize="md"
           >
-            글 쓰기
+            글쓰기
           </MainButton>
         </div>
       </div>
