@@ -69,10 +69,11 @@ export default function ScoreChart({ size, data }: ScoreChartProps) {
               //   display: isBig,
               // },
               grid: {
-                color: "#8C8478",
+                color: "#f4eccc",
               },
               pointLabels: {
                 display: size === "big",
+                color: "#f4eccc",
               },
               // angleLines: {
               //   display: isBig,

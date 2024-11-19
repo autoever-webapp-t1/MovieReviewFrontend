@@ -5,8 +5,11 @@ import MovieCard, { Score, useMyMovie } from "@/entities/movie";
 import ScoreChart from "@/widgets/score-chart";
 import { ChartRawData } from "@/widgets/score-chart/model/types";
 import Spinner from "@/widgets/spinner";
+import { useNavigate } from "react-router-dom";
 
 export default function AvgScoreContent() {
+  const navigate = useNavigate();
+
   const [avgScore, setAvgScore] = useState<Score>();
   const chartData: ChartRawData | undefined = useMemo(() => {
     return avgScore
@@ -89,7 +92,13 @@ export default function AvgScoreContent() {
         {myMovie ? (
           <div className={styles["my-movie-list"]}>
             {myMovie.map((movie, i) => (
-              <MovieCard key={i} movieCard={movie} onClick={() => {}} />
+              <MovieCard
+                key={i}
+                movieCard={movie}
+                onClick={() => {
+                  navigate(`/movie/${movie.id}`);
+                }}
+              />
             ))}
           </div>
         ) : (

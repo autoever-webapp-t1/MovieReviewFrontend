@@ -2,6 +2,7 @@ import ScoreChart from "@/widgets/score-chart";
 import styles from "./MovieInfo.module.css";
 import { useCallback, useMemo } from "react";
 import {
+  AwardsAllScoreDto,
   GenreDto,
   ImageDto,
   MyScore,
@@ -23,6 +24,7 @@ interface MovieInfoProps {
   myScore: MyScore | null;
   myReview: ReviewDetailDto | null;
   isNominated: boolean;
+  awardsAllScoreDto: AwardsAllScoreDto | null;
 }
 
 export default function MovieInfo({
@@ -37,6 +39,7 @@ export default function MovieInfo({
   myScore,
   myReview,
   isNominated,
+  awardsAllScoreDto,
 }: MovieInfoProps) {
   const { setOpenModal } = useModalStore();
 
@@ -74,6 +77,36 @@ export default function MovieInfo({
 
     return newChartData;
   }, [title, score, myScore]);
+
+  const awardsChartData = useMemo(() => {
+    if (!awardsAllScoreDto) return [];
+    const newChartData: ChartRawData[] = [];
+    const { awardsScore, awardsMyScore } = awardsAllScoreDto;
+
+    newChartData.push({
+      movieTitle: title,
+      actorSkill: awardsScore.avgActorSkillWithAwards,
+      lineSkill: awardsScore.avgLineSkillWithAwards,
+      directorSkill: awardsScore.avgDirectorSkillWithAwards,
+      musicSkill: awardsScore.avgMusicSkillWithAwards,
+      sceneSkill: awardsScore.avgSceneSkillWithAwards,
+      storySkill: awardsScore.avgStorySkillWithAwards,
+    });
+
+    if (awardsMyScore.avgSkillWithMyAwards) {
+      newChartData.push({
+        movieTitle: title,
+        actorSkill: awardsMyScore.myActorSkillWithMyAwards,
+        lineSkill: awardsMyScore.myLineSkillWithMyAwards,
+        directorSkill: awardsMyScore.myDirectorSkillWithMyAwards,
+        musicSkill: awardsMyScore.myMusicSkillWithMyAwards,
+        sceneSkill: awardsMyScore.mySceneSkillWithMyAwards,
+        storySkill: awardsMyScore.myStorySkillWithMyAwards,
+      });
+    }
+
+    return newChartData;
+  }, [title, awardsAllScoreDto]);
 
   const handleRatingButtonClick = useCallback(() => {
     setOpenModal("ratingModal", {
@@ -118,21 +151,23 @@ export default function MovieInfo({
               )}
             </div>
           </div>
-          {isNominated && (
+          {isNominated && awardsAllScoreDto && (
             <div className={styles["chart-container"]}>
               <div
                 className={`${styles["chart-wrapper"]} ${styles.nominated}`}
                 onClick={handleRatingButtonClick}
               >
-                <ScoreChart size="big" data={chartData} />
+                <ScoreChart size="big" data={awardsChartData} />
               </div>
               <div className={`${styles["score-text"]} text-bold text-md`}>
                 <div className={styles["avg-score"]}>
-                  평균 총점 {score.totalAverageSkill}
+                  어워즈 평균 총점{" "}
+                  {awardsAllScoreDto.awardsScore.totalAverageSkillWithAwards}
                 </div>
-                {myScore && (
+                {awardsAllScoreDto.awardsMyScore.avgSkillWithMyAwards && (
                   <div className={styles["my-score"]}>
-                    나의 총점 {myScore.myAvgSkill}
+                    나의 총점{" "}
+                    {awardsAllScoreDto.awardsMyScore.avgSkillWithMyAwards}
                   </div>
                 )}
               </div>

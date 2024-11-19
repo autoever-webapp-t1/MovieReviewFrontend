@@ -45,9 +45,7 @@ export default function MovieDetailPage() {
 
   const reviews: ReviewDetailDto[] = useMemo(() => {
     return pagedReviews
-      ? pagedReviews.pages
-          .flatMap((page) => page.dtoList)
-          .filter((review) => review.content !== null)
+      ? pagedReviews.pages.flatMap((page) => page.dtoList)
       : [];
   }, [pagedReviews]);
 
@@ -68,6 +66,7 @@ export default function MovieDetailPage() {
               myScore={movieData.myScore}
               myReview={myReview}
               isNominated={isNominated}
+              awardsAllScoreDto={movieData.awardsAllScoreDto}
             />
             <MovieContent
               credits={movieData.credits}
