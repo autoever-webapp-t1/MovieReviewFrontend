@@ -2,7 +2,7 @@ import ProfileImage from "@/widgets/profile-image";
 import styles from "./SideBox.module.css";
 import { useCallback, useState } from "react";
 import EditImg from "@assets/edit.svg";
-import SaveImg from "@assets/save.svg";
+import SaveImg from "@assets/save_2.svg";
 import { updateNickname } from "@/entities/user";
 import MenuItem from "./MenuItem";
 
