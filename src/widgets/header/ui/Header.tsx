@@ -1,7 +1,6 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styles from "./Header.module.css";
 import Logo from "@assets/logo.svg";
-import UserImage from "@assets/song.jpg";
 import ProfileImage from "@/widgets/profile-image";
 import SearchIcon from "@mui/icons-material/Search";
 import { useRef } from "react";
@@ -18,7 +17,6 @@ export default function Header() {
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const location = useLocation();
-  const user = sessionStorage.getItem("userId");
   const userProfile = sessionStorage.getItem("userProfile");
 
   const handleClick = () => {
@@ -54,9 +52,6 @@ export default function Header() {
         <div className={styles.headerMenu}>
           <nav className={styles.nav}>
             <ul>
-              <li>
-                <Link to="/">리뷰</Link>
-              </li>
               <li>
                 <Link to="/awards">어워드</Link>
               </li>

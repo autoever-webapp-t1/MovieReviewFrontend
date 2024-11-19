@@ -1,95 +1,22 @@
 import styles from "./AwardsHistoryPage.module.css";
 import { useMemo, useState } from "react";
 import Select from "@/widgets/select";
-import ChartBox from "./ChartBox";
-import { AwardsMovieCardDto, AwardsPastListDto } from "@/entities/awards";
+import { AwardsMovieCardDto } from "@/entities/awards";
 import { ChartRawData } from "@/widgets/score-chart/model/types";
 import AwardsBox from "./AwardsBox";
 import { AwardsMovieCardType } from "../model/types";
-
-const movies: AwardsMovieCardDto[] = [
-  {
-    movieId: 1,
-    movieTitle: "재밌는 영화",
-    posterPath:
-      "https://i.namu.wiki/i/hwTmapI5x7fN8IuqFHO4HfoFeItPIRL5V2NBdqFtuc9CWJUGeKbMCNLCEq3u1ZIlINTrzA9xr81_aX_v7b8hng.webp",
-    score: {
-      avgSceneSkill: 5.0,
-      totalAverageSkill: 5.0,
-      avgLineSkill: 5.0,
-      avgStorySkill: 5.0,
-      avgDirectorSkill: 5.0,
-      avgMusicSkill: 5.0,
-      avgActorSkill: 5.0,
-    },
-  },
-  {
-    movieId: 2,
-    movieTitle: "슬픈 영화",
-    posterPath:
-      "https://i.namu.wiki/i/hwTmapI5x7fN8IuqFHO4HfoFeItPIRL5V2NBdqFtuc9CWJUGeKbMCNLCEq3u1ZIlINTrzA9xr81_aX_v7b8hng.webp",
-    score: {
-      avgSceneSkill: 7.0,
-      totalAverageSkill: 5.84,
-      avgLineSkill: 8.0,
-      avgStorySkill: 9.0,
-      avgDirectorSkill: 4.0,
-      avgMusicSkill: 4.0,
-      avgActorSkill: 3.0,
-    },
-  },
-  {
-    movieId: 3,
-    movieTitle: "액션 영화",
-    posterPath:
-      "https://i.namu.wiki/i/hwTmapI5x7fN8IuqFHO4HfoFeItPIRL5V2NBdqFtuc9CWJUGeKbMCNLCEq3u1ZIlINTrzA9xr81_aX_v7b8hng.webp",
-    score: {
-      avgSceneSkill: 1.0,
-      totalAverageSkill: 5.33,
-      avgLineSkill: 2.0,
-      avgStorySkill: 1.0,
-      avgDirectorSkill: 9.0,
-      avgMusicSkill: 9.0,
-      avgActorSkill: 10.0,
-    },
-  },
-  {
-    movieId: 4,
-    movieTitle: "공포 영화",
-    posterPath:
-      "https://i.namu.wiki/i/hwTmapI5x7fN8IuqFHO4HfoFeItPIRL5V2NBdqFtuc9CWJUGeKbMCNLCEq3u1ZIlINTrzA9xr81_aX_v7b8hng.webp",
-    score: {
-      avgSceneSkill: 4.0,
-      totalAverageSkill: 5.67,
-      avgLineSkill: 1.0,
-      avgStorySkill: 1.0,
-      avgDirectorSkill: 10.0,
-      avgMusicSkill: 10.0,
-      avgActorSkill: 8.0,
-    },
-  },
-];
-
-const awards: AwardsPastListDto[] = [
-  {
-    awardsId: 5,
-    awardsName: "제 15회 고전 공포 어워즈",
-    nominatedMovies: movies,
-  },
-  {
-    awardsId: 4,
-    awardsName: "제 14회 고전 공포 어워즈",
-    nominatedMovies: movies,
-  },
-  {
-    awardsId: 3,
-    awardsName: "제 13회 고전 공포 어워즈",
-    nominatedMovies: movies,
-  },
-];
+import { usePastAwards } from "@/entities/awards/api/hooks";
+import Spinner from "@/widgets/spinner";
+import MainBox from "./MainBox";
 
 export default function AwardsHistoryPage() {
   const [value, setValue] = useState(0);
+
+  const { data: awards } = usePastAwards();
+  const movies: AwardsMovieCardDto[] = useMemo(() => {
+    if (awards) return awards[value].nominatedMovies;
+    else return [];
+  }, [awards, value]);
 
   const chartData: ChartRawData[] = useMemo(() => {
     return movies.map<ChartRawData>((movie) => ({
@@ -144,20 +71,27 @@ export default function AwardsHistoryPage() {
 
   return (
     <div className={styles.container}>
-      <div className={styles["select-wrapper"]}>
-        <Select
-          items={awards.map((award) => award.awardsName)}
-          selectedIdx={value}
-          onChange={(e) => {
-            setValue(e);
-          }}
-        />
-      </div>
-      <div className={styles.content}>
-        <ChartBox data={chartData} />
-        <AwardsBox data={[winnersData[0]]} />
-        <AwardsBox data={winnersData.slice(1)} />
-      </div>
+      {awards ? (
+        <>
+          <div className={styles["select-wrapper"]}>
+            <Select
+              items={awards.map((award) => award.awardsName)}
+              selectedIdx={value}
+              onChange={(e) => {
+                setValue(e);
+              }}
+            />
+          </div>
+          <div className={styles.content}>
+            <MainBox chartData={chartData} winner={winnersData[0].movie} />
+            <AwardsBox data={winnersData.slice(1)} />
+          </div>
+        </>
+      ) : (
+        <div className={styles["spinner-wrapper"]}>
+          <Spinner />
+        </div>
+      )}
     </div>
   );
 }

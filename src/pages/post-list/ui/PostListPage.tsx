@@ -7,8 +7,26 @@ import { PostDetailDto } from "@/entities/post/model/types";
 import { PageResponseDto } from "@/shared/model/types";
 import { useNavigate } from "react-router-dom";
 import MainButton from "@/widgets/main-button/ui/MainButton";
+import { useEffect, useState } from "react";
+import { fetchPosts } from "@/entities/post/api/postApi";
+import { PostDetailDto } from "@/entities/post/model/types";
+import { PageResponseDto } from "@/shared/model/types";
+import { useNavigate } from "react-router-dom";
+import MainButton from "@/widgets/main-button/ui/MainButton";
 
 export default function PostListPage() {
+  const [posts, setPosts] = useState<PageResponseDto<PostDetailDto>>();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const loadPosts = async () => {
+      const data = await fetchPosts();
+      setPosts(data);
+      console.log(data);
+    };
+    loadPosts();
+    console.log(posts);
+  }, []);
   const [posts, setPosts] = useState<PageResponseDto<PostDetailDto>>();
   const navigate = useNavigate();
 

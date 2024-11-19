@@ -2,6 +2,7 @@ import MainButton from "@/widgets/main-button/ui/MainButton";
 import PostMeta from "@/widgets/post-meta/ui/PostMeta";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./PostDetailPage.module.css";
 import CommentBox from "./CommentBox";
 import { useNavigate, useParams } from "react-router-dom";
@@ -31,6 +32,7 @@ import Viewer from "./Viewer";
 // };
 
 export default function PostDetailPage() {
+  const userId = sessionStorage.getItem("userId") ?? "";
   const userId = sessionStorage.getItem("userId") ?? "";
   const authorProfileImage = "../../../src/assets/jackeylove.jpg";
   const commentCount = 4;
