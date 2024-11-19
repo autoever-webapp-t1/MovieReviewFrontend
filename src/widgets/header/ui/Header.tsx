@@ -18,6 +18,8 @@ export default function Header() {
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const location = useLocation();
+  const user = sessionStorage.getItem("userId");
+  const userProfile = sessionStorage.getItem("userProfile");
 
   const handleClick = () => {
     inputRef.current?.focus();
@@ -75,8 +77,14 @@ export default function Header() {
               />
             </div>
             <div className={styles.profile}>
-              <ProfileImage src={UserImage} alt="" size={32} />
-              <img />
+              <ProfileImage
+                src={
+                  userProfile ||
+                  "http://img1.kakaocdn.net/thumb/R640x640.q70/?fname=http://t1.kakaocdn.net/account_images/default_profile.jpeg"
+                }
+                alt=""
+                size={32}
+              />
             </div>
           </div>
         </div>
