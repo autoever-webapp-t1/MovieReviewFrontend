@@ -26,7 +26,7 @@ export interface MovieCardDto {
   score: Score | null;
   myScore: MyScore | null;
   release_date: string;
-  genre_ids: number[];
+  genre_ids: string;
 }
 
 export interface MovieDetailDto {
@@ -116,4 +116,9 @@ export interface MovieSearchResponse {
   nextPage: number;
   totalPage: number;
   current: number;
+}
+
+export interface MovieRecommendationDto {
+  title: string;
+  recommendations: MovieCardDto[];
 }

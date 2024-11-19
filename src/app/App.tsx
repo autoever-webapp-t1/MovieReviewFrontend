@@ -25,5 +25,10 @@ export default function App() {
         </AppModal>
       </>
     );
-  else return <Outlet />;
+  else
+    return (
+      <AppModal>
+        <Outlet />
+      </AppModal>
+    );
 }

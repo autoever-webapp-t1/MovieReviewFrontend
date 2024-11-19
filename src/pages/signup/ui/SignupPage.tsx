@@ -25,6 +25,7 @@ export default function SignupPage() {
 
   const handleMovieCardClick = useCallback(
     (movieId: number) => {
+      if (selectedMovieCards.includes(movieId)) return;
       setOpenModal("ratingModal", { movieId: movieId });
     },
     [selectedMovieCards]

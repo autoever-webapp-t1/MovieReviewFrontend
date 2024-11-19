@@ -22,6 +22,7 @@ interface MovieInfoProps {
   score: Score;
   myScore: MyScore | null;
   myReview: ReviewDetailDto | null;
+  isNominated: boolean;
 }
 
 export default function MovieInfo({
@@ -35,6 +36,7 @@ export default function MovieInfo({
   score,
   myScore,
   myReview,
+  isNominated,
 }: MovieInfoProps) {
   const { setOpenModal } = useModalStore();
 
@@ -81,7 +83,7 @@ export default function MovieInfo({
   }, [setOpenModal, movieId, myReview]);
 
   return (
-    <div className={styles.info}>
+    <div className={`${styles.info} ${isNominated ? styles.nominated : ""}`}>
       <div className={styles["movie-img-wrapper"]}>
         <img
           src={`https://image.tmdb.org/t/p/w780${images[0].backdrop_path}`}
@@ -89,28 +91,53 @@ export default function MovieInfo({
         />
       </div>
       <div className={styles["info-content"]}>
-        <h1 className="header-h1">{title}</h1>
+        <h1 className={`header-h1 ${isNominated ? styles.nominated : ""}`}>
+          {title}
+        </h1>
         <p className="text-md text-regular">
           {releaseDate.substring(0, 4)} | {runningTimeStr} |{" "}
           {genres.map((genre) => genre.name).join(", ")}
         </p>
         <p className="text-md text-regular">{overview}</p>
-        <div className={`${styles["score-text"]} text-bold text-lg`}>
-          <span className={styles["avg-score"]}>
-            평균 총점 {score.totalAverageSkill}
-          </span>
-          <span className={styles["my-score"]}>
-            나의 총점{" "}
-            <button
-              className={`${styles["score-button"]}`}
+        <div className={styles["chart-box"]}>
+          <div className={styles["chart-container"]}>
+            <div
+              className={styles["chart-wrapper"]}
               onClick={handleRatingButtonClick}
             >
-              {myScore ? myScore.avgSkill : "평가하기"}
-            </button>
-          </span>
-        </div>
-        <div className={styles["chart-wrapper"]}>
-          <ScoreChart size="small" data={chartData} />
+              <ScoreChart size="big" data={chartData} />
+            </div>
+            <div className={`${styles["score-text"]} text-bold text-md`}>
+              <div className={styles["avg-score"]}>
+                평균 총점 {score.totalAverageSkill}
+              </div>
+              {myScore && (
+                <div className={styles["my-score"]}>
+                  나의 총점 {myScore.avgSkill}
+                </div>
+              )}
+            </div>
+          </div>
+          {isNominated && (
+            <div className={styles["chart-container"]}>
+              <div
+                className={`${styles["chart-wrapper"]} ${styles.nominated}`}
+                onClick={handleRatingButtonClick}
+              >
+                <ScoreChart size="big" data={chartData} />
+              </div>
+              <div className={`${styles["score-text"]} text-bold text-md`}>
+                <div className={styles["avg-score"]}>
+                  평균 총점 {score.totalAverageSkill}
+                </div>
+                {myScore && (
+                  <div className={styles["my-score"]}>
+                    나의 총점 {myScore.avgSkill}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
