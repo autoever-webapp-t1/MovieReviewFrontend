@@ -16,6 +16,17 @@ export default function AuthCodePage() {
     const { accessToken, refreshToken } = loginResponse;
 
     const userInfo = await postLogin(accessToken, refreshToken);
+
+    sessionStorage.setItem("userId", String(userInfo.member.memberId));
+    sessionStorage.setItem("awardsId", String(userInfo.award.awardsId));
+    sessionStorage.setItem("awardsName", userInfo.award.awardName);
+    sessionStorage.setItem("nominated1Id", String(userInfo.award.nominated1));
+    sessionStorage.setItem("nominated2Id", String(userInfo.award.nominated2));
+    sessionStorage.setItem("nominated3Id", String(userInfo.award.nominated3));
+    sessionStorage.setItem("nominated4Id", String(userInfo.award.nominated4));
+    sessionStorage.setItem("startDateTime", userInfo.award.startDateTime);
+    sessionStorage.setItem("endDateTime", userInfo.award.endDateTime);
+
     setUser(userInfo);
     localStorage.setItem("at", userInfo.jwtToken);
 
