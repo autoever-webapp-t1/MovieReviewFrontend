@@ -115,3 +115,16 @@ export const createComment = async (postId: number, content: string) => {
   );
   return response.data;
 };
+
+export const updateComment = async (postId: number, content: string) => {
+  const response = await authAxios.patch(
+    `/api/comments/${postId}`,
+    { content },
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return response.data;
+};
