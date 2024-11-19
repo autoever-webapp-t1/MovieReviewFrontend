@@ -1,12 +1,17 @@
 import MainButton from "@/widgets/main-button/ui/MainButton";
 import PostEditor from "./PostEditor";
 import styles from "./PostEditor.module.css";
-import { createPost } from "@/entities/post/api/postApi";
-import { useCallback, useRef, useState } from "react";
+import {
+  createPost,
+  fetchPostDetail,
+  updatePost,
+} from "@/entities/post/api/postApi";
+import { useCallback, useEffect, useRef, useState } from "react";
 import ReactQuill from "react-quill";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function PostEditPage() {
+  const { postId } = useParams();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const navigate = useNavigate();
@@ -30,22 +35,45 @@ export default function PostEditPage() {
     }
   }, []);
 
-  const handleClick = useCallback(() => {
+  const handleSubmit = useCallback(() => {
     if (editorRef.current) {
       const textContent = editorRef.current.getEditor().getText();
       const thumbnail = getThumbnail();
-      createPost(title, content, textContent, thumbnail)
-        .then(() => {
-          // 성공 시 /post-list로 네비게이트
-          navigate("/post-list");
-        })
-        .catch((error) => {
-          // 실패 시 알러트 창 표시
-          console.error("Failed to create post:", error);
-          alert("포스트 작성에 실패했습니다. 다시 시도해주세요.");
-        });
+
+      if (postId) {
+        // 수정 로직
+        updatePost(Number(postId), title, content, textContent, thumbnail)
+          .then(() => {
+            navigate(`/post/${postId}`); // 수정 후 해당 포스트로 이동
+          })
+          .catch((error) => {
+            console.error("Failed to update post:", error);
+            alert("포스트 수정에 실패했습니다. 다시 시도해주세요.");
+          });
+      } else {
+        // 작성 로직
+        createPost(title, content, textContent, thumbnail)
+          .then(() => {
+            navigate("/post-list"); // 작성 성공 시 포스트 리스트로 이동
+          })
+          .catch((error) => {
+            console.error("Failed to create post:", error);
+            alert("포스트 작성에 실패했습니다. 다시 시도해주세요.");
+          });
+      }
     }
-  }, [title, content]);
+  }, [postId, title, content]);
+
+  useEffect(() => {
+    const fetchPostData = async () => {
+      if (postId) {
+        const data = await fetchPostDetail(Number(postId));
+        setTitle(data.title);
+        setContent(data.content);
+      }
+    };
+    fetchPostData();
+  }, [postId]);
 
   return (
     <div className={styles.container}>
@@ -66,13 +94,8 @@ export default function PostEditPage() {
           />
         </div>
         <div className={styles.buttonContainer}>
-          <MainButton
-            color="primary"
-            onClick={() => {
-              handleClick();
-            }}
-          >
-            작성
+          <MainButton color="primary" onClick={handleSubmit}>
+            {postId ? "수정" : "작성"}
           </MainButton>
         </div>
       </div>
