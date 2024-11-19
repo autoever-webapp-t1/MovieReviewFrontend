@@ -9,13 +9,13 @@ export interface Score {
 }
 
 export interface MyScore {
-  sceneSkill: number;
-  avgSkill: number;
-  lineSkill: number;
-  musicSkill: number;
-  storySkill: number;
-  directorSkill: number;
-  actorSkill: number;
+  mySceneSkill: number;
+  myAvgSkill: number;
+  myLineSkill: number;
+  myMusicSkill: number;
+  myStorySkill: number;
+  myDirectorSkill: number;
+  myActorSkill: number;
 }
 
 export interface MovieCardDto {
@@ -26,7 +26,33 @@ export interface MovieCardDto {
   score: Score | null;
   myScore: MyScore | null;
   release_date: string;
-  genre_ids: number[];
+  genre_ids: string;
+}
+
+export interface AwardsScoreDto {
+  avgActorSkillWithAwards: number;
+  totalAverageSkillWithAwards: number;
+  avgStorySkillWithAwards: number;
+  avgMusicSkillWithAwards: number;
+  avgLineSkillWithAwards: number;
+  avgDirectorSkillWithAwards: number;
+  avgSceneSkillWithAwards: number;
+}
+
+export interface AwardsMyScoreDto {
+  myMusicSkillWithMyAwards: number;
+  myDirectorSkillWithMyAwards: number;
+  mySceneSkillWithMyAwards: number;
+  avgSkillWithMyAwards: number | null;
+  myActorSkillWithMyAwards: number;
+  myStorySkillWithMyAwards: number;
+  myLineSkillWithMyAwards: number;
+}
+
+export interface AwardsAllScoreDto {
+  movieId: number;
+  awardsScore: AwardsScoreDto;
+  awardsMyScore: AwardsMyScoreDto;
 }
 
 export interface MovieDetailDto {
@@ -42,6 +68,8 @@ export interface MovieDetailDto {
   genres: string;
   recommendations: RecommendDto[];
   myScore: MyScore | null;
+  awardsNames: string[];
+  awardsAllScoreDto: AwardsAllScoreDto | null;
 }
 
 export interface RecommendDto {
@@ -116,4 +144,9 @@ export interface MovieSearchResponse {
   nextPage: number;
   totalPage: number;
   current: number;
+}
+
+export interface MovieRecommendationDto {
+  title: string;
+  recommendations: MovieCardDto[];
 }

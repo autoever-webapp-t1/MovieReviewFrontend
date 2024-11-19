@@ -1,22 +1,28 @@
 import { useCallback, useState } from "react";
 import styles from "./MovieContent.module.css";
 import ContentInfo from "./ContentInfo";
-import { CreditDto, ReviewDetailDto, VideoDto } from "@/entities/movie";
+import {
+  CreditDto,
+  MovieCardDto,
+  ReviewDetailDto,
+  VideoDto,
+} from "@/entities/movie";
+import RelatedContent from "./RelatedContent";
 
 interface MovieContentProps {
+  movieId: number;
   credits: CreditDto[];
   videos: VideoDto[];
-  reviews: ReviewDetailDto[];
   myReview: ReviewDetailDto | null;
-  hasNextPage: boolean;
+  relatedMovies: MovieCardDto[] | undefined;
 }
 
 export default function MovieContent({
+  movieId,
   credits,
   videos,
-  reviews,
   myReview,
-  hasNextPage,
+  relatedMovies,
 }: MovieContentProps) {
   const [currentTab, setCurrentTab] = useState(0);
 
@@ -46,14 +52,13 @@ export default function MovieContent({
       </div>
       {currentTab === 0 ? (
         <ContentInfo
+          movieId={movieId}
           credits={credits}
           videos={videos}
-          reviews={reviews}
           myReview={myReview}
-          hasNextPage={hasNextPage}
         />
       ) : (
-        <></>
+        <RelatedContent relatedMovies={relatedMovies} />
       )}
     </div>
   );

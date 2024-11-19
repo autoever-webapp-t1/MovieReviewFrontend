@@ -1,25 +1,37 @@
-import { CreditDto, ReviewDetailDto, VideoDto } from "@/entities/movie";
+import {
+  CreditDto,
+  ReviewDetailDto,
+  useReview,
+  VideoDto,
+} from "@/entities/movie";
 import styles from "./ContentInfo.module.css";
 import ContentSegment from "./ContentSegment";
 import CreditItem from "./CreditItem";
 import ReviewItem from "./ReviewItem";
 import VideoItem from "./VideoItem";
+import { useMemo } from "react";
 
 interface ContentInfoProps {
+  movieId: number;
   credits: CreditDto[];
   videos: VideoDto[];
-  reviews: ReviewDetailDto[];
   myReview: ReviewDetailDto | null;
-  hasNextPage: boolean;
 }
 
 export default function ContentInfo({
+  movieId,
   credits,
   videos,
-  reviews,
   myReview,
-  hasNextPage,
 }: ContentInfoProps) {
+  const { data: pagedReviews, hasNextPage, fetchNextPage } = useReview(movieId);
+
+  const reviews: ReviewDetailDto[] = useMemo(() => {
+    return pagedReviews
+      ? pagedReviews.pages.flatMap((page) => page.dtoList)
+      : [];
+  }, [pagedReviews]);
+
   return (
     <div>
       <ContentSegment label="감독/출연">
@@ -58,7 +70,14 @@ export default function ContentInfo({
                   <ReviewItem key={i} review={r} isMine={false} />
                 ))}
                 {hasNextPage && (
-                  <button className={styles["more-button"]}>MORE</button>
+                  <div className={styles["button-wrapper"]}>
+                    <button
+                      className="text-md text-bold"
+                      onClick={() => fetchNextPage()}
+                    >
+                      더 보기
+                    </button>
+                  </div>
                 )}
               </>
             ) : (

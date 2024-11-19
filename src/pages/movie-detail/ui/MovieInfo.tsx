@@ -2,6 +2,7 @@ import ScoreChart from "@/widgets/score-chart";
 import styles from "./MovieInfo.module.css";
 import { useCallback, useMemo } from "react";
 import {
+  AwardsAllScoreDto,
   GenreDto,
   ImageDto,
   MyScore,
@@ -22,6 +23,8 @@ interface MovieInfoProps {
   score: Score;
   myScore: MyScore | null;
   myReview: ReviewDetailDto | null;
+  isNominated: boolean;
+  awardsAllScoreDto: AwardsAllScoreDto | null;
 }
 
 export default function MovieInfo({
@@ -35,6 +38,8 @@ export default function MovieInfo({
   score,
   myScore,
   myReview,
+  isNominated,
+  awardsAllScoreDto,
 }: MovieInfoProps) {
   const { setOpenModal } = useModalStore();
 
@@ -61,17 +66,47 @@ export default function MovieInfo({
     if (myScore) {
       newChartData.push({
         movieTitle: title,
-        actorSkill: myScore.actorSkill,
-        lineSkill: myScore.lineSkill,
-        directorSkill: myScore.directorSkill,
-        musicSkill: myScore.musicSkill,
-        sceneSkill: myScore.sceneSkill,
-        storySkill: myScore.storySkill,
+        actorSkill: myScore.myActorSkill,
+        lineSkill: myScore.myLineSkill,
+        directorSkill: myScore.myDirectorSkill,
+        musicSkill: myScore.myMusicSkill,
+        sceneSkill: myScore.mySceneSkill,
+        storySkill: myScore.myStorySkill,
       });
     }
 
     return newChartData;
   }, [title, score, myScore]);
+
+  const awardsChartData = useMemo(() => {
+    if (!awardsAllScoreDto) return [];
+    const newChartData: ChartRawData[] = [];
+    const { awardsScore, awardsMyScore } = awardsAllScoreDto;
+
+    newChartData.push({
+      movieTitle: title,
+      actorSkill: awardsScore.avgActorSkillWithAwards,
+      lineSkill: awardsScore.avgLineSkillWithAwards,
+      directorSkill: awardsScore.avgDirectorSkillWithAwards,
+      musicSkill: awardsScore.avgMusicSkillWithAwards,
+      sceneSkill: awardsScore.avgSceneSkillWithAwards,
+      storySkill: awardsScore.avgStorySkillWithAwards,
+    });
+
+    if (awardsMyScore.avgSkillWithMyAwards) {
+      newChartData.push({
+        movieTitle: title,
+        actorSkill: awardsMyScore.myActorSkillWithMyAwards,
+        lineSkill: awardsMyScore.myLineSkillWithMyAwards,
+        directorSkill: awardsMyScore.myDirectorSkillWithMyAwards,
+        musicSkill: awardsMyScore.myMusicSkillWithMyAwards,
+        sceneSkill: awardsMyScore.mySceneSkillWithMyAwards,
+        storySkill: awardsMyScore.myStorySkillWithMyAwards,
+      });
+    }
+
+    return newChartData;
+  }, [title, awardsAllScoreDto]);
 
   const handleRatingButtonClick = useCallback(() => {
     setOpenModal("ratingModal", {
@@ -81,7 +116,7 @@ export default function MovieInfo({
   }, [setOpenModal, movieId, myReview]);
 
   return (
-    <div className={styles.info}>
+    <div className={`${styles.info} ${isNominated ? styles.nominated : ""}`}>
       <div className={styles["movie-img-wrapper"]}>
         <img
           src={`https://image.tmdb.org/t/p/w780${images[0].backdrop_path}`}
@@ -89,28 +124,55 @@ export default function MovieInfo({
         />
       </div>
       <div className={styles["info-content"]}>
-        <h1 className="header-h1">{title}</h1>
+        <h1 className={`header-h1 ${isNominated ? styles.nominated : ""}`}>
+          {title}
+        </h1>
         <p className="text-md text-regular">
           {releaseDate.substring(0, 4)} | {runningTimeStr} |{" "}
           {genres.map((genre) => genre.name).join(", ")}
         </p>
         <p className="text-md text-regular">{overview}</p>
-        <div className={`${styles["score-text"]} text-bold text-lg`}>
-          <span className={styles["avg-score"]}>
-            평균 총점 {score.totalAverageSkill}
-          </span>
-          <span className={styles["my-score"]}>
-            나의 총점{" "}
-            <button
-              className={`${styles["score-button"]}`}
+        <div className={styles["chart-box"]}>
+          <div className={styles["chart-container"]}>
+            <div
+              className={styles["chart-wrapper"]}
               onClick={handleRatingButtonClick}
             >
-              {myScore ? myScore.avgSkill : "평가하기"}
-            </button>
-          </span>
-        </div>
-        <div className={styles["chart-wrapper"]}>
-          <ScoreChart size="small" data={chartData} />
+              <ScoreChart size="big" data={chartData} />
+            </div>
+            <div className={`${styles["score-text"]} text-bold text-md`}>
+              <div className={styles["avg-score"]}>
+                평균 총점 {score.totalAverageSkill}
+              </div>
+              {myScore && (
+                <div className={styles["my-score"]}>
+                  나의 총점 {myScore.myAvgSkill}
+                </div>
+              )}
+            </div>
+          </div>
+          {isNominated && awardsAllScoreDto && (
+            <div className={styles["chart-container"]}>
+              <div
+                className={`${styles["chart-wrapper"]} ${styles.nominated}`}
+                onClick={handleRatingButtonClick}
+              >
+                <ScoreChart size="big" data={awardsChartData} />
+              </div>
+              <div className={`${styles["score-text"]} text-bold text-md`}>
+                <div className={styles["avg-score"]}>
+                  어워즈 평균 총점{" "}
+                  {awardsAllScoreDto.awardsScore.totalAverageSkillWithAwards}
+                </div>
+                {awardsAllScoreDto.awardsMyScore.avgSkillWithMyAwards && (
+                  <div className={styles["my-score"]}>
+                    나의 총점{" "}
+                    {awardsAllScoreDto.awardsMyScore.avgSkillWithMyAwards}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

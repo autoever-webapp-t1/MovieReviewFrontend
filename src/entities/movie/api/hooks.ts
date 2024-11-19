@@ -4,11 +4,14 @@ import {
   fetchNowPlaying,
   fetchPopular,
   fetchReview,
+  fetchRecommendations,
   fetchTopRated,
   fetchUpComing,
   rateMovie,
   updateReview,
   searchMovie,
+  fetchMyMovie,
+  fetchRelated,
 } from "./movieApi";
 import { NewReviewDto, ReviewDetailDto } from "../model/types";
 
@@ -40,6 +43,20 @@ export const usePopular = () => {
   });
 };
 
+export const useMyMovie = () => {
+  return useQuery({
+    queryKey: ["movie/myMovie"],
+    queryFn: () => fetchMyMovie(),
+  });
+};
+
+export const useRelated = (movieId: number) => {
+  return useQuery({
+    queryKey: ["movie/related", movieId],
+    queryFn: () => fetchRelated(movieId),
+  });
+};
+
 export const useMovie = (movieId: number) => {
   return useQuery({
     queryKey: ["movie", movieId],
@@ -53,10 +70,17 @@ export const useReview = (movieId: number) => {
     queryFn: ({ pageParam }) => fetchReview(pageParam, movieId),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
-      return lastPage.current + 1 < lastPage.totalPage
+      return lastPage.current + 1 <= lastPage.totalPage
         ? lastPage.current + 1
         : undefined;
     },
+  });
+};
+
+export const useRecommendations = () => {
+  return useQuery({
+    queryKey: ["movie/recommendations"],
+    queryFn: () => fetchRecommendations(),
   });
 };
 
