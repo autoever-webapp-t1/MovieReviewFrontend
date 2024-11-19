@@ -65,6 +65,26 @@ export const createPost = async (
   return response.data;
 };
 
+export const updatePost = async (
+  postId: number,
+  title: string,
+  content: string,
+  textContent: string,
+  thumbnail: string
+) => {
+  const response = await authAxios.patch(
+    `/api/post/${postId}`,
+    { title, content, textContent, mainImgUrl: thumbnail },
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  console.log(response.data);
+  return response.data;
+};
+
 export const deletePost = async (postId: number) => {
   const response = await authAxios.delete(`/api/post/${postId}`);
 
@@ -86,6 +106,19 @@ export const deleteComment = async (commentId: number) => {
 export const createComment = async (postId: number, content: string) => {
   const response = await authAxios.post(
     `/api/posts/${postId}/comments`,
+    { content },
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return response.data;
+};
+
+export const updateComment = async (postId: number, content: string) => {
+  const response = await authAxios.patch(
+    `/api/comments/${postId}`,
     { content },
     {
       headers: {

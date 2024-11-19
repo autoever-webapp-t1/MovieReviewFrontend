@@ -14,6 +14,7 @@ import {
   fetchComments,
   fetchPostDetail,
   toggleLike,
+  updateComment,
 } from "@/entities/post/api/postApi";
 import Viewer from "./Viewer";
 
@@ -49,6 +50,15 @@ export default function PostDetailPage() {
   const loadComments = async () => {
     const data = await fetchComments(postIdNumber);
     setComments(data);
+  };
+  const handleEditComment = async (commentId: number, content: string) => {
+    updateComment(commentId, content)
+      .then(() => {
+        loadComments();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
   const handleRemoveComment = async (commentId: number) => {
     const sureToDelete = confirm("댓글을 정말 삭제하시겠습니까?");
@@ -131,7 +141,9 @@ export default function PostDetailPage() {
                 <>
                   <MainButton
                     color="primary"
-                    onClick={() => {}}
+                    onClick={() => {
+                      navigate(`/post-edit/${postId}`);
+                    }}
                     disabled={false}
                   >
                     수정
@@ -191,51 +203,16 @@ export default function PostDetailPage() {
                         createdAt={comment.createdAt}
                         authorProfileImage={comment.profile}
                         handleRemoveComment={handleRemoveComment}
+                        handleEditComment={handleEditComment}
                       />
                     ))}
-
-                    {/* <CommentBox
-            {comments ? (
-              <>
-                <div className={styles["comment-header"]}>
-                  댓글{" "}
-                  <span className={styles["comment-count"]}>
-                    {comments.length}
-                  </span>
-                </div>
-                <div>
-                  <ul>
-                    {comments.map((comment, i) => (
-                      <CommentBox
-                        key={i}
-                        commentId={comment.commentId}
-                        postId={comment.postId}
-                        memberId={comment.memberId}
-                        content={comment.content}
-                        author={comment.nickname}
-                        createdAt={comment.createdAt}
-                        authorProfileImage={comment.profile}
-                        handleRemoveComment={handleRemoveComment}
-                      />
-                    ))}
-
-                    {/* <CommentBox
-                  commentId={2}
-                  postId={1}
-                  memberId={12}
-                  content="타노스의 의도는 공감할 수 있지만, 방식은 너무나 극단적이네요. 자원을 효율적으로 사용하거나 대안을 마련하는 것이 가능했을 텐데, 굳이 생명체를 없애는 방법만이 답은 아니었을 것 같아요. 타노스의 의도는 공감할 수 있지만, 방식은 너무나 극단적이네요. 자원을 효율적으로 사용하거나 대안을 마련하는 것이 가능했을 텐데, 굳이 생명체를 없애는 방법만이 답은 아니었을 것 같아요. 타노스의 의도는 공감할 수 있지만, 방식은 너무나 극단적이네요. 자원을 효율적으로 사용하거나 대안을 마련하는 것이 가능했을 텐데, 굳이 생명체를 없애는 방법만이 답은 아니었을 것 같아요."
-                  author="재키러브"
-                  createdAt="2024-11-12 12:36:00"
-                  updatedAt="2024-11-12 14:36:00"
-                  authorProfileImage={authorProfileImage}
-                /> */}
                   </ul>
                 </div>
               </>
             ) : (
               <></>
             )}
-            <div>
+            <div className={styles.inputWrapper}>
               <textarea
                 className={styles.input}
                 maxLength={500}
