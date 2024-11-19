@@ -195,6 +195,31 @@ export default function PostDetailPage() {
                     ))}
 
                     {/* <CommentBox
+            {comments ? (
+              <>
+                <div className={styles["comment-header"]}>
+                  댓글{" "}
+                  <span className={styles["comment-count"]}>
+                    {comments.length}
+                  </span>
+                </div>
+                <div>
+                  <ul>
+                    {comments.map((comment, i) => (
+                      <CommentBox
+                        key={i}
+                        commentId={comment.commentId}
+                        postId={comment.postId}
+                        memberId={comment.memberId}
+                        content={comment.content}
+                        author={comment.nickname}
+                        createdAt={comment.createdAt}
+                        authorProfileImage={comment.profile}
+                        handleRemoveComment={handleRemoveComment}
+                      />
+                    ))}
+
+                    {/* <CommentBox
                   commentId={2}
                   postId={1}
                   memberId={12}
