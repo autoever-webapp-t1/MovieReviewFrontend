@@ -1,5 +1,6 @@
 .chart-box {
-  width: 100%;
+  opacity: 0;
+  animation: fade-out 1s 0.5s forwards;
 
   .chart-wrapper {
     width: 300px;
@@ -44,4 +45,16 @@
 
 .idx-3 {
   background-color: var(--color-success);
+}
+
+@keyframes fade-out {
+  0% {
+    transform: translateY(10%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }

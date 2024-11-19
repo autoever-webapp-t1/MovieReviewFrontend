@@ -1,28 +1,31 @@
+import { useAwards } from "@/entities/awards/api/hooks";
 import styles from "./AwardsPage.module.css";
 import NominatedCard from "./NominatedCard";
-import { Score } from "@/entities/movie";
-
-const score: Score = {
-  avgActorSkill: 7,
-  avgDirectorSkill: 6,
-  avgLineSkill: 5,
-  avgMusicSkill: 6.5,
-  avgSceneSkill: 6.6,
-  avgStorySkill: 9,
-  totalAverageSkill: 1,
-};
 
 export default function AwardsPage() {
+  const awardsId = sessionStorage.getItem("awardsId")
+    ? parseInt(sessionStorage.getItem("awardsId") as string)
+    : -1;
+
+  const awardsName = sessionStorage.getItem("awardsName");
+
+  const { data: nominatedMovies } = useAwards(awardsId);
+
   return (
     <div className={styles.container}>
       <div className={styles.title}>
-        <h1 className={`header-h1`}>제 14회 고전 명작 어워즈</h1>
+        <h1 className={`header-h1`}>{awardsName || ""}</h1>
       </div>
       <div className={styles["nominated-list"]}>
-        <NominatedCard idx={0} score={score} />
-        <NominatedCard idx={1} score={score} />
-        <NominatedCard idx={2} score={score} />
-        <NominatedCard idx={3} score={score} />
+        {nominatedMovies !== undefined ? (
+          <>
+            {nominatedMovies.map((movie, i) => (
+              <NominatedCard key={i} idx={i} movie={movie} />
+            ))}
+          </>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

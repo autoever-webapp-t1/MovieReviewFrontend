@@ -1,11 +1,15 @@
-.awards-box {
+.container {
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
   justify-content: space-around;
+  align-items: center;
+  height: 550px;
+}
+
+.wrapper {
+  width: 300px;
   opacity: 0;
-  animation: fade-out 1s 1.5s forwards;
+  animation: fade-out 1s 0s forwards;
 }
 
 @keyframes fade-out {

@@ -10,16 +10,23 @@ import {
   useTopRated,
   useUpComing,
 } from "@/entities/movie";
+import { useNavigate } from "react-router-dom";
 
 export default function MainPage() {
+  const navigate = useNavigate();
+
   const { data: nowPlaying } = useNowPlaing();
   const { data: topRated } = useTopRated();
   const { data: upComing } = useUpComing();
   const { data: popular } = usePopular();
 
-  const handleAwardsButtonClick = useCallback(() => {}, []);
+  const handleAwardsButtonClick = useCallback(() => {
+    navigate("/awards");
+  }, []);
 
-  const handleHistoryButtonClick = useCallback(() => {}, []);
+  const handleHistoryButtonClick = useCallback(() => {
+    navigate("/awards/history");
+  }, []);
 
   return (
     <div>
