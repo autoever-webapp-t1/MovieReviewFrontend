@@ -8,6 +8,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { CommentDto, PostDetailDto } from "@/entities/post/model/types";
 import { useUserStore } from "@/entities/user";
 import {
+  createComment,
   deleteComment,
   deletePost,
   fetchComments,
@@ -36,6 +37,7 @@ export default function PostDetailPage() {
   const { postId } = useParams();
   const [post, setPost] = useState<PostDetailDto>();
   const [comments, setComments] = useState<CommentDto[]>();
+  const [commentContent, setCommentContent] = useState("");
   const navigate = useNavigate();
 
   const postIdNumber = Number(postId);
@@ -61,7 +63,23 @@ export default function PostDetailPage() {
         });
     }
   };
-  const handleAddComments = async () => {};
+  const handleAddComments = async () => {
+    if (commentContent.trim() === "") {
+      alert("댓글 내용을 입력해주세요.");
+      return;
+    }
+
+    createComment(postIdNumber, commentContent)
+      .then(() => {
+        alert("댓글이 등록되었습니다.");
+        setCommentContent(""); // textarea 초기화
+        loadComments();
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("댓글 등록에 실패했습니다.");
+      });
+  };
 
   useEffect(() => {
     loadPostDetail();
@@ -185,16 +203,6 @@ export default function PostDetailPage() {
                   createdAt="2024-11-12 12:36:00"
                   updatedAt="2024-11-12 14:36:00"
                   authorProfileImage={authorProfileImage}
-                />
-                <CommentBox
-                  commentId={2}
-                  postId={1}
-                  memberId={12}
-                  content="타노스의 의도는 공감할 수 있지만, 방식은 너무나 극단적이네요. 자원을 효율적으로 사용하거나 대안을 마련하는 것이 가능했을 텐데, 굳이 생명체를 없애는 방법만이 답은 아니었을 것 같아요. 타노스의 의도는 공감할 수 있지만, 방식은 너무나 극단적이네요. 자원을 효율적으로 사용하거나 대안을 마련하는 것이 가능했을 텐데, 굳이 생명체를 없애는 방법만이 답은 아니었을 것 같아요. 타노스의 의도는 공감할 수 있지만, 방식은 너무나 극단적이네요. 자원을 효율적으로 사용하거나 대안을 마련하는 것이 가능했을 텐데, 굳이 생명체를 없애는 방법만이 답은 아니었을 것 같아요."
-                  author="재키러브"
-                  createdAt="2024-11-12 12:36:00"
-                  updatedAt="2024-11-12 14:36:00"
-                  authorProfileImage={authorProfileImage}
                 /> */}
                   </ul>
                 </div>
@@ -203,9 +211,20 @@ export default function PostDetailPage() {
               <></>
             )}
             <div>
-              <textarea className={styles.input} maxLength={500}></textarea>
+              <textarea
+                className={styles.input}
+                maxLength={500}
+                value={commentContent}
+                onChange={(e) => setCommentContent(e.target.value)}
+              ></textarea>
               <div className={styles.add}>
-                <MainButton color="sub" onClick={() => {}} fontSize="xs">
+                <MainButton
+                  color="sub"
+                  onClick={() => {
+                    handleAddComments();
+                  }}
+                  fontSize="xs"
+                >
                   등록
                 </MainButton>
               </div>
