@@ -131,7 +131,9 @@ export default function PostDetailPage() {
                 <>
                   <MainButton
                     color="primary"
-                    onClick={() => {}}
+                    onClick={() => {
+                      navigate(`/post-edit/${postId}`);
+                    }}
                     disabled={false}
                   >
                     수정
