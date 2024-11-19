@@ -7,30 +7,16 @@ import { useMemo } from "react";
 
 export default function MovieDetailPage() {
   const { movieId } = useParams();
-  const nominated1Id = sessionStorage.getItem("nominated1Id");
-  const nominated2Id = sessionStorage.getItem("nominated2Id");
-  const nominated3Id = sessionStorage.getItem("nominated3Id");
-  const nominated4Id = sessionStorage.getItem("nominated4Id");
-
-  const isNominated: boolean = useMemo(() => {
-    if (
-      movieId &&
-      nominated1Id &&
-      nominated2Id &&
-      nominated3Id &&
-      nominated4Id
-    ) {
-      return (
-        movieId === nominated1Id ||
-        movieId === nominated2Id ||
-        movieId === nominated3Id ||
-        movieId === nominated4Id
-      );
-    } else return false;
-  }, [movieId, nominated1Id, nominated2Id, nominated3Id, nominated4Id]);
 
   const { data: movieWithReview } = useMovie(Number.parseInt(movieId!));
   const movieData = movieWithReview?.movieDetails;
+
+  const isNominated = useMemo(() => {
+    if (movieData) {
+      return Boolean(movieData.awardsAllScoreDto);
+    } else return false;
+  }, [movieData]);
+
   const myReview =
     movieWithReview?.reviews.length === 1 ? movieWithReview.reviews[0] : null;
 

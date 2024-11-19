@@ -56,22 +56,6 @@ export default function SseProvider({ children }: SseProviderProps) {
 
             sessionStorage.setItem("awardsId", String(awardsDto.awardsId));
             sessionStorage.setItem("awardsName", awardsDto.awardName);
-            sessionStorage.setItem(
-              "nominated1Id",
-              String(awardsDto.nominated1)
-            );
-            sessionStorage.setItem(
-              "nominated2Id",
-              String(awardsDto.nominated2)
-            );
-            sessionStorage.setItem(
-              "nominated3Id",
-              String(awardsDto.nominated3)
-            );
-            sessionStorage.setItem(
-              "nominated4Id",
-              String(awardsDto.nominated4)
-            );
             sessionStorage.setItem("startDateTime", awardsDto.startDateTime);
             sessionStorage.setItem("endDateTime", awardsDto.endDateTime);
           }

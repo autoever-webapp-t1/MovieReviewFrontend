@@ -5,6 +5,7 @@ import EditImg from "@assets/edit.svg";
 import SaveImg from "@assets/save_2.svg";
 import { updateNickname } from "@/entities/user";
 import MenuItem from "./MenuItem";
+import { useNavigate } from "react-router-dom";
 
 interface SideBoxProps {
   selectedContent: string;
@@ -15,11 +16,12 @@ export default function SideBox({
   selectedContent,
   onMenuItemSelect,
 }: SideBoxProps) {
-  console.log(selectedContent);
   const userId = sessionStorage.getItem("userId")!;
   const profileImg = sessionStorage.getItem("userProfile")!;
   const nickname = sessionStorage.getItem("userNickname")!;
   const email = sessionStorage.getItem("userEmail")!;
+
+  const navigate = useNavigate();
 
   const [nicknameValue, setNicknameValue] = useState(nickname);
   const [isNicknameEditMode, setNicknameEditMode] = useState(false);
@@ -30,6 +32,20 @@ export default function SideBox({
     sessionStorage.setItem("userNickname", nicknameValue);
     setNicknameEditMode(false);
   }, [userId, nicknameValue]);
+
+  const handleLogoutClick = useCallback(() => {
+    localStorage.removeItem("at");
+    sessionStorage.removeItem("awardsId");
+    sessionStorage.removeItem("awardsName");
+    sessionStorage.removeItem("endDateTime");
+    sessionStorage.removeItem("startDateTime");
+    sessionStorage.removeItem("userEmail");
+    sessionStorage.removeItem("userId");
+    sessionStorage.removeItem("userNickname");
+    sessionStorage.removeItem("userProfile");
+
+    navigate("/");
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -91,7 +107,7 @@ export default function SideBox({
         >
           나의 포스트
         </MenuItem>
-        <MenuItem onClick={() => {}} warning>
+        <MenuItem onClick={handleLogoutClick} warning>
           로그아웃
         </MenuItem>
       </div>

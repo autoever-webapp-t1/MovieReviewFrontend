@@ -12,13 +12,18 @@ export default function MyPostContent() {
     } else return [];
   }, [data]);
 
-  console.log(posts);
-
   return (
     <div className={styles.container}>
       {posts.map((post, i) => (
         <MyPostItem key={i} post={post} />
       ))}
+      {hasNextPage && (
+        <div className={styles["button-wrapper"]}>
+          <button className="text-md text-bold" onClick={() => fetchNextPage()}>
+            더 보기
+          </button>
+        </div>
+      )}
     </div>
   );
 }
