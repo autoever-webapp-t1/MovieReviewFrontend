@@ -9,13 +9,13 @@ export interface Score {
 }
 
 export interface MyScore {
-  sceneSkill: number;
-  avgSkill: number;
-  lineSkill: number;
-  musicSkill: number;
-  storySkill: number;
-  directorSkill: number;
-  actorSkill: number;
+  mySceneSkill: number;
+  myAvgSkill: number;
+  myLineSkill: number;
+  myMusicSkill: number;
+  myStorySkill: number;
+  myDirectorSkill: number;
+  myActorSkill: number;
 }
 
 export interface MovieCardDto {

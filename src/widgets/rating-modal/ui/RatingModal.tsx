@@ -118,13 +118,13 @@ export default function RatingModal({ movieId, myReview }: RatingModalProps) {
                       const newMovieCard: MovieCardDto = {
                         ...movieCard,
                         myScore: {
-                          sceneSkill: sceneScore,
-                          actorSkill: actorScore,
-                          lineSkill: lineScore,
-                          directorSkill: directorScore,
-                          musicSkill: musicScore,
-                          storySkill: storyScore,
-                          avgSkill: 0,
+                          mySceneSkill: sceneScore,
+                          myActorSkill: actorScore,
+                          myLineSkill: lineScore,
+                          myDirectorSkill: directorScore,
+                          myMusicSkill: musicScore,
+                          myStorySkill: storyScore,
+                          myAvgSkill: 0,
                         },
                       };
 

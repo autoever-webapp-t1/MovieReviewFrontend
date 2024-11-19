@@ -63,12 +63,12 @@ export default function MovieInfo({
     if (myScore) {
       newChartData.push({
         movieTitle: title,
-        actorSkill: myScore.actorSkill,
-        lineSkill: myScore.lineSkill,
-        directorSkill: myScore.directorSkill,
-        musicSkill: myScore.musicSkill,
-        sceneSkill: myScore.sceneSkill,
-        storySkill: myScore.storySkill,
+        actorSkill: myScore.myActorSkill,
+        lineSkill: myScore.myLineSkill,
+        directorSkill: myScore.myDirectorSkill,
+        musicSkill: myScore.myMusicSkill,
+        sceneSkill: myScore.mySceneSkill,
+        storySkill: myScore.myStorySkill,
       });
     }
 
@@ -113,7 +113,7 @@ export default function MovieInfo({
               </div>
               {myScore && (
                 <div className={styles["my-score"]}>
-                  나의 총점 {myScore.avgSkill}
+                  나의 총점 {myScore.myAvgSkill}
                 </div>
               )}
             </div>
@@ -132,7 +132,7 @@ export default function MovieInfo({
                 </div>
                 {myScore && (
                   <div className={styles["my-score"]}>
-                    나의 총점 {myScore.avgSkill}
+                    나의 총점 {myScore.myAvgSkill}
                   </div>
                 )}
               </div>

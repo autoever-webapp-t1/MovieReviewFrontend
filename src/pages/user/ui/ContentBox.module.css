@@ -1,0 +1,8 @@
+.container {
+  flex-grow: 1;
+}
+
+.header {
+  color: var(--color-gray-100);
+  margin-bottom: 32px;
+}

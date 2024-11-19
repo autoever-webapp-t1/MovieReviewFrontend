@@ -71,7 +71,7 @@ export default function Header() {
                 onChange={handleInputChange}
               />
             </div>
-            <div className={styles.profile}>
+            <div className={styles.profile} onClick={() => navigate("/user")}>
               <ProfileImage
                 src={
                   userProfile ||
