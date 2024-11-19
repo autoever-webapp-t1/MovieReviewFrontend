@@ -18,6 +18,7 @@ export default function AuthCodePage() {
     const userInfo = await postLogin(accessToken, refreshToken);
 
     sessionStorage.setItem("userId", String(userInfo.member.memberId));
+    sessionStorage.setItem("userProfile", String(userInfo.member.profile));
     sessionStorage.setItem("awardsId", String(userInfo.award.awardsId));
     sessionStorage.setItem("awardsName", userInfo.award.awardName);
     sessionStorage.setItem("nominated1Id", String(userInfo.award.nominated1));

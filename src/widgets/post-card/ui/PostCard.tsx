@@ -9,6 +9,7 @@ interface PostCardProps {
   likeCount: number;
   thumbnail: string;
   createdAt: string;
+  onClick: () => void;
 }
 
 export default function PostCard({
@@ -19,9 +20,10 @@ export default function PostCard({
   likeCount,
   thumbnail,
   createdAt,
+  onClick,
 }: PostCardProps) {
   return (
-    <li className={styles.postCard}>
+    <li className={styles.postCard} onClick={onClick}>
       <div className={styles.postContent}>
         <div className={`${styles.postTitle} header-h4`}>{title}</div>
         <div className={`${styles.postPreview} text-sm text-regular`}>
@@ -35,12 +37,14 @@ export default function PostCard({
         />
       </div>
       <div className={styles["post-thumbnail-container"]}>
-        <img
-          src={thumbnail}
-          width={120}
-          height={120}
-          className={styles.postThumbnail}
-        ></img>
+        {thumbnail && (
+          <img
+            src={thumbnail}
+            width={120}
+            height={120}
+            className={styles.postThumbnail}
+          ></img>
+        )}
       </div>
     </li>
   );
