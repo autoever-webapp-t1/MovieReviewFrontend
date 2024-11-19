@@ -8,7 +8,7 @@ interface ScoreChartProps {
   data: ChartRawData[];
 }
 
-const colors = ["#f3bb4b", "#a72608", "#0075f2", "#358600"];
+const colors = ["#d6310a", "#f3bb4b", "#0075f2", "#358600"];
 
 export default function ScoreChart({ size, data }: ScoreChartProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -48,7 +48,7 @@ export default function ScoreChart({ size, data }: ScoreChartProps) {
           animation: false,
           plugins: {
             title: {
-              display: size === "big",
+              display: false,
             },
             legend: {
               display: false,
@@ -69,10 +69,11 @@ export default function ScoreChart({ size, data }: ScoreChartProps) {
               //   display: isBig,
               // },
               grid: {
-                color: "#8C8478",
+                color: "#f4eccc",
               },
               pointLabels: {
                 display: size === "big",
+                color: "#f4eccc",
               },
               // angleLines: {
               //   display: isBig,

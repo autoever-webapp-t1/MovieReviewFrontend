@@ -4,6 +4,7 @@ import "./App.css";
 import { useMemo } from "react";
 import SseProvider from "./providers/SseProvider";
 import AppModal from "@/widgets/app-modal";
+import Footer from "@/widgets/footer";
 
 export default function App() {
   const { pathname } = useLocation();
@@ -21,9 +22,15 @@ export default function App() {
             <div className="content-container">
               <Outlet />
             </div>
+            <Footer />
           </SseProvider>
         </AppModal>
       </>
     );
-  else return <Outlet />;
+  else
+    return (
+      <AppModal>
+        <Outlet />
+      </AppModal>
+    );
 }

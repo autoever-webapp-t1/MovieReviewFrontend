@@ -46,7 +46,7 @@ export default function AwardsMovieCard({
       >
         <div className={styles["background-img-wrapper"]}>
           <img
-            src={`https://image.tmdb.org/t/p/w200${posterPath}`}
+            src={`https://image.tmdb.org/t/p/w400${posterPath}`}
             alt="PosterImg"
           />
         </div>

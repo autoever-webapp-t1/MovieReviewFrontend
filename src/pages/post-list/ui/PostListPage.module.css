@@ -49,3 +49,14 @@
 .button {
   margin-top: auto; /* 내부 요소를 아래로 밀기 */
 }
+
+.paginationContainer {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 24px 0;
+}
+
+.activePage {
+  color: var(--color-sub);
+}

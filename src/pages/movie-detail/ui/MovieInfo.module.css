@@ -1,15 +1,16 @@
 .info {
   position: relative;
   width: 100%;
-  height: 400px;
+  height: 500px;
   display: flex;
   justify-content: flex-end;
   overflow: hidden;
   border-bottom: 1px solid var(--color-gray-800);
+  margin-top: 16px;
 
   .movie-img-wrapper {
     width: 50%;
-    height: 400px;
+    height: 500px;
 
     & > img {
       width: 100%;
@@ -28,7 +29,6 @@
     width: 100%;
     height: 100%;
     padding: 16px;
-    margin-top: 10px;
     background: linear-gradient(
       90deg,
       rgba(36, 28, 36, 1) 60%,
@@ -37,30 +37,48 @@
     );
     color: var(--color-gray-100);
 
-    .avg-score {
-      color: var(--color-sub);
-    }
+    .chart-box {
+      display: flex;
+      gap: 16px;
 
-    .my-score {
-      margin-left: 20px;
-      color: var(--color-primary);
+      .chart-container {
+        padding: 8px;
+        display: flex;
+        flex-direction: column;
 
-      .score-button {
-        font-size: inherit;
-        line-height: inherit;
-        font-weight: inherit;
-        color: inherit;
-        text-decoration: underline;
-        cursor: pointer;
+        .chart-wrapper {
+          width: 200px;
+          height: 200px;
+          border-radius: 8px;
+          border: 1px solid var(--color-gray-800);
+          padding: 8px;
+          cursor: pointer;
+
+          &:hover {
+            border: 1px solid var(--color-gray-700);
+          }
+        }
+
+        .chart-wrapper.nominated {
+          border: 1px solid var(--color-primary);
+
+          &:hover {
+            border: 1px solid var(--color-primary-light);
+          }
+        }
+
+        .score-text {
+          padding: 0 8px;
+
+          .avg-score {
+            color: var(--color-sub-light);
+          }
+
+          .my-score {
+            color: var(--color-primary);
+          }
+        }
       }
-    }
-
-    .chart-wrapper {
-      width: 120px;
-      height: 120px;
-      border-radius: 8px;
-      border: 2px solid var(--color-gray-800);
-      padding: 8px;
     }
 
     & > p {
@@ -75,4 +93,14 @@
       overflow: hidden;
     }
   }
+}
+
+.info.nominated {
+  border: 1px solid var(--color-primary);
+  box-shadow: 0 0 16px var(--color-primary);
+  border-radius: 8px;
+}
+
+h1.nominated {
+  color: var(--color-primary);
 }

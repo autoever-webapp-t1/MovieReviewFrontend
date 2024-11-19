@@ -2,10 +2,32 @@ import { authAxios, noAuthAxios } from "@/shared/api/base";
 import { PageResponseDto } from "@/shared/model/types";
 import { PostDetailDto } from "../model/types";
 
-export const fetchPosts = async () => {
+export const fetchPosts = async (page: number, size: number) => {
   const response = await noAuthAxios.get<PageResponseDto<PostDetailDto>>(
-    "/api/posts"
+    "/api/posts",
+    {
+      params: {
+        page,
+        size,
+      },
+    }
   );
+  console.log(response.data);
+  return response.data;
+};
+
+export const fetchSearchResults = async (
+  keyword: string,
+  page: number,
+  size: number
+) => {
+  const response = await authAxios.get(`/api/post/search/${keyword}`, {
+    params: {
+      page,
+      size,
+    },
+  });
+
   console.log(response.data);
   return response.data;
 };
@@ -43,6 +65,26 @@ export const createPost = async (
   return response.data;
 };
 
+export const updatePost = async (
+  postId: number,
+  title: string,
+  content: string,
+  textContent: string,
+  thumbnail: string
+) => {
+  const response = await authAxios.patch(
+    `/api/post/${postId}`,
+    { title, content, textContent, mainImgUrl: thumbnail },
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  console.log(response.data);
+  return response.data;
+};
+
 export const deletePost = async (postId: number) => {
   const response = await authAxios.delete(`/api/post/${postId}`);
 
@@ -58,5 +100,31 @@ export const fetchComments = async (postId: number) => {
 
 export const deleteComment = async (commentId: number) => {
   const response = await authAxios.delete(`/api/comments/${commentId}`);
+  return response.data;
+};
+
+export const createComment = async (postId: number, content: string) => {
+  const response = await authAxios.post(
+    `/api/posts/${postId}/comments`,
+    { content },
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  return response.data;
+};
+
+export const updateComment = async (postId: number, content: string) => {
+  const response = await authAxios.patch(
+    `/api/comments/${postId}`,
+    { content },
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
   return response.data;
 };

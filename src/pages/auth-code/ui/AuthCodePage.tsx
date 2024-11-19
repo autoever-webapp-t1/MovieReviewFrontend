@@ -19,6 +19,8 @@ export default function AuthCodePage() {
 
     sessionStorage.setItem("userId", String(userInfo.member.memberId));
     sessionStorage.setItem("userProfile", String(userInfo.member.profile));
+    sessionStorage.setItem("userNickname", String(userInfo.member.nickname));
+    sessionStorage.setItem("userEmail", String(userInfo.member.email));
     sessionStorage.setItem("awardsId", String(userInfo.award.awardsId));
     sessionStorage.setItem("awardsName", userInfo.award.awardName);
     sessionStorage.setItem("nominated1Id", String(userInfo.award.nominated1));
