@@ -2,12 +2,7 @@ import { useParams } from "react-router-dom";
 import styles from "./MovieDetailPage.module.css";
 import MovieInfo from "./MovieInfo";
 import MovieContent from "./MovieContent";
-import {
-  ReviewDetailDto,
-  useMovie,
-  useRelated,
-  useReview,
-} from "@/entities/movie";
+import { useMovie, useRelated } from "@/entities/movie";
 import { useMemo } from "react";
 
 export default function MovieDetailPage() {
@@ -39,15 +34,7 @@ export default function MovieDetailPage() {
   const myReview =
     movieWithReview?.reviews.length === 1 ? movieWithReview.reviews[0] : null;
 
-  const { data: pagedReviews, hasNextPage } = useReview(parseInt(movieId!));
-
   const { data: relatedMovies } = useRelated(parseInt(movieId!));
-
-  const reviews: ReviewDetailDto[] = useMemo(() => {
-    return pagedReviews
-      ? pagedReviews.pages.flatMap((page) => page.dtoList)
-      : [];
-  }, [pagedReviews]);
 
   return (
     <div className={`${styles.wrapper}`}>
@@ -69,11 +56,10 @@ export default function MovieDetailPage() {
               awardsAllScoreDto={movieData.awardsAllScoreDto}
             />
             <MovieContent
+              movieId={movieData.id}
               credits={movieData.credits}
               videos={JSON.parse(movieData.videos)}
-              reviews={reviews}
               myReview={myReview}
-              hasNextPage={hasNextPage}
               relatedMovies={relatedMovies}
             />
           </>

@@ -70,7 +70,7 @@ export const useReview = (movieId: number) => {
     queryFn: ({ pageParam }) => fetchReview(pageParam, movieId),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
-      return lastPage.current + 1 < lastPage.totalPage
+      return lastPage.current + 1 <= lastPage.totalPage
         ? lastPage.current + 1
         : undefined;
     },
