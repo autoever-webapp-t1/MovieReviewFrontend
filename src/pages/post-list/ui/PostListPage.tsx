@@ -64,7 +64,11 @@ export default function PostListPage() {
             }}
           />
           <SearchIcon
-            sx={{ color: "var(--color-gray-400)", fontSize: "32px" }}
+            sx={{
+              color: "var(--color-gray-400)",
+              fontSize: "32px",
+              cursor: "pointer",
+            }}
             onClick={handleSearch}
           />
         </div>
@@ -108,7 +112,7 @@ export default function PostListPage() {
           <ReactPaginate
             pageCount={totalPages} // 전체 페이지 수
             pageRangeDisplayed={5} // 한번에 표시할 페이지 버튼 수
-            marginPagesDisplayed={2} // 시작과 끝에 표시할 페이지 버튼 수
+            marginPagesDisplayed={1} // 시작과 끝에 표시할 페이지 버튼 수
             onPageChange={handlePageClick} // 페이지 변경 이벤트 핸들러
             containerClassName={styles.paginationContainer} // CSS 클래스명
             activeClassName={styles.activePage} // 활성화된 버튼 클래스명

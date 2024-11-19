@@ -52,4 +52,9 @@
   display: flex;
   justify-content: center;
   gap: 8px;
+  padding: 24px 0;
+}
+
+.activePage {
+  color: var(--color-sub);
 }

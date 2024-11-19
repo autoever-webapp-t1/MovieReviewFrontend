@@ -17,13 +17,12 @@ export const fetchPosts = async (page: number, size: number) => {
 };
 
 export const fetchSearchResults = async (
-  value: string,
+  keyword: string,
   page: number,
   size: number
 ) => {
-  const response = await authAxios.get(`/api/search`, {
+  const response = await authAxios.get(`/api/post/search/${keyword}`, {
     params: {
-      "title.contains": value,
       page,
       size,
     },
