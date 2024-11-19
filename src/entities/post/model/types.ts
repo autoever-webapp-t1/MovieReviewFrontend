@@ -14,4 +14,13 @@ export interface PostDetailDto {
   updatedDate: string;
 }
 
-export interface CommentDto {}
+export interface CommentDto {
+  commentId: number;
+  postId: number;
+  nickname: string;
+  content: string;
+  memberId: number;
+  createdAt: string;
+  updatedAt: string;
+  profile: string;
+}

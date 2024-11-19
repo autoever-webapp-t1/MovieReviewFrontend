@@ -1,10 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchPostDetail, fetchPosts } from "./postApi";
 
-export const usePosts = () => {
+export const usePosts = (size: number, page: number) => {
   return useQuery({
-    queryKey: ["posts"],
-    queryFn: fetchPosts,
+    queryKey: ["posts", size, page],
+    queryFn: () => {
+      fetchPosts(size, page);
+    },
     staleTime: 1000 * 60,
   });
 };
