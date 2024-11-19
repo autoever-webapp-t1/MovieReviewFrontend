@@ -30,7 +30,7 @@ export default function PostListPage() {
             sx={{ color: "var(--color-gray-400)", fontSize: "32px" }}
           />
         </div>
-        <div className={styles.buttonWrappers}>
+        <div className={styles.buttonWrapper}>
           <MainButton
             color="primary"
             onClick={() => {

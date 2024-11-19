@@ -42,3 +42,21 @@ export const createPost = async (
   console.log(response.data);
   return response.data;
 };
+
+export const deletePost = async (postId: number) => {
+  const response = await authAxios.delete(`/api/post/${postId}`);
+
+  console.log(response.data);
+  return response.data;
+};
+
+export const fetchComments = async (postId: number) => {
+  const response = await authAxios.get(`/api/post/${postId}/comments`);
+  console.log(response.data);
+  return response.data;
+};
+
+export const deleteComment = async (commentId: number) => {
+  const response = await authAxios.delete(`/api/comments/${commentId}`);
+  return response.data;
+};
