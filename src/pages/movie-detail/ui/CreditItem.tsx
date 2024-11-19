@@ -20,7 +20,9 @@ export default function CreditItem({ credit }: CreditItemProps) {
       </div>
       <div className={styles.content}>
         <p className="text-bold text-md">{name}</p>
-        <p className="text-regular text-sm">{type}</p>
+        <p className="text-regular text-sm">
+          {type === "Acting" ? "배우" : "감독"}
+        </p>
       </div>
     </div>
   );

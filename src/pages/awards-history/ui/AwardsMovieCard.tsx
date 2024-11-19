@@ -3,6 +3,7 @@ import styles from "./AwardsMovieCard.module.css";
 import { useNavigate } from "react-router-dom";
 import ScoreChart from "@/widgets/score-chart";
 import MovieInfoImg from "@assets/movie-info.svg";
+import { useMemo } from "react";
 
 interface AwardsMovieCardProps {
   movie: AwardsMovieCardDto;
@@ -15,13 +16,28 @@ export default function AwardsMovieCard({
   movie,
   strong,
 }: AwardsMovieCardProps) {
-  const { movieId, movieTitle, posterPath, score } = movie;
+  const { movieId, movieTitle, moviePoster, score } = movie;
+  console.log(moviePoster);
+
+  const posterPath = useMemo(() => {
+    return JSON.parse(moviePoster)[0].poster_path;
+  }, [moviePoster]);
+
+  console.log(posterPath);
 
   const navigate = useNavigate();
 
   return (
-    <div className={styles.container}>
-      <div className={`${styles["awards-name"]} header-h3`}>{awardsName}</div>
+    <div
+      className={`${strong ? styles["container-strong"] : styles.container}`}
+    >
+      <div
+        className={`${styles["awards-name"]} ${
+          strong ? "header-h2" : "header-h3"
+        }`}
+      >
+        {awardsName}
+      </div>
       <div
         className={`${styles["card-container"]} ${strong ? styles.strong : ""}`}
         onClick={() => {
@@ -30,8 +46,7 @@ export default function AwardsMovieCard({
       >
         <div className={styles["background-img-wrapper"]}>
           <img
-            // src={`https://image.tmdb.org/t/p/w200${poster_path}`}
-            src={posterPath}
+            src={`https://image.tmdb.org/t/p/w200${posterPath}`}
             alt="PosterImg"
           />
         </div>
