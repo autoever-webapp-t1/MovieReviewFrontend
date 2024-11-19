@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, NavLink } from "react-router-dom";
 import styles from "./Header.module.css";
 import Logo from "@assets/logo.svg";
 import UserImage from "@assets/song.jpg";
@@ -42,53 +42,71 @@ export default function Header() {
   };
 
   return (
-    <>
-      <header className={styles.header}>
-        <div className={styles.logo}>
-          <Link to="/main">
-            <div className={styles.logoContainer}>
-              <img src={Logo} alt="로고" width="90" />
-            </div>
-          </Link>
-        </div>
-        <div className={styles.headerMenu}>
-          <nav className={styles.nav}>
-            <ul>
-              <li>
-                <Link to="/">리뷰</Link>
-              </li>
-              <li>
-                <Link to="/awards">어워드</Link>
-              </li>
-              <li>
-                <Link to="/post-list">포스트</Link>
-              </li>
-            </ul>
-          </nav>
-          <div className={styles.headerUtilities}>
-            <div className={styles.searchBar} onClick={handleClick}>
-              <SearchIcon sx={{ color: "var(--color-gray-500)" }} />
-              <input
-                className=""
-                type="text"
-                placeholder="영화 제목 검색"
-                ref={inputRef}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div className={styles.profile}>
-              <ProfileImage
-                src={
-                  userProfile ||
-                  "http://img1.kakaocdn.net/thumb/R640x640.q70/?fname=http://t1.kakaocdn.net/account_images/default_profile.jpeg"
+    <header className={styles.header}>
+      <div className={styles.logo}>
+        <Link to="/main">
+          <div className={styles.logoContainer}>
+            <img src={Logo} alt="로고" width="90" />
+          </div>
+        </Link>
+      </div>
+      <div className={styles.headerMenu}>
+        <nav className={styles.nav}>
+          <ul>
+            <li>
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive ? `${styles.active}` : undefined
                 }
-                alt=""
-                size={32}
-              />
-            </div>
+              >
+                리뷰
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/awards"
+                className={({ isActive }) =>
+                  isActive ? `${styles.active}` : undefined
+                }
+              >
+                어워드
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/post-list"
+                className={({ isActive }) =>
+                  isActive ? `${styles.active}` : undefined
+                }
+              >
+                포스트
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
+        <div className={styles.headerUtilities}>
+          <div className={styles.searchBar} onClick={handleClick}>
+            <SearchIcon sx={{ color: "var(--color-gray-500)" }} />
+            <input
+              type="text"
+              placeholder="영화 제목 검색"
+              ref={inputRef}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className={styles.profile}>
+            <ProfileImage
+              src={
+                userProfile ||
+                "http://img1.kakaocdn.net/thumb/R640x640.q70/?fname=http://t1.kakaocdn.net/account_images/default_profile.jpeg"
+              }
+              alt=""
+              size={32}
+            />
           </div>
         </div>
-      </header>
-    </>
+      </div>
+    </header>
   );
 }
