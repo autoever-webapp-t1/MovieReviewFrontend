@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { useModalStore } from "@/widgets/app-modal/model/store";
 import RatingModal from "@/widgets/rating-modal";
+import AwardsModal from "@/widgets/awards-modal";
 
 interface AppModalProps {
   children: ReactNode;
@@ -17,6 +18,8 @@ export default function AppModal({ children }: AppModalProps) {
           movieId={modalProps!.movieId}
           myReview={modalProps!.myReview}
         />
+      ) : openModal === "awardsModal" ? (
+        <AwardsModal />
       ) : (
         <></>
       )}

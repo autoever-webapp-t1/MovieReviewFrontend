@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { ModalPropsType } from "./types";
 
-type ModalType = null | "ratingModal";
+type ModalType = null | "ratingModal" | "awardsModal";
 
 interface ModalStore {
   openModal: ModalType;
