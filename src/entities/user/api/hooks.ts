@@ -7,7 +7,7 @@ export const useMyReview = () => {
     queryFn: ({ pageParam }) => fetchMyReivew(pageParam),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
-      return lastPage.current + 1 < lastPage.totalPage
+      return lastPage.current + 1 <= lastPage.totalPage
         ? lastPage.current + 1
         : undefined;
     },
@@ -20,7 +20,7 @@ export const useMyPost = () => {
     queryFn: ({ pageParam }) => fetchMyPost(pageParam),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
-      return lastPage.current + 1 < lastPage.totalPage
+      return lastPage.current + 1 <= lastPage.totalPage
         ? lastPage.current + 1
         : undefined;
     },
