@@ -2,10 +2,33 @@ import { authAxios, noAuthAxios } from "@/shared/api/base";
 import { PageResponseDto } from "@/shared/model/types";
 import { PostDetailDto } from "../model/types";
 
-export const fetchPosts = async () => {
+export const fetchPosts = async (page: number, size: number) => {
   const response = await noAuthAxios.get<PageResponseDto<PostDetailDto>>(
-    "/api/posts"
+    "/api/posts",
+    {
+      params: {
+        page,
+        size,
+      },
+    }
   );
+  console.log(response.data);
+  return response.data;
+};
+
+export const fetchSearchResults = async (
+  value: string,
+  page: number,
+  size: number
+) => {
+  const response = await authAxios.get(`/api/search`, {
+    params: {
+      "title.contains": value,
+      page,
+      size,
+    },
+  });
+
   console.log(response.data);
   return response.data;
 };
