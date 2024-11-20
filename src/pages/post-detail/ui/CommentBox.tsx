@@ -2,6 +2,7 @@ import PostMeta from "@/widgets/post-meta/ui/PostMeta";
 import styles from "./CommentBox.module.css";
 import MainButton from "@/widgets/main-button/ui/MainButton";
 import { useState } from "react";
+import { formatDate } from "@/shared/lib/dateUtils";
 
 interface CommentBoxProps {
   commentId: number;
@@ -10,7 +11,7 @@ interface CommentBoxProps {
   memberId: number;
   author: string;
   createdAt: string;
-  updatedAt?: string;
+  updatedAt: string;
   authorProfileImage: string;
   handleEditComment: (commentId: number, editedContent: string) => void;
   handleRemoveComment: (commentId: number) => void;
@@ -47,7 +48,7 @@ export default function CommentBox({
             authorProfileImage={authorProfileImage}
             author={author}
             createdAt={createdAt}
-            isUpdated={!!updatedAt}
+            isUpdated={createdAt !== updatedAt}
           />
           {myComment && (
             <div className={`${styles.actions}`}>

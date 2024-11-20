@@ -20,7 +20,7 @@
 .notification {
   display: flex;
   justify-content: center;
-  padding-top: 100px;
+  padding: 120px;
   color: var(--color-gray-500);
   user-select: none;
 }

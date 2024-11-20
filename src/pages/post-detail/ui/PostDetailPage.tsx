@@ -159,7 +159,7 @@ export default function PostDetailPage() {
                 </>
               ) : (
                 <div className={styles.button}>
-                  {post.liked ? (
+                  {/* {post.liked ? (
                     <Favorite
                       sx={{ color: "var(--color-sub-light)", fontSize: 36 }}
                       onClick={handleLikeToggle}
@@ -169,7 +169,7 @@ export default function PostDetailPage() {
                       sx={{ color: "var(--color-sub-light)", fontSize: 36 }}
                       onClick={handleLikeToggle}
                     />
-                  )}
+                  )} */}
                 </div>
               )}
             </div>
@@ -200,6 +200,7 @@ export default function PostDetailPage() {
                         content={comment.content}
                         author={comment.nickname}
                         createdAt={comment.createdAt}
+                        updatedAt={comment.updatedAt}
                         authorProfileImage={comment.profile}
                         handleRemoveComment={handleRemoveComment}
                         handleEditComment={handleEditComment}
