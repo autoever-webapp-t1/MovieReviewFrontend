@@ -49,7 +49,7 @@ export default function CommentBox({
             authorProfileImage={authorProfileImage}
             author={author}
             createdAt={createdAt}
-            isUpdated={formatDate(createdAt) !== formatDate(updatedAt)}
+            isUpdated={createdAt !== updatedAt}
           />
           {myComment && (
             <div className={`${styles.actions}`}>
