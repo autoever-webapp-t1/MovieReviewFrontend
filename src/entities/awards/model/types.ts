@@ -10,7 +10,6 @@ export interface AwardsDto {
   startDateTime: string;
   endDateTime: string;
   topMovieId: number;
-  nextAwardName: string;
 }
 
 export interface AwardsMovieCardDto {

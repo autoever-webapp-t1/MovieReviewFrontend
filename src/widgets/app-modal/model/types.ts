@@ -5,4 +5,8 @@ export interface RatingModalProps {
   myReview?: ReviewDetailDto | null;
 }
 
-export type ModalPropsType = RatingModalProps | null;
+export interface AwardsModalProps {
+  awardName: string;
+}
+
+export type ModalPropsType = RatingModalProps | AwardsModalProps | null;

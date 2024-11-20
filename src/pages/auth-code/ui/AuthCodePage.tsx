@@ -25,7 +25,6 @@ export default function AuthCodePage() {
     sessionStorage.setItem("awardsName", userInfo.award.awardName);
     sessionStorage.setItem("startDateTime", userInfo.award.startDateTime);
     sessionStorage.setItem("endDateTime", userInfo.award.endDateTime);
-    sessionStorage.setItem("nextAwardName", userInfo.award.nextAwardName);
 
     setUser(userInfo);
     localStorage.setItem("at", userInfo.jwtToken);

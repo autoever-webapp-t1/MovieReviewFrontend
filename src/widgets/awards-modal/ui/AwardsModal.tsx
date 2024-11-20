@@ -6,10 +6,9 @@ import MainButton from "@/widgets/main-button/ui/MainButton";
 import { useNavigate } from "react-router-dom";
 import { useCallback } from "react";
 import { useModalStore } from "@/widgets/app-modal/model/store";
+import { AwardsModalProps } from "@/widgets/app-modal/model/types";
 
-export default function AwardsModal() {
-  const awardsName = sessionStorage.getItem("awardsName")!;
-
+export default function AwardsModal({ awardName }: AwardsModalProps) {
   const navigate = useNavigate();
   const { setOpenModal } = useModalStore();
 
@@ -24,7 +23,7 @@ export default function AwardsModal() {
         <div className={styles["bg-wrapper"]}>
           <img src={AwardsModalBgImg} alt="AwardsModalBgImg" />
           <div className={`${styles.box} header-h3`}>
-            <span className="header-h1">{awardsName}</span>
+            <span className="header-h1">{awardName}</span>
             <p>투표 결과가 발표되었습니다.</p>
             <div className={styles["button-wrapper"]}>
               <MainButton color="primary" fontSize="md" onClick={handleClick}>
