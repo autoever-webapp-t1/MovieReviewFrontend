@@ -21,12 +21,18 @@ export default function AwardsHistoryPage() {
   const chartData: ChartRawData[] = useMemo(() => {
     return movies.map<ChartRawData>((movie) => ({
       movieTitle: movie.movieTitle,
-      actorSkill: movie.score.avgActorSkill,
-      directorSkill: movie.score.avgDirectorSkill,
-      lineSkill: movie.score.avgLineSkill,
-      musicSkill: movie.score.avgMusicSkill,
-      storySkill: movie.score.avgStorySkill,
-      sceneSkill: movie.score.avgSceneSkill,
+      // @ts-ignore
+      actorSkill: movie.score.avgActorSkillWithAwards,
+      // @ts-ignore
+      directorSkill: movie.score.avgDirectorSkillWithAwards,
+      // @ts-ignore
+      lineSkill: movie.score.avgLineSkillWithAwards,
+      // @ts-ignore
+      musicSkill: movie.score.avgMusicSkillWithAwards,
+      // @ts-ignore
+      storySkill: movie.score.avgStorySkillWithAwards,
+      // @ts-ignore
+      sceneSkill: movie.score.avgSceneSkillWithAwards,
     }));
   }, [movies]);
 
@@ -40,23 +46,63 @@ export default function AwardsHistoryPage() {
     let lineWinner = movies[0];
 
     for (let i = 1; i < movies.length; i++) {
-      if (winner.score.totalAverageSkill < movies[i].score.totalAverageSkill)
+      if (
+        //@ts-ignore
+        winner.score.totalAverageSkillWithAwards <
+        //@ts-ignore
+        movies[i].score.totalAverageSkillWithAwards
+      )
         winner = movies[i];
-      if (actorWinner.score.avgActorSkill < movies[i].score.avgActorSkill)
+      //@ts-ignore
+      if (
+        //@ts-ignore
+        actorWinner.score.avgActorSkillWithAwards <
+        //@ts-ignore
+        movies[i].score.avgActorSkillWithAwards
+      )
         actorWinner = movies[i];
       if (
-        directorWinner.score.avgDirectorSkill < movies[i].score.avgDirectorSkill
+        //@ts-ignore
+        directorWinner.score.avgDirectorSkillWithAwards <
+        //@ts-ignore
+        movies[i].score.avgDirectorSkillWithAwards
       )
         directorWinner = movies[i];
-      if (sceneWinner.score.avgSceneSkill < movies[i].score.avgSceneSkill)
+      //@ts-ignore
+      if (
+        //@ts-ignore
+        sceneWinner.score.avgSceneSkillWithAwards <
+        //@ts-ignore
+        movies[i].score.avgSceneSkillWithAwards
+      )
         sceneWinner = movies[i];
-      if (storyWinner.score.avgStorySkill < movies[i].score.avgStorySkill)
+      //@ts-ignore
+      if (
+        //@ts-ignore
+        storyWinner.score.avgStorySkillWithAwards <
+        //@ts-ignore
+        movies[i].score.avgStorySkillWithAwards
+      )
         storyWinner = movies[i];
-      if (musicWinner.score.avgMusicSkill < movies[i].score.avgMusicSkill)
+      //@ts-ignore
+      if (
+        //@ts-ignore
+        musicWinner.score.avgMusicSkillWithAwards <
+        //@ts-ignore
+        movies[i].score.avgMusicSkillWithAwards
+      )
         musicWinner = movies[i];
-      if (lineWinner.score.avgLineSkill < movies[i].score.avgLineSkill)
+      //@ts-ignore
+      if (
+        //@ts-ignore
+        lineWinner.score.avgLineSkillWithAwards <
+        //@ts-ignore
+        movies[i].score.avgLineSkillWithAwards
+      )
         lineWinner = movies[i];
     }
+
+    console.log(winner);
 
     return [
       { movie: winner, awardsName: "수상작", strong: true },

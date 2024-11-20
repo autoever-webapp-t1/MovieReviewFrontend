@@ -64,12 +64,18 @@ export default function AwardsMovieCard({
                   ? [
                       {
                         movieTitle: movieTitle,
-                        sceneSkill: score.avgSceneSkill,
-                        actorSkill: score.avgActorSkill,
-                        directorSkill: score.avgDirectorSkill,
-                        lineSkill: score.avgLineSkill,
-                        musicSkill: score.avgMusicSkill,
-                        storySkill: score.avgStorySkill,
+                        //@ts-ignore
+                        sceneSkill: score.avgSceneSkillWithAwards,
+                        //@ts-ignore
+                        actorSkill: score.avgActorSkillWithAwards,
+                        //@ts-ignore
+                        directorSkill: score.avgDirectorSkillWithAwards,
+                        //@ts-ignore
+                        lineSkill: score.avgLineSkillWithAwards,
+                        //@ts-ignore
+                        musicSkill: score.avgMusicSkillWithAwards,
+                        //@ts-ignore
+                        storySkill: score.avgStorySkillWithAwards,
                       },
                     ]
                   : [
