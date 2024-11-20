@@ -27,12 +27,12 @@ export default function PostMeta({
         {formatDate(createdAt)}
         {isUpdated && " (수정됨)"}
       </span>
-      {likeCount !== undefined && (
+      {/* {likeCount !== undefined && (
         <>
           <Separator />
           <span className={styles.likeCount}>♥️ {likeCount}</span>
         </>
-      )}
+      )} */}
     </div>
   );
 }
