@@ -1,6 +1,6 @@
 import MainButton from "@/widgets/main-button/ui/MainButton";
 import PostMeta from "@/widgets/post-meta/ui/PostMeta";
-import { Favorite, FavoriteBorder } from "@mui/icons-material";
+// import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import styles from "./PostDetailPage.module.css";
 import CommentBox from "./CommentBox";
@@ -12,7 +12,7 @@ import {
   deletePost,
   fetchComments,
   fetchPostDetail,
-  toggleLike,
+  // toggleLike,
   updateComment,
 } from "@/entities/post/api/postApi";
 import Viewer from "./Viewer";
@@ -95,17 +95,17 @@ export default function PostDetailPage() {
     loadComments();
   }, [postIdNumber]);
 
-  const handleLikeToggle = () => {
-    if (post) {
-      const updatedPost = {
-        ...post,
-        liked: !post.liked,
-        likesCount: post.liked ? post.likesCount - 1 : post.likesCount + 1,
-      };
-      setPost(updatedPost);
-      toggleLike(postIdNumber, updatedPost.liked);
-    }
-  };
+  // const handleLikeToggle = () => {
+  //   if (post) {
+  //     const updatedPost = {
+  //       ...post,
+  //       liked: !post.liked,
+  //       likesCount: post.liked ? post.likesCount - 1 : post.likesCount + 1,
+  //     };
+  //     setPost(updatedPost);
+  //     toggleLike(postIdNumber, updatedPost.liked);
+  //   }
+  // };
 
   const handleDelete = () => {
     const sureToDelete = confirm("게시글을 정말 삭제하시겠습니까?");
