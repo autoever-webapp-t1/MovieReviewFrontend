@@ -58,6 +58,7 @@ export default function SseProvider({ children }: SseProviderProps) {
             sessionStorage.setItem("awardsName", awardsDto.awardName);
             sessionStorage.setItem("startDateTime", awardsDto.startDateTime);
             sessionStorage.setItem("endDateTime", awardsDto.endDateTime);
+            sessionStorage.setItem("nextAwardName", awardsDto.nextAwardName);
           }
         );
 

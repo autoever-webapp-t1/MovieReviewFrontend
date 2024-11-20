@@ -1,11 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchAwards, fetchPastAwards } from "./AwardsApi";
 
-export const useAwards = (awardsId: number) => {
+export const useAwards = () => {
   return useQuery({
-    queryKey: ["awards", awardsId],
-    queryFn: () => fetchAwards(awardsId),
-    enabled: awardsId >= 0,
+    queryKey: ["awards"],
+    queryFn: () => fetchAwards(),
   });
 };
 

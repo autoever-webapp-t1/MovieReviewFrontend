@@ -2,10 +2,8 @@ import { authAxios } from "@/shared/api/base";
 import { AwardsPastListDto } from "../model/types";
 import { MovieDetailDto } from "@/entities/movie";
 
-export const fetchAwards = async (awardsId: number) => {
-  const response = await authAxios.get<MovieDetailDto[]>(
-    `api/awards/${awardsId}`
-  );
+export const fetchAwards = async () => {
+  const response = await authAxios.get<MovieDetailDto[]>(`api/awards`);
 
   return response.data;
 };
