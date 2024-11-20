@@ -16,13 +16,13 @@ export default function Footer() {
         </div>
         <nav className={styles.footerNav}>
           <ul>
-            <li>무슨 내용 적을까요</li>
             <li>Privacy Policy</li>
             <li>Contact Us</li>
           </ul>
         </nav>
         <div className={styles.footerCopyright}>
-          <p>© 2024 Gasannes. All rights reserved.</p>
+          <p>서울 금천구 가산디지털1로 189 (주)LG 가산 디지털센터</p>
+          <p>© 2024 Gasannes. All rights reserved. </p>
         </div>
       </div>
     </footer>
