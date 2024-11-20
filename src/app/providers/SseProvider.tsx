@@ -51,6 +51,7 @@ export default function SseProvider({ children }: SseProviderProps) {
             console.log(awardsDtoStr);
             const { message }: { message: string } = JSON.parse(awardsDtoStr);
             const awardsDto: AwardsDto = JSON.parse(message);
+            console.log(awardsDto);
 
             setOpenModal("awardsModal", null);
 
