@@ -3,7 +3,7 @@ import styles from "./AwardsPage.module.css";
 import NominatedCard from "./NominatedCard";
 
 export default function AwardsPage() {
-  const awardsName = sessionStorage.getItem("nextAwardName");
+  const awardsName = sessionStorage.getItem("awardsName");
 
   const { data: nominatedMovies } = useAwards();
 

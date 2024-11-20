@@ -17,7 +17,7 @@ import { useNavigate } from "react-router-dom";
 export default function MainPage() {
   const navigate = useNavigate();
 
-  const awardsName = sessionStorage.getItem("nextAwardName");
+  const awardsName = sessionStorage.getItem("awardsName");
 
   const { data: nowPlaying } = useNowPlaing();
   const { data: topRated } = useTopRated();
