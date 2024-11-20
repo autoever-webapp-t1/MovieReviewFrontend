@@ -2,7 +2,6 @@ import PostMeta from "@/widgets/post-meta/ui/PostMeta";
 import styles from "./CommentBox.module.css";
 import MainButton from "@/widgets/main-button/ui/MainButton";
 import { useState } from "react";
-import { formatDate } from "@/shared/lib/dateUtils";
 
 interface CommentBoxProps {
   commentId: number;
