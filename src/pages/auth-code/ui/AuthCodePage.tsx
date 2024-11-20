@@ -23,18 +23,14 @@ export default function AuthCodePage() {
     sessionStorage.setItem("userEmail", String(userInfo.member.email));
     sessionStorage.setItem("awardsId", String(userInfo.award.awardsId));
     sessionStorage.setItem("awardsName", userInfo.award.awardName);
-    sessionStorage.setItem("nominated1Id", String(userInfo.award.nominated1));
-    sessionStorage.setItem("nominated2Id", String(userInfo.award.nominated2));
-    sessionStorage.setItem("nominated3Id", String(userInfo.award.nominated3));
-    sessionStorage.setItem("nominated4Id", String(userInfo.award.nominated4));
     sessionStorage.setItem("startDateTime", userInfo.award.startDateTime);
     sessionStorage.setItem("endDateTime", userInfo.award.endDateTime);
+    sessionStorage.setItem("nextAwardName", userInfo.award.nextAwardName);
 
     setUser(userInfo);
     localStorage.setItem("at", userInfo.jwtToken);
 
-    if (false) {
-      // if (userInfo.existed) {
+    if (userInfo.member.existed) {
       navigate("/main");
     } else {
       navigate("/signup");

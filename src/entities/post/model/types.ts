@@ -4,14 +4,14 @@ export interface PostDetailDto {
   title: string;
   content: string;
   textContent: string;
-  mainImgUrl: string;
+  mainImgUrl: string | null;
   profileImage: string;
   img: string;
   nickname: string;
   likesCount: number;
   liked: boolean;
   createdDate: string;
-  updatedDate: string;
+  modifiedDate: string;
 }
 
 export interface CommentDto {

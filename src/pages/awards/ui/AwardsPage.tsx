@@ -3,13 +3,9 @@ import styles from "./AwardsPage.module.css";
 import NominatedCard from "./NominatedCard";
 
 export default function AwardsPage() {
-  const awardsId = sessionStorage.getItem("awardsId")
-    ? parseInt(sessionStorage.getItem("awardsId") as string)
-    : -1;
+  const awardsName = sessionStorage.getItem("nextAwardName");
 
-  const awardsName = sessionStorage.getItem("awardsName");
-
-  const { data: nominatedMovies } = useAwards(awardsId);
+  const { data: nominatedMovies } = useAwards();
 
   return (
     <div className={styles.container}>

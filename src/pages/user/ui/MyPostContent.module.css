@@ -1,0 +1,10 @@
+.button-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  button {
+    color: var(--color-gray-100);
+    cursor: pointer;
+  }
+}

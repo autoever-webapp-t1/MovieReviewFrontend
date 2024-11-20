@@ -1,7 +1,6 @@
 import PostMeta from "@/widgets/post-meta/ui/PostMeta";
 import styles from "./CommentBox.module.css";
 import MainButton from "@/widgets/main-button/ui/MainButton";
-import { deleteComment } from "@/entities/post/api/postApi";
 import { useState } from "react";
 import { formatDate } from "@/shared/lib/dateUtils";
 
@@ -24,7 +23,7 @@ export default function CommentBox({
   createdAt,
   memberId,
   commentId,
-  postId,
+  // postId,
   updatedAt,
   authorProfileImage,
   handleEditComment,

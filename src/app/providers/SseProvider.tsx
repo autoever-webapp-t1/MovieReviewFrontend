@@ -51,29 +51,15 @@ export default function SseProvider({ children }: SseProviderProps) {
             console.log(awardsDtoStr);
             const { message }: { message: string } = JSON.parse(awardsDtoStr);
             const awardsDto: AwardsDto = JSON.parse(message);
+            console.log(awardsDto);
 
             setOpenModal("awardsModal", null);
 
             sessionStorage.setItem("awardsId", String(awardsDto.awardsId));
             sessionStorage.setItem("awardsName", awardsDto.awardName);
-            sessionStorage.setItem(
-              "nominated1Id",
-              String(awardsDto.nominated1)
-            );
-            sessionStorage.setItem(
-              "nominated2Id",
-              String(awardsDto.nominated2)
-            );
-            sessionStorage.setItem(
-              "nominated3Id",
-              String(awardsDto.nominated3)
-            );
-            sessionStorage.setItem(
-              "nominated4Id",
-              String(awardsDto.nominated4)
-            );
             sessionStorage.setItem("startDateTime", awardsDto.startDateTime);
             sessionStorage.setItem("endDateTime", awardsDto.endDateTime);
+            sessionStorage.setItem("nextAwardName", awardsDto.nextAwardName);
           }
         );
 

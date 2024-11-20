@@ -6,7 +6,6 @@ import styles from "./PostDetailPage.module.css";
 import CommentBox from "./CommentBox";
 import { useNavigate, useParams } from "react-router-dom";
 import { CommentDto, PostDetailDto } from "@/entities/post/model/types";
-import { useUserStore } from "@/entities/user";
 import {
   createComment,
   deleteComment,
