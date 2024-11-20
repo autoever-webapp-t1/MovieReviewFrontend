@@ -15,7 +15,7 @@ export default function PostMeta({
   authorProfileImage,
   author,
   createdAt,
-  likeCount,
+  // likeCount,
   isUpdated = false,
 }: PostMetaProps) {
   return (
